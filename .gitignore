@@ -8,3 +8,6 @@
 /logs
 # /JD_DailyBonus.js
 /result.txt
+/docker_entrypoint.sh
+/default_task.sh
+/Dockerfile
