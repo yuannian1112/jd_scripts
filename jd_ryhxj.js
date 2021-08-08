@@ -7,7 +7,7 @@ boxjs：https://raw.githubusercontent.com/Ariszy/Private-Script/master/Ariszy.bo
 0 1 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ryhxj.js, tag= 荣耀焕新季
 ================Loon==============
 [Script]
-cron "0 1 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ryhxj.js,tag= 荣耀焕新季
+cron "50 0,4 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ryhxj.js,tag= 荣耀焕新季
 ===============Surge=================
 荣耀焕新季 = type=cron,cronexp="0 1 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ryhxj.js
 ============小火箭=========
