@@ -13,7 +13,7 @@ cron 20 1 * * * jx_sign.js
 
 ================Loon==============
 [Script]
-cron "20 1，7 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js,tag=京喜签到
+cron "20 1,7 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js,tag=京喜签到
 
 ===============Surge=================
 京喜签到 = type=cron,cronexp="20 1 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js
