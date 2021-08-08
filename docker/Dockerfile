@@ -3,18 +3,18 @@ FROM node:lts-alpine3.12
 LABEL AUTHOR="none" \
       VERSION=0.1.4
 
-ARG KEY="-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn\nNhAAAAAwEAAQAAAQEAvRQk2oQqLB01iVnJKrnI3tTfJyEHzc2ULVor4vBrKKWOum4dbTeT\ndNWL5aS+CJso7scJT3BRq5fYVZcz5ra0MLMdQyFL1DdwurmzkhPYbwcNrJrB8abEPJ8ltS\nMoa0X9ecmSepaQFedZOZ2YeT/6AAXY+cc6xcwyuRVQ2ZJ3YIMBrRuVkF6nYwLyBLFegzhu\nJJeU5o53kfpbTCirwK0h9ZsYwbNbXYbWuJHmtl5tEBf2Hz+5eCkigXRq8EhRZlSnXfhPr2\n32VCb1A/gav2/YEaMPSibuBCzqVMVruP5D625XkxMdBdLqLBGWt7bCas7/zH2bf+q3zac4\nLcIFhkC6XwAAA9BjE3IGYxNyBgAAAAdzc2gtcnNhAAABAQC9FCTahCosHTWJWckqucje1N\n8nIQfNzZQtWivi8GsopY66bh1tN5N01YvlpL4ImyjuxwlPcFGrl9hVlzPmtrQwsx1DIUvU\nN3C6ubOSE9hvBw2smsHxpsQ8nyW1IyhrRf15yZJ6lpAV51k5nZh5P/oABdj5xzrFzDK5FV\nDZkndggwGtG5WQXqdjAvIEsV6DOG4kl5TmjneR+ltMKKvArSH1mxjBs1tdhta4kea2Xm0Q\nF/YfP7l4KSKBdGrwSFFmVKdd+E+vbfZUJvUD+Bq/b9gRow9KJu4ELOpUxWu4/kPrbleTEx\n0F0uosEZa3tsJqzv/MfZt/6rfNpzgtwgWGQLpfAAAAAwEAAQAAAQEAnMKZt22CBWcGHuUI\nytqTNmPoy2kwLim2I0+yOQm43k88oUZwMT+1ilUOEoveXgY+DpGIH4twusI+wt+EUVDC3e\nlyZlixpLV+SeFyhrbbZ1nCtYrtJutroRMVUTNf7GhvucwsHGS9+tr+96y4YDZxkBlJBfVu\nvdUJbLfGe0xamvE114QaZdbmKmtkHaMQJOUC6EFJI4JmSNLJTxNAXKIi3TUrS7HnsO3Xfv\nhDHElzSEewIC1smwLahS6zi2uwP1ih4fGpJJbU6FF/jMvHf/yByHDtdcuacuTcU798qT0q\nAaYlgMd9zrLC1OHMgSDcoz9/NQTi2AXGAdo4N+mnxPTHcQAAAIB5XCz1vYVwJ8bKqBelf1\nw7OlN0QDM4AUdHdzTB/mVrpMmAnCKV20fyA441NzQZe/52fMASUgNT1dQbIWCtDU2v1cP6\ncG8uyhJOK+AaFeDJ6NIk//d7o73HNxR+gCCGacleuZSEU6075Or2HVGHWweRYF9hbmDzZb\nCLw6NsYaP2uAAAAIEA3t1BpGHHek4rXNjl6d2pI9Pyp/PCYM43344J+f6Ndg3kX+y03Mgu\n06o33etzyNuDTslyZzcYUQqPMBuycsEb+o5CZPtNh+1klAVE3aDeHZE5N5HrJW3fkD4EZw\nmOUWnRj1RT2TsLwixB21EHVm7fh8Kys1d2ULw54LVmtv4+O3cAAACBANkw7XZaZ/xObHC9\n1PlT6vyWg9qHAmnjixDhqmXnS5Iu8TaKXhbXZFg8gvLgduGxH/sGwSEB5D6sImyY+DW/OF\nbmIVC4hwDUbCsTMsmTTTgyESwmuQ++JCh6f2Ams1vDKbi+nOVyqRvCrAHtlpaqSfv8hkjK\npBBqa/rO5yyYmeJZAAAAFHJvb3RAbmFzLmV2aW5lLnByZXNzAQIDBAUG\n-----END OPENSSH PRIVATE KEY-----"
+ARG KEY="-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA5Hkz6pLTTYEDSXBOnFJYjQpvlJzzOkN7Z8vaQv6enZC7cHFC\n2cXK86wo7Q71sg/zCAX5KS6hB82DIgfjqlMO8XmlW32wKjEibEoYuAmlaGZdoGMU\nL1HcuzwMHiI0H1p0+ZYpo8QXPvIc5IviYN+QKP5+lPuXhlrXOrj3+S5dEDFWnCOw\n2M5pV2InCFl63i5Cgt0HjDReoqGnujwS0JF+bNIHuvi0C9SdOWn+ADXKyHi6h2sa\neJ2h0fBgww8R4m8HLngyc8v2oZz/I2rcpdrqOLUJB17bXW7V7EM1aFrcq2FQzrgz\npYnKojGrd1E9Qtr0bobRG7Yukd9k9BauN9lXHQIDAQABAoIBAH0a2RDDYSz5TgFy\nm7kBZjek1UB9SLpIpVRKzbMNlXEWBW0mt8JjiiQvyyEzpdng3eUw0CR6wfZx1DJY\nO5PSc0ZKo/8bLdGMohrF4A82SPqHwxDF8BGRM9raoJAHjp70e0UHsrlX8JqpHKUQ\n6967zEaGRG3z7h7Fs0EWc8JgXtk0AhXqXz4i/zOF9b3Ae1oec2xBKGJLUEIlXA5J\nmmWUkvI+qbP/0eoL4Zqtjmzg4FgUSqj/dvruQysYwT83qxfJHMqypDAx8/Vh5IwB\n5BruYG1XMUGhfKGQcJrXXB1WvA06zXmryU1CB9U5CXFkqSmZCdwLfxGl/PIQGncU\nIbqUFgECgYEA9/+VPPEBY42puDbsniiNGH/DjlXjVkwiNyjfQzWWej1t9I5KtaPu\naAWg30bQdd4pBA2GospgmG6F4E0/SW0NjAN7h2dp45hSG6N+B0fm8liPmLVDJKzC\ntneXe2C8gNtG4AkzBL3KbplpYiexqIwvlx5H0Yzw3s/wIJFGRT8y410CgYEA69hZ\nDk29YED81gfPnPyrGPUgqOIrZ84PtdMGCB/YjotneI3Qxz/Akqn/Ph+nwINhvdQ0\nR43JFbSnuIRbnZpnOg2HYkAHtBsSHoKpTheGkgXJT1QhAUXJoGyGPUjtvy+Ef9Wl\nzksRUWVqFpZcQ2qCMVG/rqrprMfZHs+90FkKxsECgYEA7p0iqaU18eSvBQkLt81K\nnOTpcr0e5LySO0J/NrqL04fhkOmL5qMZU0r/E3WeQ5qDGlwtS9qvAFtvQnbwyqQ7\n4ZjENW8CCjNX5TH0o+rBwjIF0Cevt8zl+AyvWs2j8dOJqSwQw6Ic8Td4lzGcFZD0\nhVFkRrJ2W9v0rlE5LI13WB0CgYA1f2PkHLpCZTt1CVyMzbu585Cu/m6+Iz3pDq8l\nlKO44eJctD6Rk+KI4krluqSAxMydFM+vE3hzlgEdl9h4TZfw0TTOkpusvR9FEHp7\nHlcGNI3PktPRyBTOcQ+aQzq6zXqOzNXJj7mj7w87hGv1VumlalfCtT5AVSzpElKK\nOkh5gQKBgDWYWHFdfdnvuFdaUq6RAhLuZ0Qi5MkE+yn7mcYAViuRmLNB2g45N5XJ\nHkaJF0W8qlFSfNxneTccaxoSVuSdJstGuOIXBSDpALeQYB+7vi2orpiniCIebeky\nvtTXtneO4YC2ZjpTZez++x+x/0AKJxHXbhUOXJLw3qss6xYBnvQc\n-----END RSA PRIVATE KEY-----"
 
 ENV DEFAULT_LIST_FILE=crontab_list.sh \
     CUSTOM_LIST_MERGE_TYPE=append \
     COOKIES_LIST=/scripts/logs/cookies.list \
-    REPO_URL=git@gitee.com:lxk0301/jd_scripts.git \
+    REPO_URL=git@gitee.com:underlaw/jd_scripts.git \
     REPO_BRANCH=master
 
 RUN set -ex \
     && apk update \
     && apk upgrade \
-    && apk add --no-cache bash tzdata git moreutils curl jq openssh-client \
+    && apk add --no-cache bash tzdata git moreutils curl jq openssh-client python3 py3-pip \
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
@@ -25,7 +25,8 @@ RUN set -ex \
     && git clone -b $REPO_BRANCH $REPO_URL /scripts \
     && cd /scripts \
     && mkdir logs \
-    && npm config set registry https://registry.npm.taobao.org \
+    && python3 -m pip install requests \
+    && npm config set registry https://registry.npmjs.org \
     && npm install \
     && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin \
     && chmod +x /usr/local/bin/docker_entrypoint.sh
