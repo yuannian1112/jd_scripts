@@ -4,37 +4,40 @@
 活动入口：京东APP我的-更多工具-种豆得豆
 已支持IOS京东多账号,云端多京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-	@@ -9,20 +8,21 @@
+注：会自动关注任务中的店铺跟商品，介意者勿使用。
+互助码shareCode请先手动运行脚本查看打印可看到
 每个京东账号每天只能帮助3个人。多出的助力码将会助力失败。
 =====================================Quantumult X=================================
 [task_local]
 1 7-21/2 * * * jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png, enabled=true
+
 =====================================Loon================================
 [Script]
 cron "1 7-21/2 * * *" script-path=jd_plantBean.js,tag=京东种豆得豆
+
 ======================================Surge==========================
 京东种豆得豆 = type=cron,cronexp="1 7-21/2 * * *",wake-system=1,timeout=3600,script-path=jd_plantBean.js
+
 ====================================小火箭=============================
 京东种豆得豆 = type=cron,script-path=jd_plantBean.js, cronexpr="1 7-21/2 * * *", timeout=3600, enable=true
+
 搬的https://github.com/uniqueque/QuantumultX/blob/4c1572d93d4d4f883f483f907120a75d925a693e/Script/jd_plantBean.js
 */
 const $ = new Env('京东种豆得豆');
-
-console.log('\n====================Hello World====================\n')
-
 //Node.js用户请在jdCookie.js处填写京东ck;
 //ios等软件用户直接用NobyDa的jd cookie
 let jdNotify = true;//是否开启静默运行。默认true开启
-	@@ -33,8 +33,10 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
+let cookiesArr = [], cookie = '', jdPlantBeanShareArr = [], isBox = false, notify, newShareCodes, option, message,subTitle;
+//京东接口地址
+const JD_API_HOST = 'https://api.m.jd.com/client.action';
+//助力好友分享码(最多3个,否则后面的助力失败)
 //此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
-let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
-                   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  ''
-]
+let shareCodes = ['']
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
-	@@ -43,707 +45,688 @@ let roundList = [];
+let lastRoundId = null;//上期id
+let roundList = [];
 let awardState = '';//上期活动的京豆是否收取
 let randomCount = $.isNode() ? 20 : 5;
 !(async () => {
@@ -86,9 +89,9 @@ async function jdPlantBean() {
       const shareUrl = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl
       $.myPlantUuid = getParam(shareUrl, 'plantUuid')
       console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.myPlantUuid}\n`);
-       roundList = $.plantBeanIndexResult.data.roundList;
-      currentRoundId = roundList[2].roundId;//本期的roundId
-      lastRoundId = roundList[1].roundId;//上期的roundId
+      roundList = $.plantBeanIndexResult.data.roundList;
+      currentRoundId = roundList[1].roundId;//本期的roundId
+      lastRoundId = roundList[0].roundId;//上期的roundId
       awardState = roundList[0].awardState;
       $.taskList = $.plantBeanIndexResult.data.taskList;
       subTitle = `【京东昵称】${$.plantBeanIndexResult.data.plantUserInfo.plantNickName}`;
@@ -527,7 +530,7 @@ function readShareCode() {
       try {
         if (err) {
           //console.log(`${JSON.stringify(err)}`)
-         // console.log(`${$.name} API请求失败，请检查网路重试`)
+          //console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
             console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
