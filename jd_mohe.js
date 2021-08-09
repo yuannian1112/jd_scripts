@@ -7,11 +7,11 @@
 =================================Quantumultx=========================
 [task_local]
 #5G超级盲盒
-0 0,1-23/3 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_mohe.js, tag=5G超级盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+5 0,1-23/3 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_mohe.js, tag=5G超级盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =================================Loon===================================
 [Script]
-cron "20 0,1-23/3 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_mohe.js,tag=5G超级盲盒
+cron "5 0,1-23/3 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_mohe.js,tag=5G超级盲盒
 
 ===================================Surge================================
 5G超级盲盒 = type=cron,cronexp="0 0,1-23/3 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_mohe.js
@@ -130,7 +130,7 @@ async function task0() {
 function addShare(shareId) {
   return new Promise((resolve) => {
     const body = {"shareId":shareId,"apiMapping":"/active/addShare"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -154,7 +154,7 @@ function addShare(shareId) {
 function conf() {
   return new Promise((resolve) => {
     const body = {"apiMapping":"/active/conf"};
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
       } catch (e) {
@@ -168,7 +168,7 @@ function conf() {
 function homeGoBrowse(type, id) {
   return new Promise((resolve) => {
     const body = {"type":type,"id":id,"apiMapping":"/active/homeGoBrowse"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
       } catch (e) {
@@ -182,7 +182,7 @@ function homeGoBrowse(type, id) {
 function taskHomeCoin(type, id) {
   return new Promise((resolve) => {
     const body = {"type":type,"id":id,"apiMapping":"/active/taskHomeCoin"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
       } catch (e) {
@@ -196,7 +196,7 @@ function taskHomeCoin(type, id) {
 function getCoin() {
   return new Promise((resolve) => {
     const body = {"apiMapping":"/active/getCoin"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
         if (data.code === 1001) {
@@ -216,10 +216,10 @@ function getCoin() {
   })
 }
 
-function taskList() {
-  return new Promise((resolve) => {
+async function taskList() {
+  return new Promise(async (resolve) => {
     const body = {"apiMapping":"/active/taskList"}
-    $.get(taskurl(body), async (err, resp, data) => {
+    $.post(taskurl(body), async (err, resp, data) => {
       try {
         data = JSON.parse(data);
         if (data.code === 200) {
@@ -227,17 +227,23 @@ function taskList() {
           //浏览商品
           if (task4.finishNum < task4.totalNum) {
             await browseProduct(task4.skuId);
+            await $.wait(2000)
             await taskCoin(task4.type);
+            await $.wait(2000)
           }
           //浏览会场
           if (task1.finishNum < task1.totalNum) {
             await strollActive((task1.finishNum + 1));
+            await $.wait(2000)
             await taskCoin(task1.type);
+            await $.wait(2000)
           }
           //关注或浏览店铺
           if (task2.finishNum < task2.totalNum) {
             await followShop(task2.shopId);
+            await $.wait(2000)
             await taskCoin(task2.type);
+            await $.wait(2000)
           }
           // if (task5.finishNum < task5.totalNum) {
           //   console.log(`\n\n分享好友助力 ${task5.finishNum}/${task5.totalNum}\n\n`)
@@ -279,7 +285,7 @@ function browseProduct(skuId) {
 function strollActive(index) {
   return new Promise((resolve) => {
     const body = {"activeId":index,"apiMapping":"/active/strollActive"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
       } catch (e) {
@@ -294,7 +300,7 @@ function strollActive(index) {
 function followShop(shopId) {
   return new Promise((resolve) => {
     const body = {"shopId":shopId,"apiMapping":"/active/followShop"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
       } catch (e) {
@@ -309,7 +315,7 @@ function followShop(shopId) {
 function taskCoin(type) {
   return new Promise((resolve) => {
     const body = {"type":type,"apiMapping":"/active/taskCoin"}
-    $.get(taskurl(body), (err, resp, data) => {
+    $.post(taskurl(body), (err, resp, data) => {
       try {
         data = JSON.parse(data);
       } catch (e) {
@@ -380,7 +386,7 @@ function lottery() {
 function shareUrl() {
   return new Promise((resolve) => {
     const body = {"apiMapping":"/active/shareUrl"}
-    $.get(taskurl(body), async (err, resp, data) => {
+    $.post(taskurl(body), async (err, resp, data) => {
       try {
         data = JSON.parse(data);
         if (data['code'] === 5000) {
