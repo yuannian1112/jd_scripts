@@ -3,14 +3,7 @@
 兼容京东jdCookie.js
 手机设备在boxjs里填写cookie
 boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
-TG群:https://t.me/passerbyb2021
-
-[task_local]
-10 0 * * * https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_plantBeans.js
-
-[Script]
-cron "10 0 * * *" script-path=https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_plantBeans.js,tag=京东到家鲜豆庄园
-
+cron "20 */6 * * *" jd_jddj_plantBeans.js
 */
 
 const $ = new API("jddj_plantBeans");
