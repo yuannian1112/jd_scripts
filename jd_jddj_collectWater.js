@@ -3,16 +3,8 @@
 兼容京东jdCookie.js
 手机设备在boxjs里填写cookie
 boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
-TG群:https://t.me/passerbyb2021
+cron "*/30 * * * *" jddj_fruit_collectWater.js
 */
-
-//[task_local]
-//*/5 * * * * https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_fruit_collectWater.js
-
-//================Loon==============
-//[Script]
-//cron "*/5 * * * *" script-path=https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_fruit_collectWater.js,tag=京东到家果园水车收水滴
-//
 
 const $ = new API("jddj_fruit_collectWater");
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
