@@ -19,12 +19,13 @@ $.authorizationInfo = {};
 $.joinTeamLsit = [];
 $.inviteList = [];
 $.authorCode = '';
+let res = [];
 !(async () => {
     if (!cookiesArr[0]) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
     }
-    let res = [];
+
     try{res = await getAuthorShareCode('https://raw.githubusercontent.com/star261/jd/main/code/goldPhone.json');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('https://gitee.com/star267/share-code/raw/master/goldPhone.json');}catch (e) {}
@@ -86,6 +87,9 @@ async function main() {
         await takePostRequest('join_team');
     }else{
         console.log(`已参团`);
+    }
+    if($.index === 1){
+        $.authorCode = $.useInfo.code
     }
     $.needVoteList = $.homeInfo.hard_list;
     await doVote();
