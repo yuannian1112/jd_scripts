@@ -4,7 +4,7 @@
 10 1 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ryhxj.js, tag= 来电好物季
 ================Loon==============
 [Script]
-cron "10 3 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ldhwj.js,tag= 来电好物季
+cron "10 3,15 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ldhwj.js,tag= 来电好物季
 ===============Surge=================
 来电好物季 = type=cron,cronexp="10 1 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ldhwj.js
 ============小火箭=========
