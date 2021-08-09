@@ -30,7 +30,7 @@ $.authorCode = '';
         try{res = await getAuthorShareCode('https://gitee.com/star267/share-code/raw/master/goldPhone.json');}catch (e) {}
         if(!res){res = [];}
     }
-    if(res.length > 0){
+    if(res && res.length > 0){
         $.authorCode = getRandomArrayElements(res,1)[0];
     }
     for (let i = 0; i < cookiesArr.length; i++) {
@@ -58,7 +58,7 @@ $.authorCode = '';
 async function main() {
     $.token = ``;
     await getToken();
-    if($.token === ``){
+    if($.token === `` || !$.token){
         console.log(`获取token失败`);return;
     }
     console.log(`token:${$.token}`);
@@ -71,8 +71,8 @@ async function main() {
     await $.wait(1000);
     $.useInfo = {};
     await takeGetRequest('get_user_info');
-    if(JSON.stringify($.useInfo) === `{}`){
-        console.log(`获取用户信息失败`);return;
+    if(JSON.stringify($.useInfo) === `{}` || $.useInfo.status_code === 403){
+        console.log(`获取用户信息失败,可能是黑号`);return;
     }
     console.log(`组队码：${$.useInfo.code}`);
     await $.wait(1000);
@@ -85,13 +85,50 @@ async function main() {
         console.log(`去参团: ${$.authorCode}`)
         await takePostRequest('join_team');
     }else{
-        console.log(`已参团`)
+        console.log(`已参团`);
     }
     $.needVoteList = $.homeInfo.hard_list;
     await doVote();
     $.needVoteList = $.homeInfo.soft_list;
     await doVote();
-
+    $.teamInfo = {}
+    $.type = 1;
+    await takeGetRequest('team_info');
+    console.log(`自己队伍分数：${$.teamInfo.team_vote_total}`);
+    await $.wait(2000);
+    if(Number($.teamInfo.my_vote_total) > 0){
+        if($.teamInfo.draw_total_first === 0 && $.teamInfo.team_vote_total >= 80){
+            console.log(`去抽奖1`);
+            $.draw_type = 1;
+            await takePostRequest('draw_prize');
+            await $.wait(2000);
+        }
+        if($.teamInfo.draw_total_second === 0 && $.teamInfo.team_vote_total >= 180){
+            console.log(`去抽奖2`);
+            $.draw_type = 2;
+            await takePostRequest('draw_prize');
+            await $.wait(2000);
+        }
+    }
+    $.type = 2;
+    await takeGetRequest('team_info');
+    console.log(`加入队伍分数：${$.teamInfo.team_vote_total}`);
+    await $.wait(2000);
+    if(Number($.teamInfo.my_vote_total) > 0){
+        if($.teamInfo.draw_total_first === 0 && $.teamInfo.team_vote_total >= 80){
+            console.log(`去抽奖3`);
+            $.draw_type = 1;
+            await takePostRequest('draw_prize');
+            await $.wait(2000);
+        }
+        if($.teamInfo.draw_total_second === 0 && $.teamInfo.team_vote_total >= 180){
+            console.log(`去抽奖4`);
+            $.draw_type = 2;
+            await takePostRequest('draw_prize');
+            await $.wait(2000);
+        }
+    }
+    await takeGetRequest('my_prize');
 }
 
 async function doVote(){
@@ -119,6 +156,11 @@ function compare(property){
 }
 async function takeGetRequest(type){
     let  url= `https://xinrui1-isv.isvjcloud.com/gapi/${type}`;
+    if( type === 'team_info'){
+        url = `https://xinrui1-isv.isvjcloud.com/gapi/team_info?type=${$.type}`;
+    }else if(type  === 'my_prize'){
+        url = `https://xinrui1-isv.isvjcloud.com/gapi/my_prize?type=5&page=1`
+    }
     let myRequest = getGetRequest(url);
     return new Promise(async resolve => {
         $.get(myRequest, (err, resp, data) => {
@@ -144,6 +186,10 @@ async function takePostRequest(type){
         case 'join_team':
             body= JSON.stringify({"inviter_id":$.authorCode});
             url = `https://xinrui1-isv.isvjcloud.com/gapi/join_team`;
+            break;
+        case 'draw_prize':
+            body= JSON.stringify({"type":$.type ,"draw_type":$.draw_type});
+            url = `https://xinrui1-isv.isvjcloud.com/gapi/draw_prize`;
             break;
         default:
             console.log(`错误${type}`);
@@ -198,6 +244,36 @@ function dealReturn(type, data) {
         case 'join_team':
             if(data){
                 console.log(JSON.stringify(data));
+            }
+            break;
+        case 'team_info':
+            if(data){
+                $.teamInfo = data
+            }
+            break;
+        case 'draw_prize':
+            if(data){
+                console.log(JSON.stringify(data));
+            }
+            break;
+        case 'my_prize':
+            if(data){
+                let message = '';
+                if(data && data.length>0){
+                    for (let i = 0; i < data.length; i++) {
+                        let oneInfo = data[i];
+                        if(oneInfo.is_get !== 1){
+                            console.log(`奖品：${oneInfo.name},未填写地址`)
+                            message+= oneInfo.name+'\n';
+                        }else{
+                            console.log(`奖品：${oneInfo.name},已填写地址`)
+                        }
+                    }
+                    if(message !== ''){
+                        message = `京东账号${$.index} ${$.UserName},抽到实物，请到APP填写地址\n 活动路径: 手机馆--》IQOO大牌日--》左下角金机馆\n`+message;
+                        notify.sendNotify(`金机奖投票`,message);
+                    }
+                }
             }
             break;
         default:
