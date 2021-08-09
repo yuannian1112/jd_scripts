@@ -90,6 +90,7 @@ async function jdPlantBean() {
       const shareUrl = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl
       $.myPlantUuid = getParam(shareUrl, 'plantUuid')
       console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.myPlantUuid}\n`);
+      roundList = $.plantBeanIndexResult.data.roundList;
       currentRoundId = roundList[count-1].roundId;//本期的roundId
       lastRoundId = roundList[count-2].roundId;//上期的roundId
       awardState = roundList[count-2].awardState;
