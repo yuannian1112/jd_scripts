@@ -5,11 +5,11 @@
 Author: Curtin
 功能: 东东超市商品兑换
 Date: 2021/4/17 上午11:22
-update: 2021/7/18 00:30
+update: 2021/7/24 18:30
 TG交流 https://t.me/topstyle996
 TG频道 https://t.me/TopStyle2021
 建议cron: 59 23 * * *  python3 jd_blueCoin.py
-new Env('东东超市商品兑换py并发版');
+new Env('东东超市商品兑换并发版');
 '''
 ################【参数】######################
 # ck 优先读取【JDCookies.txt】 文件内的ck  再到 ENV的 变量 JD_COOKIE='ck1&ck2' 最后才到脚本内 cookies=ck
@@ -20,7 +20,7 @@ coinToBeans = ''
 
 #多账号并发，默认关闭 ENV设置开启： export blueCoin_Cc=True
 blueCoin_Cc = False
-#单击次数
+#单击次数，同时发生点击兑换按钮次数，适当调整。
 dd_thread = 5
 ###############################################
 
@@ -43,7 +43,7 @@ endtime='00:00:10.00000000'
 today = datetime.datetime.now().strftime('%Y-%m-%d')
 unstartTime = datetime.datetime.now().strftime('%Y-%m-%d 23:55:00.00000000')
 tomorrow = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%Y-%m-%d')
-starttime = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y-%m-%d 23:59:59.00000000')
+starttime = (datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00.00000000')
 
 
 def printT(s):
@@ -133,9 +133,9 @@ class getJDCookie(object):
         except Exception as e:
             printT(f"【getCookie Error】{e}")
 
-    # 检测cookie格式是否正确
+        # 检测cookie格式是否正确
     def getUserInfo(self, ck, pinName, userNum):
-        url = 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion?orgFlag=JD_PinGou_New&callSource=mainorder&channel=4&isHomewhite=0&sceneval=2&sceneval=2&callback=GetJDUserInfoUnion'
+        url = 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion?orgFlag=JD_PinGou_New&callSource=mainorder&channel=4&isHomewhite=0&sceneval=2&sceneval=2&callback='
         headers = {
             'Cookie': ck,
             'Accept': '*/*',
@@ -147,15 +147,20 @@ class getJDCookie(object):
             'Accept-Language': 'zh-cn'
         }
         try:
-            resp = requests.get(url=url, verify=False, headers=headers, timeout=60).text
-            r = re.compile(r'GetJDUserInfoUnion.*?\((.*?)\)')
-            result = r.findall(resp)
-            userInfo = json.loads(result[0])
-            nickname = userInfo['data']['userInfo']['baseInfo']['nickname']
-            return ck, nickname
+            if sys.platform == 'ios':
+                resp = requests.get(url=url, verify=False, headers=headers, timeout=60).json()
+            else:
+                resp = requests.get(url=url, headers=headers, timeout=60).json()
+            if resp['retcode'] == "0":
+                nickname = resp['data']['userInfo']['baseInfo']['nickname']
+                return ck, nickname
+            else:
+                context = f"账号{userNum}【{pinName}】Cookie 已失效！请重新获取。"
+                print(context)
+                return ck, False
         except Exception:
             context = f"账号{userNum}【{pinName}】Cookie 已失效！请重新获取。"
-            printT(context)
+            print(context)
             return ck, False
 
     def iscookie(self):
@@ -200,20 +205,19 @@ getCk = getJDCookie()
 getCk.getCookie()
 
 # 获取v4环境 特殊处理
-try:
-    with open(v4f, 'r', encoding='utf-8') as f:
-        curenv = locals()
-        for i in f.readlines():
-            r = re.compile(r'^export\s(.*?)=[\'\"]?([\w\.\-@#&=_,\[\]\{\}\(\)]{1,})+[\'\"]{0,1}$', re.M | re.S | re.I)
-            r = r.findall(i)
-            if len(r) > 0:
-                for i in r:
-                    if i[0] != 'JD_COOKIE':
-                        curenv[i[0]] = getEnvs(i[1])
-except:
-    pass
-
-
+if os.path.exists(v4f):
+    try:
+        with open(v4f, 'r', encoding='utf-8') as f:
+            curenv = locals()
+            for i in f.readlines():
+                r = re.compile(r'^export\s(.*?)=[\'\"]?([\w\.\-@#!&=_,\[\]\{\}\(\)]{1,})+[\'\"]{0,1}$', re.M | re.S | re.I)
+                r = r.findall(i)
+                if len(r) > 0:
+                    for i in r:
+                        if i[0] != 'JD_COOKIE':
+                            curenv[i[0]] = getEnvs(i[1])
+    except:
+        pass
 
 if "coinToBeans" in os.environ:
     if len(os.environ["coinToBeans"]) > 1:
