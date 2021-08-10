@@ -20,20 +20,7 @@ guaopencard8="true"
 ————————————————
 入口：[8.10-8.15 头号玩家 一起热8 (https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/797702?activityId=33d9ae00c1904c20bd8a4488fc5d6f33&shareUuid=c4f7e898ab304200a48d0122ccbacd6d)]
 
-============Quantumultx===============
-[task_local]
-#8.10-8.15 头号玩家 一起热8
-28 4,19 8-14 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard8.js, tag=8.10-8.15 头号玩家 一起热8, enabled=true
-
-================Loon==============
-[Script]
-cron "28 4,19 8-14 8 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard8.js,tag=8.10-8.15 头号玩家 一起热8
-
-===============Surge=================
-8.10-8.15 头号玩家 一起热8 = type=cron,cronexp="28 0,22 8-14 8 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard8.js
-
-============小火箭=========
-8.10-8.15 头号玩家 一起热8 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard8.js, cronexpr="28 0,22 8-14 8 *", timeout=3600, enable=true
+cron "28 4,22 8-14 8 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard8.js,tag=8.10-8.15 头号玩家 一起热8
 */
 const $ = new Env('8.10-8.15 头号玩家 一起热8');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
