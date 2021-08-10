@@ -1,10 +1,9 @@
-/*
+/**
+cron "0-59/30 * * * *" jddj_fruit_collectWater.js
 京东到家果园水车收水滴任务脚本,支持qx,loon,shadowrocket,surge,nodejs
 兼容京东jdCookie.js
 手机设备在boxjs里填写cookie
-boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
-cron "*/30 * * * *" jddj_fruit_collectWater.js
-*/
+**/
 
 const $ = new API("jddj_fruit_collectWater");
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
