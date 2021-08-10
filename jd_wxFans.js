@@ -12,7 +12,6 @@ let cookiesArr = [];
 const activityList = [
     {'actid':'c75ae2afd7ff4aec9ed47008b08400f7','endTime':1630288800000},
     {'actid':'3da50af9e8664746844c5456b8920b7d','endTime':1630425599000},
-    {'actid':'4374884673374f9c883d21ceea5694f1','endTime':1628524799000},
     {'actid':'162c43699ba945e8adb83b2bd5fe0142','endTime':1630425599000},
     {'actid':'31073025b8a34de59d8d55faffdd44ab','endTime':1630425599000},
     {'actid':'5a8aea7f27b84900a14624fe9dcc8fe1','endTime':1628956799000},
