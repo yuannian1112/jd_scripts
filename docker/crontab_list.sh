@@ -104,6 +104,7 @@
 20 5,10 * * * node /scripts/jd_fcdyj.js >> /scripts/logs/jd_fcdyj.log 2>&1
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 40 0,4 * * * node /scripts/jd_ryhxj.js >> /scripts/logs/jd_ryhxj.log 2>&1
+38 0,21 8-14 8 * node /scripts/jd_opencard6.js >> /scripts/logs/jd_opencard6.log 2>&1
 38 0,21 8-14 8 * node /scripts/jd_opencard7.js >> /scripts/logs/jd_opencard7.log 2>&1
 38 4,19 8-14 8 * node /scripts/jd_opencard8.js >> /scripts/logs/jd_opencard8.log 2>&1
 39 0,22 8-15 8 * node /scripts/jd_opencard9.js >> /scripts/logs/jd_opencard9.log 2>&1
