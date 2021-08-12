@@ -108,6 +108,7 @@
 38 4,19 8-14 8 * node /scripts/jd_opencard8.js >> /scripts/logs/jd_opencard8.log 2>&1
 39 0,22 8-15 8 * node /scripts/jd_opencard9.js >> /scripts/logs/jd_opencard9.log 2>&1
 30 0,22 11-18 8 * node /scripts/jd_opencard10.js >> /scripts/logs/jd_opencard10.log 2>&1
+40 5 * * * node /scripts/jd_qcshj.js >> /scripts/logs/jd_qcshj.log 2>&1
 39 3,14 * * * node /scripts/jd_ldhwj.js >> /scripts/logs/jd_ldhwj.log 2>&1
 2 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 6 1,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
