@@ -30,7 +30,7 @@ guaopencard6="true"
 30 0,8 * 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard6.js, tag=七夕告白季-开卡, enabled=true
 */
 const $ = new Env('七夕告白季-开卡');
-const Faker=require('./sign_graphics_validate.js') 
+const Faker=require('./utils/sign_graphics_validate.js') 
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 const notify = $.isNode() ? require('./sendNotify') : '';
