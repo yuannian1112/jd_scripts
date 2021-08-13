@@ -194,7 +194,14 @@ async function sendNotify(
   text = text.match(/.*?(?=\s?-)/g) ? text.match(/.*?(?=\s?-)/g)[0] : text;
   await Promise.all([
     BarkNotify(text, desp, params), //iOS Bark APP
-    tgBotNotify(text, desp), //telegram 机器人
+     new Promise(async resolve=>{
+      var size=4000
+      for(var i=0;i<desp.length/size;i++)
+      {
+        await tgBotNotify(text,desp.substr(i*size,size))
+      }
+      resolve()
+    }), //telegram 机器人
     ddBotNotify(text, desp), //钉钉机器人
     qywxBotNotify(text, desp), //企业微信机器人
     qywxamNotify(text, desp), //企业微信应用消息推送
