@@ -4,7 +4,7 @@
 项目名称: JD-Script / jd_jxgc_tuan
 Author: Curtin
 功能：京喜工厂开团，支持指定账号开团，跑一次脚本默认开3次团，，如未指定账号默认给账号1开团。
-cron: 10 0,7 * * *
+cron: 10 3,5,7 * * *
 Date: 2021/7/17 下午9:40
 TG交流 https://t.me/topstyle996
 TG频道 https://t.me/TopStyle2021
