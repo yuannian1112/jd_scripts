@@ -25,6 +25,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
+let isLoginInfo = {}
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -60,6 +61,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
       $.blockAccount = false;//黑号
       message = '';
       await TotalBean();
+      isLoginInfo[$.UserName] = $.isLogin
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -71,6 +73,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
       }
       await shareCodesFormat();
       await JD818();
+      await $.wait(1000)
     }
   }
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -78,21 +81,32 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
       cookie = cookiesArr[i];
       $.canHelp = true;//能否助力
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-      if ((cookiesArr && cookiesArr.length >= 1) && $.canHelp) {
-        console.log(`\n先自己账号内部相互邀请助力\n`);
-        for (let item of $.temp) {
-          console.log(`\n${$.UserName} 去参助力 ${item}`);
-          const helpRes = await toHelp(item.trim());
-          if (helpRes.data.status === 5) {
-            console.log(`助力机会已耗尽，跳出助力`);
-            $.canHelp = false;
-            break;
+      if (!isLoginInfo[$.UserName]) continue
+      if ((cookiesArr && cookiesArr.length >= 1) && ($.temp && $.temp.length)) {
+        console.log(`\n先自己账号内部相互邀请助力`);
+        for (let j = 0; j < $.temp.length && $.canHelp; j++) {
+          console.log(`\n${$.UserName} 去助力 ${$.temp[j]}`);
+          $.delcode = false;
+          await toHelp($.temp[j].trim());
+          if ($.delcode) {
+            $.temp.splice(j, 1)
+            j--
+            continue
           }
         }
       }
-      if ($.canHelp) {
+      if ($.canHelp && ($.newShareCodes && $.newShareCodes.length)) {
         console.log(`\n\n如果有剩余助力机会，则给作者以及随机码助力`)
-        await doHelp();
+        console.log(`\n开始助力好友`);
+        for (let j = 0; j < $.newShareCodes.length && $.canHelp; j++) {
+          $.delcode = false;
+          await toHelp($.newShareCodes[j].trim());
+          if ($.delcode) {
+            $.newShareCodes.splice(j, 1)
+            j--
+            continue
+          }
+        }
       }
     }
   }
@@ -147,17 +161,6 @@ function supportList() {
     })
   });
 }
-async function doHelp() {
-  console.log(`\n开始助力好友`);
-  for (let item of $.newShareCodes) {
-    if (!item) continue;
-    const helpRes = await toHelp(item.trim());
-    if (helpRes.data.status === 5) {
-      console.log(`助力机会已耗尽，跳出助力`);
-      break;
-    }
-  }
-}
 //助力API
 function toHelp(code) {
   return new Promise(resolve => {
@@ -168,10 +171,32 @@ function toHelp(code) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          console.log(`助力结果:${data}`);
           data = JSON.parse(data);
           if (data && data['code'] === 200) {
-            if (data['data']['status'] === 6) console.log(`助力成功\n`)
+            if (data.data.status === 6) {
+              console.log(`助力成功`)
+            } else if (data.data.status === 5) {
+              console.log(`助力机会已耗尽，跳出助力`);
+              $.canHelp = false
+            } else if (data.data.status === 4) {
+              console.log(`助力码 ${code} 已达上限`);
+              $.delcode = true
+            } else if (data.data.status === 3) {
+              console.log(`已经助力过`);
+            } else if (data.data.status === 2) {
+              console.log(`助力码 ${code} 过期`);
+              $.delcode = true
+            } else if (data.data.status === 1) {
+              console.log(`不能助力自己`);
+            } else if (data.msg.indexOf('请求参数不合规') > -1) {
+              console.log(`助力码 ${code} 助力码有问题`)
+              $.delcode = true
+            } else if (data.msg.indexOf('火爆') > -1) {
+              console.log(`${data.msg}，跳出助力`)
+              $.canHelp = false
+            } else {
+              console.log(`助力码 ${code} 助力结果\n${JSON.stringify(data)}`)
+            }
             if (data['data']['jdNums']) $.beans += data['data']['jdNums'];
           }
         }
