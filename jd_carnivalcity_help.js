@@ -97,8 +97,8 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
       }
       if ($.canHelp && ($.newShareCodes && $.newShareCodes.length)) {
         console.log(`\n\n如果有剩余助力机会，则给作者以及随机码助力`)
-        console.log(`\n开始助力好友`);
         for (let j = 0; j < $.newShareCodes.length && $.canHelp; j++) {
+           console.log(`\n${$.UserName} 去助力 ${$.newShareCodes[j]}`);
           $.delcode = false;
           await toHelp($.newShareCodes[j].trim());
           if ($.delcode) {
