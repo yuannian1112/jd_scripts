@@ -10,7 +10,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 $.activityID = 'dz2107100008586804';
 $.shopid = '1000085868';
-const inCode= ['4efc89e0a5604304bd9414c21312ab0d','bc6d0a6db4ee45c3bd5d1730c967224f'];
+const inCode= ['9780aaab22854ebc9262391f6e8d595e','098781417220456c853cc99f7c898a01'];
 $.shareUuid = getRandomArrayElements(inCode,1)[0];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
