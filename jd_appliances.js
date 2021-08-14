@@ -1,7 +1,8 @@
 /**
- *   执行一次就可以了，最多10个豆子
- cron   54 5 9-15 8 *
- *   不要问我是哪个活动，问了我也不告诉你,我也找不到入口了
+一天执行一次就可以了，最多10个豆子
+cron 54 5 9-15 8 * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_appliances.js
+cron "54 5 9-15 8 *" https://raw.githubusercontent.com/star261/jd/main/scripts/jd_appliances.js
+不要问我是哪个活动，问了我也不告诉你,我也找不到入口了
  */
 const $ = new Env('家电');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -13,7 +14,10 @@ if ($.isNode()) {
     })
     if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-    cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+    cookiesArr = [
+        $.getdata("CookieJD"),
+        $.getdata("CookieJD2"),
+        ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 !(async () => {
     if (!cookiesArr[0]) {
@@ -28,6 +32,7 @@ if ($.isNode()) {
         $.nickName = '';
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
         await TotalBean();
+        $.hotFlag = false;
         console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
         if (!$.isLogin) {
             $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
