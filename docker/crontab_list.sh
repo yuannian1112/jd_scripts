@@ -112,6 +112,7 @@
 39 3,14 * * * node /scripts/jd_ldhwj.js >> /scripts/logs/jd_ldhwj.log 2>&1
 31 6,20 13-31 8 * node /scripts/jd_xmGame.js >> /scripts/logs/jd_xmGame.log 2>&1
 8 9,19 13-25 8 * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
+20 3,6,9 * * * node /scripts/jd_dreamfactory_tuan.js >> /scripts/logs/jd_dreamfactory_tuan.log 2>&1
 45 5,17 12-24 8 * node /scripts/jd_decompression.js >> /scripts/logs/jd_decompression.log 2>&1
 2 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 6 1,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
@@ -120,4 +121,3 @@
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
 59 23 * * * python3 /jd/scripts/jd_blueCoin.py >> /jd/log/jd_blueCoin.log 2>&1
 1 0 * * * python3 /jd/scripts/jd_qjd.py >> /jd/log/jd_qjd.log 2>&1
-0 5,7,10 * * * python3 /jd/scripts/jd_dreamfactory_tuan.py >> /jd/log/jd_dreamfactory_tuan.log 2>&1
