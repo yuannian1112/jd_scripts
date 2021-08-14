@@ -2,6 +2,7 @@
  * 蚊子腿豆子，24号应该可以参与瓜分
  * 活动到24号。一天可以跑2次
  cron "25 5,11 12-24 8 *"  https://raw.githubusercontent.com/star261/jd/main/scripts/jd_appliances.js
+cron 25 5,11 12-24 8 *  https://raw.githubusercontent.com/star261/jd/main/scripts/jd_decompression.js
  */
 const $ = new Env('热血心跳,狂解压');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -9,7 +10,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 $.activityID = 'dz2107100008586804';
 $.shopid = '1000085868';
-const inCode= ['9780aaab22854ebc9262391f6e8d595e','098781417220456c853cc99f7c898a01'];
+const inCode= ['4efc89e0a5604304bd9414c21312ab0d','bc6d0a6db4ee45c3bd5d1730c967224f'];
 $.shareUuid = getRandomArrayElements(inCode,1)[0];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
@@ -17,7 +18,10 @@ if ($.isNode()) {
     })
     if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-    cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+    cookiesArr = [
+        $.getdata("CookieJD"),
+        $.getdata("CookieJD2"),
+        ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 !(async () => {
     if (!cookiesArr[0]) {
