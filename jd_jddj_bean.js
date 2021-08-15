@@ -1,4 +1,5 @@
 /*
+new Env('京东到家鲜豆任务');
 京东到家鲜豆任务脚本,支持qx,loon,shadowrocket,surge,nodejs
 兼容京东jdCookie.js
 手机设备在boxjs里填写cookie
