@@ -3,6 +3,7 @@
 // 兼容京东jdCookie.js
 // 手机设备在boxjs里填写cookie
 // boxjs订阅地址:https://gitee.com/passerby-b/javascript/raw/master/JD/passerby-b.boxjs.json
+new Env('京东到家鲜豆庄园收水滴');
 cron "45 * * * *" jd_jddj_getPoints.js
 */
 
