@@ -1,4 +1,5 @@
 /**
+new Env('京东到家果园水车收水滴任务');
 cron "0-59/30 * * * *" jddj_fruit_collectWater.js
 京东到家果园水车收水滴任务脚本,支持qx,loon,shadowrocket,surge,nodejs
 兼容京东jdCookie.js
