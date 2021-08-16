@@ -1,3 +1,7 @@
+/*
+cron 5 2,3 * * * jd_syj.js
+cron "5 2,3 * * *" jd_syj.js
+*/
 const $ = new Env('赚京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
