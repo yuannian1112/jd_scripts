@@ -1,7 +1,7 @@
 
 /*
 cron 33 1,8,12,19 * * * https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_cfd.js
-v1.4
+cron "33 1,8,12,19 * * *" https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_cfd.js
 快手果园任务脚本,支持qx,loon,shadowrocket,surge,nodejs
 手机设备在boxjs里填写cookie
 开启抓包工具,果园浇一次水,在抓包记录里搜water,复制请求头里的cookie
