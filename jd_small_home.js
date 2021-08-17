@@ -4,7 +4,6 @@ Last Modified time: 2021-6-27 13:27:20
 现有功能：
 做日常任务任务，每日抽奖（有机会活动京豆，使用的是免费机会，不消耗WO币）
 自动使用WO币购买装饰品可以获得京豆，分别可获得5,20，50,100,200,400,700，1200京豆）
-注：目前使用此脚本会给脚本内置的两个码进行助力，请知晓
 活动入口：京东APP我的-游戏与更多-东东小窝
 或 京东APP首页-搜索 玩一玩-DIY理想家
 微信小程序入口：
@@ -71,11 +70,11 @@ const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
       await smallHome();
     }
   }
-  $.inviteCodes = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_updateSmallHomeInviteCode.json')
+  $.inviteCodes = await getAuthorShareCode('')
   if (!$.inviteCodes) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateSmallHomeInviteCode.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('', e));
     await $.wait(1000)
-    $.inviteCodes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateSmallHomeInviteCode.json')
+    $.inviteCodes = await getAuthorShareCode('')
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
