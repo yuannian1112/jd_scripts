@@ -117,6 +117,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       console.log(`\n【${$.UserName}】去拆第${grade}个红包`);
       await openRedPack($.packetIdArr[i]['strUserPin'], grade);
       await $.wait(2000);
+      if(!$.canOpenGrade) break;
     }
   }
 })()
@@ -228,7 +229,7 @@ function enrollFriend(strPin) {
               $.canHelp = false;//助力火爆
               console.log(`温馨提示：如提示助力火爆，可尝试寻找京东客服`);
             }
-            if (data.iRet === 2013) $.max = true;
+            if (data.iRet === 2013) $.canHelp = false;
             console.log(`助力失败:${data.sErrMsg}\n`);
           }
         }
