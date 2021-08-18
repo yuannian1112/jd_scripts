@@ -197,6 +197,8 @@
 40 0,4 * * * node /scripts/jd_ryhxj.js >> /scripts/logs/jd_ryhxj.log 2>&1
 #
 30 0,22 11-18 8 * node /scripts/jd_opencard10.js >> /scripts/logs/jd_opencard10.log 2>&1
+#开卡12
+10 8,20 18-25 8 * node /scripts/jd_opencard12.js >> /scripts/logs/jd_opencard12.log 2>&1
 #
 10 7,19 12-20 8 * node /scripts/jd_qcshj.js >> /scripts/logs/jd_qcshj.log 2>&1
 #
