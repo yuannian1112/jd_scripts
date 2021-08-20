@@ -1,6 +1,6 @@
 /*
 京喜签到
-cron 20 1 * * * jx_sign.js
+cron 20 1,7 * * * jx_sign.js
 更新时间：2021-7-31
 活动入口：京喜APP-我的-京喜签到
 
@@ -9,7 +9,7 @@ cron 20 1 * * * jx_sign.js
 ============Quantumultx===============
 [task_local]
 #京喜签到
-20 1 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js, tag=京喜签到, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+20 1,7 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js, tag=京喜签到, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
 
 ================Loon==============
 [Script]
@@ -191,7 +191,7 @@ function signhb(type = 1) {
               for (let key of Object.keys(signlist)) {
                 let vo = signlist[key]
                 if (vo.istoday === 1) {
-                  if (vo.status === 1 && vo.tasklist.signtask.status === 1) {
+                  if (vo.status === 1 && data.signtask.status === 1) {
                     console.log(`今日已签到`)
                     $.canHelp = false
                   } else {
@@ -240,7 +240,7 @@ function helpSignhb(smp = '') {
           for (let key of Object.keys(signlist)) {
             let vo = signlist[key]
             if (vo.istoday === 1) {
-              if (vo.status === 1 && vo.tasklist.signtask.status === 1) {
+              if (vo.status === 1 && data.signtask.status === 1) {
                 // console.log(`今日已签到`)
               } else {
                 console.log(`此账号已黑`)
