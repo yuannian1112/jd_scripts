@@ -213,44 +213,52 @@ async function sendNotify(
 function gobotNotify(text, desp, time = 2100) {
   return new Promise((resolve) => {
     if (GOBOT_URL) {
-      const options = {
-        url: `${GOBOT_URL}?access_token=${GOBOT_TOKEN}&${GOBOT_QQ}`,
-        body: `message=${text}\n${desp}`,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        timeout,
-      };
-      setTimeout(() => {
-        $.post(options, (err, resp, data) => {
-          try {
-            if (err) {
-              console.log('发送go-cqhttp通知调用API失败！！\n');
-              console.log(err);
-            } else {
-              data = JSON.parse(data);
-              if (data.retcode === 0) {
-                console.log('go-cqhttp发送通知消息成功🎉\n');
-              } else if (data.retcode === 100) {
-                console.log(`go-cqhttp发送通知消息异常: ${data.errmsg}\n`);
+      let leng =2000;
+      let long = 0;
+      do{
+        let s = desp.substring(long, desp.length>long + leng? long + leng : desp.length );
+        console.log(desp+'\n');
+         console.log(text+'\n');
+        let options = {
+          url: `${GOBOT_URL}?access_token=${GOBOT_TOKEN}&${GOBOT_QQ}`,
+          body: `message=${text}\n${s}`,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          timeout,
+        };
+        setTimeout(() => {
+          $.post(options, (err, resp, data) => {
+            try {
+              if (err) {
+                console.log('发送go-cqhttp通知调用API失败！！\n');
+                console.log(err);
               } else {
-                console.log(
-                  `go-cqhttp发送通知消息异常\n${JSON.stringify(data)}`,
-                );
+                data = JSON.parse(data);
+                if (data.retcode === 0) {
+                  console.log('go-cqhttp发送通知消息成功\n');
+                } else if (data.retcode === 100) {
+                  console.log(`go-cqhttp发送通知消息异常: ${data.errmsg}\n`);
+                } else {
+                  console.log(`go-cqhttp发送通知消息异常\n${JSON.stringify(data)}`);
+                }
               }
+            } catch (e) {
+              $.logErr(e, resp);
+            } finally {
+              resolve(data);
             }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve(data);
-          }
-        });
-      }, time);
+          });
+        }, time+long);
+        long=long+leng
+      }
+      while(desp.length>long);
     } else {
       resolve();
     }
   });
 }
+
 
 function serverNotify(text, desp, time = 2100) {
   return new Promise((resolve) => {
