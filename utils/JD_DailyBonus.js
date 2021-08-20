@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2021.08.15 19:00 v2.1.0
+更新时间: 2021.08.15 19:00 v2.1.1
 有效接口: 20+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -202,7 +202,7 @@ function notify() {
       const Name = DualKey || OtherKey.length > 1 ? `【签到号${cnNum[$nobyda.num]||$nobyda.num}】:  ${DName}\n` : ``
       const disables = $nobyda.read("JD_DailyBonusDisables")
       const amount = disables ? disables.split(",").length : 0
-      const disa = !notify || amount ? `【温馨提示】:  检测到${$nobyda.disable?`上次执行意外崩溃, `:``}已禁用${notify?`${amount}个`:`所有`}接口, 如需开启请前往BoxJs或查看脚本内第114行注释.\n` : ``
+      const disa = !notify || amount ? `【温馨提示】:  检测到${$nobyda.disable?`上次执行意外崩溃, `:``}已禁用${notify?`${amount}个`:`所有`}接口, 如需开启请前往BoxJs或查看脚本内第118行注释.\n` : ``
       $nobyda.notify("", "", Name + one + two + three + four + five + disa + notify, {
         'media-url': $nobyda.headUrl || 'https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/jd.png'
       });
@@ -1608,6 +1608,7 @@ function checkFormat(value) { //check format and delete duplicates
     k = ((i.cookie || '').match(/(pt_key|pt_pin)=.+?;/g) || []).sort();
     if (k.length == 2) {
       if ((n = k[1]) && !c[n]) {
+        i.userName = i.userName ? i.userName : decodeURIComponent(n.split(/pt_pin=(.+?);/)[1]);
         i.cookie = k.join('')
         if (i.jrBody && !i.jrBody.includes('reqData=')) {
           console.log(`异常钢镚Body已过滤: ${i.jrBody}`)
@@ -1650,7 +1651,7 @@ function CookieUpdate(oldValue, newValue, path = 'cookie') {
     item = total.length;
   }
   return {
-    total,
+    total: checkFormat(total),
     type, //-1: same, 1: add, 2:update
     item,
     name: decodeURIComponent(name)
