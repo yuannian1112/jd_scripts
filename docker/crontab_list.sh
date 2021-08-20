@@ -203,6 +203,8 @@
 40 8,20 18-26 8 * node /scripts/jd_opencard13.js >> /scripts/logs/jd_opencard13.log 2>&1
 #开卡14
 18 7,20 18-31 8 * node /scripts/jd_opencard14.js >> /scripts/logs/jd_opencard14.log 2>&1
+#开卡15
+8 6,22 20-30 8 * node /scripts/jd_opencard15.js >> /scripts/logs/jd_opencard15.log 2>&1
 #
 10 7,19 12-20 8 * node /scripts/jd_qcshj.js >> /scripts/logs/jd_qcshj.log 2>&1
 #
