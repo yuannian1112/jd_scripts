@@ -223,6 +223,8 @@
 13 3,6 8-20 8 * node /scripts/jd_golden_machine.js >> /scripts/logs/jd_golden_machine.log 2>&1
 #
 40 9,18 9-25 8 * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
+#开学充电站
+10 4,11 * * * node /scripts/jd_kxcdz.js >> /scripts/logs/jd_kxcdz.log 2>&1
 #京东工业品抽奖
 10 6 17,18 8 * node /scripts/jd_industryLottery.js >> /scripts/logs/jd_industryLottery.log 2>&1
 #
