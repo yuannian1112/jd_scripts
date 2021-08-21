@@ -113,7 +113,7 @@ async function redPacket() {
     //await doLuckDrawFun();//券后9.9抽奖
     //await taskHomePage();//查询任务列表
     //await doTask();//领取任务，做任务，领取红包奖励
-    //await h5activityIndex();//查询红包基础信息
+    await h5activityIndex();//查询红包基础信息
     await red();//红包任务(发起助力红包,领取助力红包等)
     await h5activityIndex();
   } catch (e) {
