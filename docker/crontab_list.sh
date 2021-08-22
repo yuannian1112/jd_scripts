@@ -223,8 +223,6 @@
 2 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 #
 6 1,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
-#王者投票
-23 4,11 22-31,1-5 8,9 * node /scripts/jd_king.js >> /scripts/logs/jd_king.log 2>&1
 #
 40 9,18 9-25 8 * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
 #开学充电站
