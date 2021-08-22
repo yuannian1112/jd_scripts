@@ -205,6 +205,8 @@
 8 6,22 20-30 8 * node /scripts/jd_opencard15.js >> /scripts/logs/jd_opencard15.log 2>&1
 #开卡16
 20 10,19 * 8 * node /scripts/jd_opencard16.js >> /scripts/logs/jd_opencard16.log 2>&1
+#积分换话费
+43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 #
 10 7,19 12-20 8 * node /scripts/jd_qcshj.js >> /scripts/logs/jd_qcshj.log 2>&1
 #
