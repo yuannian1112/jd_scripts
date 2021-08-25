@@ -193,8 +193,6 @@
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #
 40 0,4 * * * node /scripts/jd_ryhxj.js >> /scripts/logs/jd_ryhxj.log 2>&1
-#开卡12
-10 8,20 18-25 8 * node /scripts/jd_opencard12.js >> /scripts/logs/jd_opencard12.log 2>&1
 #开卡13
 40 8,20 18-26 8 * node /scripts/jd_opencard13.js >> /scripts/logs/jd_opencard13.log 2>&1
 #开卡14
@@ -215,12 +213,8 @@
 39 3,14 * * * node /scripts/jd_ldhwj.js >> /scripts/logs/jd_ldhwj.log 2>&1
 #邀请有礼
 20 9 * * * node /scripts/jd_yqyl.js >> /scripts/logs/jd_yqyl.log 2>&1
-#
-45 5,17 12-24 8 * node /scripts/jd_decompression.js >> /scripts/logs/jd_decompression.log 2>&1
 #小米
 31 6,20 13-31 8 * node /scripts/jd_xmGame.js >> /scripts/logs/jd_xmGame.log 2>&1
-#骁龙
-8 9,19 13-25 8 * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
 #
 20 3,6,9 * * * node /scripts/jd_dreamfactory_tuan.js >> /scripts/logs/jd_dreamfactory_tuan.log 2>&1
 #手机城
