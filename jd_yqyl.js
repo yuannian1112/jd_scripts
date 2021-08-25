@@ -1,8 +1,6 @@
 
 /*
 
-
-
  #柠檬邀请有礼  
  #自定义邀请码环境变量
 export yqm="你的邀请码"
@@ -17,7 +15,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let yqm = '';
+let yqm = 'aKIygK8y83zhxs2LmpQv46conKGFsMrny570tt6IEhU%3D';
 let zdtx = false //设置为true自动抢提现100
 if (process.env.yqm) {
   yqm = process.env.yqm;
