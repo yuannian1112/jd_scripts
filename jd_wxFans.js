@@ -10,30 +10,28 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 const activityList = [
+     {"actid":"4e259914ef4c41c0b1006a55bb2c370f","endTime":1630857599000},
+    {"actid":"eab23c59b3614797a9ff61a9b88d1138","endTime":1630425599000},
+    {"actid":"1eff2f78ae904e7a8c6045e68744b224","endTime":1630401036000},
     {"actid":"419e0a7e20714cb08336b03ca87f514c","endTime":1630339200000},
     {"actid":"959ddcb1701d43fbbbd6e5b60136489f","endTime":1630857600000},
     {"actid":"6994d2900dfc4cfba9ab0b2c12b725e6","endTime":1630684799000},
-    {"actid":"08427e35e7a3427f95a4db27312a65ce","endTime":1630080000000},
     {"actid":"e3d5a39613094851b1a9d9c48c15c4ea","endTime":1630339200000},
     {"actid":"5439ecda2ce940a5af366b78c7e85fe0","endTime":1630339200000},
-    {"actid":"9c78bd506f1d4e64ace5228105759edb","endTime":1630080000000},
     {"actid":"6b7811e7b0a4438893f2ac9d5f53a8b8","endTime":1630857599000},
     {"actid":"0136403278fa488fa65b276a47ac3e88","endTime":1630339200000},
     {"actid":"e8206cf7401e4e90a5f645f990283144","endTime":1630339198000},
     {"actid":"4a2eb0132725416fa2a3086018437594","endTime":1630339200000},
     {"actid":"4baf19fa3f454e6abf82be7d66605ab4","endTime":1630425599000},
-    {"actid":"c75ae2afd7ff4aec9ed47008b08400f7","endTime":1630288800000},
     {"actid":"3da50af9e8664746844c5456b8920b7d","endTime":1630425599000},
     {"actid":"58121dee0d84428bbdeb83934ffa1b80","endTime":1630425599000},
     {"actid":"8afc9104d6444696b3f16ceb23a24536","endTime":1630425599000},
-    {"actid":"f006443799d34b55b9061be7b765c3fa","endTime":1630339200000},
     {"actid":"f22809ea36b14411a625641ef9685e53","endTime":1630339200000},
     {"actid":"eff9c47393be446f9dd576e26d13dd9d","endTime":1631635200000},
     {"actid":"d6fe4bd6a34e4eb9b498932122453890","endTime":1630548000000},
     {"actid":"5622386323bb4a82a2ed4e0158f7c6a7","endTime":1631289599000},
     {"actid":"4ee56f673e164305a527545efe566b20","endTime":1630425599000},
     {"actid":"9bb5cb2801114f2981c183abbc2aa522","endTime":1630425596000},
-    {"actid":"72e2c4f63db0481cbe5acc2d962aa3b1","endTime":1630252799000}
 ];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
