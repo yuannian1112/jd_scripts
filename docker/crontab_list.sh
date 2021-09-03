@@ -156,7 +156,7 @@
 #
 8 4,6 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 #
-28 1,3 * * * node /scripts/jd_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
+4 0 * * * node /scripts/jd_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
 #
 5 0 * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1
 #
