@@ -33,10 +33,10 @@ guaopencard19="true"
 
 */
 const $ = new Env('健康、食品联合开卡');
-const Faker=require('./utils/sign_graphics_validate.js') 
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const Faker=require('../utils/sign_graphics_validate.js')
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';
