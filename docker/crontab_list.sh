@@ -197,6 +197,8 @@
 34 5,17 3-13 9 * node /scripts/jd_opencard22.js >> /scripts/logs/jd_opencard22.log 2>&1
 #开卡23
 34 4,16 3-10 9 * node /scripts/jd_opencard23.js >> /scripts/logs/jd_opencard23.log 2>&1
+#开卡24
+24 3,18 6-17 9 * node /scripts/jd_opencard24.js >> /scripts/logs/jd_opencard24.log 2>&1
 #积分换话费
 43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 领券中心签到
