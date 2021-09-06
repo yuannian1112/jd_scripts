@@ -18,22 +18,22 @@ ck1满10人自动换ck2
 如需执行脚本请设置环境变量
 guaopencard20="true"
 ————————————————
-入口：[8.31-9.21 中秋酒水 (https://lzdz1-isv.isvjcloud.com/dingzhi/jddrinks/grandceremony/activity/1988328?activityId=dz2108100001566301&shareUuid=2caf01be63f34339be2e1d9d3bd7d6b4)]
+入口：[8.31-9.21 中秋酒水 (https://lzdz1-isv.isvjcloud.com/dingzhi/jddrinks/grandceremony/activity/1988328?activityId=dz2108100001566301&shareUuid=1644bc91f825400a856e4d2a15f311af)]
 
 ============Quantumultx===============
 [task_local]
 #8.31-9.21 中秋酒水
-30 7,20 1-21 9 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js, tag=8.31-9.21 中秋酒水, enabled=true
+30 9,21 1-21 9 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js, tag=8.31-9.21 中秋酒水, enabled=true
 
 ================Loon==============
 [Script]
-cron "30 7,20 1-21 9 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js, tag=8.31-9.21 中秋酒水
+cron "30 9,21 1-21 9 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js, tag=8.31-9.21 中秋酒水
 
 ===============Surge=================
-8.31-9.21 中秋酒水 = type=cron,cronexp="30 7,20 1-21 9 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js
+8.31-9.21 中秋酒水 = type=cron,cronexp="30 9,21 1-21 9 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js
 
 ============小火箭=========
-8.31-9.21 中秋酒水 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js, cronexpr="30 7,20 1-21 9 *", timeout=3600, enable=true
+8.31-9.21 中秋酒水 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard20.js, cronexpr="30 9,21 1-21 9 *", timeout=3600, enable=true
 */
 const $ = new Env('8.31-9.21 中秋酒水');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -71,7 +71,7 @@ message = ""
     }
   }
   $.shareUuidArr = [];
-  $.shareUuid = '2caf01be63f34339be2e1d9d3bd7d6b4'
+  $.shareUuid = '1644bc91f825400a856e4d2a15f311af'
   $.activityId = 'dz2108100001566301'
   console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/jddrinks/grandceremony/activity/1988328?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -277,6 +277,7 @@ function getShareRecord() {
           if(typeof res == 'object'){
             if(res.result === true && res.data){
               $.log(`=========== 你邀请了:${res.data.length}个`)
+              $.ShareCount = res.data.length
             }else if(typeof res == 'object' && res.errorMessage){
               console.log(`${res.errorMessage || ''}`)
             }else{
@@ -515,7 +516,7 @@ function drawContent() {
           console.log(`${$.toStr(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          
+
         }
       } catch (e) {
         $.logErr(e, resp)

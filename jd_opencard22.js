@@ -19,22 +19,22 @@ guaopencard_draw22="3"
 如需执行脚本请设置环境变量
 guaopencard22="true"
 ————————————————
-入口：[9.3-9.13 奔跑吧 开学季 (https://lzdz-isv.isvjcloud.com/dingzhi/union/kxj/activity/2451572?activityId=902090301&shareUuid=dada86299e854aea9d66942669e4145a)]
+入口：[9.3-9.13 奔跑吧 开学季 (https://lzdz-isv.isvjcloud.com/dingzhi/union/kxj/activity/2451572?activityId=902090301&shareUuid=a7b772e80ce64826b78da56f75be9700)]
 
 ============Quantumultx===============
 [task_local]
 #9.3-9.13 奔跑吧 开学季
-34 5,17 3-13 9 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js, tag=9.3-9.13 奔跑吧 开学季, enabled=true
+34 10,19 3-13 9 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js, tag=9.3-9.13 奔跑吧 开学季, enabled=true
 
 ================Loon==============
 [Script]
-cron "34 5,17 3-13 9 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js, tag=9.3-9.13 奔跑吧 开学季
+cron "34 10,19 3-13 9 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js, tag=9.3-9.13 奔跑吧 开学季
 
 ===============Surge=================
-9.3-9.13 奔跑吧 开学季 = type=cron,cronexp="34 5,17 3-13 9 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js
+9.3-9.13 奔跑吧 开学季 = type=cron,cronexp="34 10,19 3-13 9 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js
 
 ============小火箭=========
-9.3-9.13 奔跑吧 开学季 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js, cronexpr="34 5,17 3-13 9 *", timeout=3600, enable=true
+9.3-9.13 奔跑吧 开学季 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard22.js, cronexpr="34 10,19 3-13 9 *", timeout=3600, enable=true
 */
 const $ = new Env('9.3-9.13 奔跑吧 开学季');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -74,7 +74,7 @@ message = ""
             return
         }
     }
-    $.shareUuid = 'dada86299e854aea9d66942669e4145a'
+    $.shareUuid = 'a7b772e80ce64826b78da56f75be9700'
     $.activityId = '902090301'
     console.log(`入口:\nhttps://lzdz-isv.isvjcloud.com/dingzhi/union/kxj/activity/2451572?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
     for (let i = 0; i < cookiesArr.length && true; i++) {
@@ -173,8 +173,10 @@ async function run(){
             console.log(`开始浏览商品`)
             await getproduct()
             for (let s of $.getproduct && $.getproduct || []) {
-                if(s.taskDone !== true) await saveTask('浏览商品', `scansku&param=${s.id}`);
-                if(s.taskDone !== true) await $.wait(parseInt(Math.random() * 1000 + 5000, 10))
+                if(s.taskDone !== true) {
+                    await saveTask('浏览商品', `scansku&param=${s.id}`);
+                    await $.wait(parseInt(Math.random() * 1000 + 5000, 10))
+                }
             }
         }
         await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
@@ -194,7 +196,7 @@ async function run(){
                 await draw(99)
                 await $.wait(parseInt(Math.random() * 1000 + 4000, 10))
             }
-        }else console.log('如需抽奖请设置环境变量[guaopencard_draw22]为"true"');
+        }else console.log('如需抽奖请设置环境变量[guaopencard_draw22]为"3" 3为次数');
         if(gameFlag == 1){
             await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
             await getActorUuid()
@@ -216,6 +218,7 @@ async function run(){
                 return
             }
         }
+        await $.wait(parseInt(Math.random() * 1000 + 6000, 10))
     }catch(e){
         console.log(e)
     }
