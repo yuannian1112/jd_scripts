@@ -38,8 +38,8 @@ cron "28 9,22 1-6 9 *" script-path=https://raw.githubusercontent.com/smiek2221/s
 9.1-9.6 联合开卡 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard21.js, cronexpr="28 9,22 1-6 9 *", timeout=3600, enable=true
 */
 const $ = new Env('9.1-9.6 联合开卡');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';

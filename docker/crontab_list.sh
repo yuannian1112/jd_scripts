@@ -114,7 +114,7 @@
 #
 16 9,15,17 * * * node /scripts/jd_beauty.js >> /scripts/logs/jd_beauty.log 2>&1
 #
-30 16 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
+30 10 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
 #
 1 4,10,20 * * * node /scripts/jd_family.js >> /scripts/logs/jd_family.log 2>&1
 #
@@ -191,8 +191,6 @@
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #开卡20
 30 8,2 1-21 9 * node /scripts/jd_opencard20.js >> /scripts/logs/jd_opencard20.log 2>&1
-#开卡21
-28 7,20 1-6 9 * node /scripts/jd_opencard21.js >> /scripts/logs/jd_opencard21.log 2>&1
 #开卡22
 34 5,17 3-13 9 * node /scripts/jd_opencard22.js >> /scripts/logs/jd_opencard22.log 2>&1
 #开卡23
