@@ -31,11 +31,11 @@ guaopencard24="true"
 
 获得到的京豆不一定到账
 
-30 10,19 * 9 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard24.js, tag=会员“食”力派, enabled=true
+cron "30 10,19 * 9 *" https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard24.js, tag=会员“食”力派, enabled=true
 
 */
 const $ = new Env('会员“食”力派');
-const Faker=require('./sign_graphics_validate.js')
+const Faker=require('./utils/sign_graphics_validate.js')
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 const notify = $.isNode() ? require('./sendNotify') : '';
