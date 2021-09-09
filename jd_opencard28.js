@@ -3,6 +3,7 @@ cron"28 1,19 9-16 9 *"
 9.9-9.16 9.9大聚惠
 入口 https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/45670?activityId=f7e4d75f22c84cdeba92bf594b02b910
 */
+
 const $ = new Env("9.9-9.16 9.9大聚惠");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
