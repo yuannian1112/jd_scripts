@@ -203,6 +203,8 @@
 17 2,20 8-30 9 * node /scripts/jd_opencard26.js >> /scripts/logs/jd_opencard26.log 2>&1
 #开卡27
 5 0,15 * * * node /scripts/jd_opencard27.js >> /scripts/logs/jd_opencard27.log 2>&1
+#开卡28
+28 1,19 9-16 9 * node /scripts/jd_opencard28.js >> /scripts/logs/jd_opencard28.log 2>&1
 #电脑配件
 17 4 * 9 * node /scripts/jd_unknownTask1.js >> /scripts/logs/jd_unknownTask1.log 2>&1
 #积分换话费
