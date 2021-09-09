@@ -11,7 +11,7 @@ cron "5 0,15 * * *" script-path=jd_opencard27.js,tag=9.8-10.8 京粮食品送福
 ============小火箭=========
 9.8-10.8 京粮食品送福利 = type=cron,script-path=jd_opencard27.js, cronexpr="5 0,15 * * *", timeout=3600, enable=true
 */
-const $ = new Env('9.8-9.30 京粮食品送福利');
+const $ = new Env('9.8-10.8 京粮食品送福利');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let UA = require('./USER_AGENTS.js').USER_AGENT;
 const notify = $.isNode() ? require('./sendNotify') : '';
