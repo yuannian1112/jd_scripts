@@ -1,6 +1,15 @@
 /*
-cron "28 1,19 9-16 9 *"
-9.9-9.16 9.9大聚惠
+============Quantumultx===============
+[task_local]
+#9.9-9.16 9.9大聚惠
+28 1,19 9-16 9 * jd_opencard28.js, tag=9.9-9.16 9.9大聚惠,
+================Loon==============
+[Script]
+cron "28 1,19 9-16 9 *" script-path=jd_opencard28.js,tag=9.9-9.16 9.9大聚惠
+===============Surge=================
+9.9-9.16 9.9大聚惠 = type=cron,cronexp="28 1,19 9-16 9 *",wake-system=1,timeout=3600,script-path=jd_opencard28.js
+============小火箭=========
+9.9-9.16 9.9大聚惠 = type=cron,script-path=jd_opencard28.js, cronexpr="28 1,19 9-16 9 *", timeout=3600, enable=true
 入口 https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/45670?activityId=f7e4d75f22c84cdeba92bf594b02b910
 */
 
