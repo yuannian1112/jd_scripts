@@ -1,8 +1,22 @@
-/**
- 明星小店
- cron 10 9,18 9-25 8 * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_star_shop.js
- cron "10 9,18 9-25 8 *" https://raw.githubusercontent.com/star261/jd/main/scripts/jd_star_shop.js
- 蚊子腿，欧皇可以中实物
+/*
+明星小店
+更新时间：2021-09-10
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#明星小店
+10 9,18 * * * jd_connoisseur.js, tag=明星小店, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "10 9,18 * * *" script-path=jd_connoisseur.js,tag=明星小店
+
+===============Surge=================
+明星小店 = type=cron,cronexp="10 9,18 * * *",wake-system=1,timeout=3600,script-path=jd_connoisseur.js
+
+============小火箭=========
+明星小店 = type=cron,script-path=jd_connoisseur.js, cronexpr="10 9,18 * * *", timeout=3600, enable=true
  */
 const $ = new Env('明星小店');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -12,12 +26,10 @@ $.authorCodeList = [];
 let cookiesArr = [];
 $.linkID = '';
 let uniqueIdList = [
-    {'id':'L74LC5','name':'肖战','linkID':'P8Iw2eXANcZA4r_ofEDaAQ','taskId':false},
-    {'id':'7D2GUG','name':'张艺兴','linkID':'MRyP3a30dDZl5kSccE6B2w','taskId':215},
-    {'id':'3SU8SN','name':'陈小春','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':230},
-    {'id':'4T2M7Z','name':'黄征','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':230},
-    {'id':'Y5DXN4','name':'张智霖','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':230},
-    {'id':'MK9U5L','name':'李承铉','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':230},
+    {'id':'RU59FC','name':'尹正','linkID':'o4Z4uGy8EYe_-RY7p-Uw_Q','taskId':236},
+    {'id':'3SU8SN','name':'陈小春','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
+    {'id':'2ZFR43','name':'李xx','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
+    {'id':'4T2M7Z','name':'黄征','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
 ];
 const rewardList = ['P8Iw2eXANcZA4r_ofEDaAQ', 'MRyP3a30dDZl5kSccE6B2w', 'm2okfVwwfUNLJy8RGsIMTw']
 if ($.isNode()) {
