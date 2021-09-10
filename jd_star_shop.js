@@ -27,9 +27,9 @@ let cookiesArr = [];
 $.linkID = '';
 let uniqueIdList = [
     {'id':'RU59FC','name':'尹正','linkID':'o4Z4uGy8EYe_-RY7p-Uw_Q','taskId':236},
-    {'id':'3SU8SN','name':'陈小春','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
+    //{'id':'3SU8SN','name':'陈小春','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
     {'id':'2ZFR43','name':'李xx','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
-    {'id':'4T2M7Z','name':'黄征','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
+    //{'id':'4T2M7Z','name':'黄征','linkID':'m2okfVwwfUNLJy8RGsIMTw','taskId':232},
 ];
 const rewardList = ['P8Iw2eXANcZA4r_ofEDaAQ', 'MRyP3a30dDZl5kSccE6B2w', 'm2okfVwwfUNLJy8RGsIMTw']
 if ($.isNode()) {
