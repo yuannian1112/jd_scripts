@@ -1,7 +1,7 @@
 /*
 京喜财富岛
 cron 5 * * * * jd_cfd.js
-更新时间：2021-7-13
+更新时间：2021-9-11
 活动入口：京喜APP-我的-京喜财富岛
 
 已支持IOS双京东账号,Node.js支持N个京东账号
@@ -37,7 +37,7 @@ $.notifyTime = $.getdata("cfd_notifyTime");
 $.result = [];
 $.shareCodes = [];
 let cookiesArr = [], cookie = '', token = '';
-let UA, UAInfo = {}
+let UA, UAInfo = {}, num
 let nowTimes;
 
 const randomCount = $.isNode() ? 3 : 3;
@@ -99,6 +99,7 @@ $.appId = 10028;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
     $.canHelp = true
     UA = UAInfo[$.UserName]
+    num = 0
     if ($.shareCodes && $.shareCodes.length) {
       console.log(`\n自己账号内部循环互助\n`);
       for (let j = 0; j < $.shareCodes.length && $.canHelp; j++) {
@@ -190,10 +191,10 @@ async function cfd() {
       await $.wait(2000)
     }
 
-    //合成月饼
+    //合成珍珠
     // if (nowTimes.getHours() >= 5) {
-    await $.wait(2000)
-    await composePearlState()
+    //   await $.wait(2000)
+    //   await composeGameState()
     // }
 
     //接待贵宾
@@ -327,57 +328,46 @@ function TreasureHunt(strIndex) {
   })
 }
 
-// 合成月饼
-async function composePearlState(type = true) {
+// 合成珍珠
+async function composeGameState(type = true) {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/ComposePearlState`, `dwGetType=0`), async (err, resp, data) => {
+    $.get(taskUrl(`user/ComposeGameState`, `dwFirst=1`), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} ComposePearlState API请求失败，请检查网路重试`)
+          console.log(`${$.name} ComposeGameState API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
           if (type) {
-            console.log(`合成月饼`)
+            console.log(`合成珍珠`)
             if (data.iRet === 0) {
-              console.log(`当前已合成${data.dwCurProgress}颗月饼，总计获得${data.ddwVirHb / 100}元红包\n`)
-              if (data.dayDrawInfo.dwIsDraw == 0) {
-                await $.wait(2000)
-                let strToken = await getPearlDailyReward().strToken
-                await pearlDailyDraw(data.ddwSeasonStartTm, strToken)
-              }
-              if (data.strDT) {
-                let count = Math.floor((Math.random() * 2)) + 3
-                for (let j = 0; j < count; j++) {
+              if (data.dwCurProgress < data.stagelist[data.stagelist.length - 1].dwCurStageEndCnt && data.strDT) {
+                let count = data.stagelist[data.stagelist.length - 1].dwCurStageEndCnt
+                console.log(`当前已合成${data.dwCurProgress}颗珍珠，还需合成珍珠${count - data.dwCurProgress}颗\n`)
+                for (let j = data.dwCurProgress; j < count; j++) {
                   let num = Math.ceil(Math.random() * 12 + 12)
-                  console.log(`合成月饼：模拟操作${num}次`)
+                  console.log(`合成珍珠：模拟操作${num}次`)
                   for (let v = 0; v < num; v++) {
                     console.log(`模拟操作进度：${v + 1}/${num}`)
                     await $.wait(2000)
                     await realTmReport(data.strMyShareId)
-                    let s = Math.floor((Math.random() * 3))
-                    if (s === 1) {
-                      await composePearlAward(data.strDT)
-                    }
                   }
-                  let strLT = data.oPT[data.ddwCurTime % data.oPT.length]
-                  let res = await composePearlAddProcess(data.strDT, strLT)
+                  let res = await composeGameAddProcess(data.strDT)
                   if (res.iRet === 0) {
-                    console.log(`\n合成月饼成功：进度${j + 1}/${count},获得${res.ddwAwardHb / 100}元红包\n`)
+                    console.log(`\n合成珍珠成功：${j + 1}/${count}\n`)
                   } else {
-                    console.log(`\n合成月饼失败：${res.sErrMsg}\n`)
+                    console.log(`\n合成珍珠失败：${data.sErrMsg}\n`)
                   }
-                  data = await composePearlState(false)
                 }
-                // let composeGameStateRes = await composePearlState(false)
-                // console.log("合成月饼领奖")
-                // for (let key of Object.keys(composeGameStateRes.stagelist)) {
-                //   let vo = composeGameStateRes.stagelist[key]
-                //   if (vo.dwIsAward == 0 && composeGameStateRes.dwCurProgress >= vo.dwCurStageEndCnt) {
-                //     await $.wait(2000)
-                //     await composeGameAward(vo.dwCurStageEndCnt)
-                //   }
-                // }
+                let composeGameStateRes = await composeGameState(false)
+                console.log("合成珍珠领奖")
+                for (let key of Object.keys(composeGameStateRes.stagelist)) {
+                  let vo = composeGameStateRes.stagelist[key]
+                  if (vo.dwIsAward == 0 && composeGameStateRes.dwCurProgress >= vo.dwCurStageEndCnt) {
+                    await $.wait(2000)
+                    await composeGameAward(vo.dwCurStageEndCnt)
+                  }
+                }
               } else {
                 console.log(`今日已完成\n`)
               }
@@ -394,7 +384,7 @@ async function composePearlState(type = true) {
 }
 function realTmReport(strMyShareId) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`user/RealTmReport`, `dwIdentityType=0&strBussKey=composegame&strMyShareId=${strMyShareId}&ddwCount=10`), (err, resp, data) => {
+    $.get(taskUrl(`user/RealTmReport`, `dwIdentityType=0&strBussKey=composegame&strMyShareId=${strMyShareId}&ddwCount=5`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -410,13 +400,13 @@ function realTmReport(strMyShareId) {
     })
   })
 }
-function composePearlAddProcess(strDT, strLT) {
+function composeGameAddProcess(strDT) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`user/ComposePearlAddProcess`, `strBT=${strDT}&strLT=${strLT}`), (err, resp, data) => {
+    $.get(taskUrl(`user/ComposeGameAddProcess`, `strBT=${strDT}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} ComposePearlAddProcess API请求失败，请检查网路重试`)
+          console.log(`${$.name} ComposeGameAddProcess API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
         }
@@ -439,76 +429,12 @@ function composeGameAward(dwCurStageEndCnt) {
           data = JSON.parse(data);
           if (data.iRet === 0) {
             if (data.dwPrizeType === 0) {
-              console.log(`合成月饼领奖成功：获得${data.ddwCoin}金币`)
+              console.log(`合成珍珠领奖成功：获得${data.ddwCoin}金币`)
             } else if (data.dwPrizeType === 1) {
-              console.log(`合成月饼领奖成功：获得${data.ddwMoney}财富\n`)
+              console.log(`合成珍珠领奖成功：获得${data.ddwMoney}财富\n`)
             }
           } else {
-            console.log(`合成月饼领奖失败：${data.sErrMsg}\n`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function getPearlDailyReward() {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/GetPearlDailyReward`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} GetPearlDailyReward API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function pearlDailyDraw(ddwSeasonStartTm, strToken) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/PearlDailyDraw`, `ddwSeaonStart=${ddwSeasonStartTm}&strToken=${strToken}`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} PearlDailyDraw API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0) {
-            console.log(`抽奖成功：获得${data.strPrizeName || JSON.stringify(data)}`)
-          } else {
-            console.log(`抽奖失败：${data.sErrMsg}`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function composePearlAward(strDT) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/ComposePearlAward`, `__t=${Date.now()}&type=4&size=1&strBT=${strDT}`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} ComposePearlAward API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0) {
-            console.log(`模拟操作中奖：获得${data.ddwAwardHb / 100}元红包，总计获得${data.ddwVirHb / 100}元红包`)
-          } else {
-            console.log(`模拟操作未中奖：${data.sErrMsg}`)
+            console.log(`合成珍珠领奖失败：${data.sErrMsg}\n`)
           }
         }
       } catch (e) {
@@ -1277,11 +1203,12 @@ function helpByStage(shareCodes) {
             $.canHelp = false
           } else if (data.iRet === 2229 || data.sErrMsg === '助力失败啦~') {
             console.log(`助力失败：您的账号或被助力的账号可能已黑，请联系客服`)
-            // $.canHelp = false
+            num++
+            if (num === 5) $.canHelp = false
           } else if (data.iRet === 2190 || data.sErrMsg === '达到助力上限') {
             console.log(`助力失败：${data.sErrMsg}`)
             $.delcode = true
-          } else{
+          } else {
             console.log(`助力失败：${data.sErrMsg}`)
           }
         }
