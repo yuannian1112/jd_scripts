@@ -8,9 +8,9 @@ https://prodev.m.jd.com/mall/active/2VyRHGE7jM1igBJcrjoB6ak1JJWV/index.html
 cron "27 4 * 9 *" https://raw.githubusercontent.com/smiek2221/scripts/master/gua_UnknownTask1.js
 */
 const $ = new Env('电脑配件');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';

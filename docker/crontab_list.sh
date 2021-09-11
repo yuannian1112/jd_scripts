@@ -205,8 +205,6 @@
 5 0,15 * * * node /scripts/jd_opencard27.js >> /scripts/logs/jd_opencard27.log 2>&1
 #开卡28
 28 1,19 9-16 9 * node /scripts/jd_opencard28.js >> /scripts/logs/jd_opencard28.log 2>&1
-#电脑配件
-17 4 * 9 * node /scripts/jd_unknownTask1.js >> /scripts/logs/jd_unknownTask1.log 2>&1
 #积分换话费
 43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 领券中心签到
@@ -231,6 +229,8 @@
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 明星小店
 10 9,18 * * * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
+# 京喜财富岛月饼
+5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
 #
 0 6 * * * node /scripts/jd_focus.js >> /scripts/logs/jd_focus.log 2>&1
 #早起签到
