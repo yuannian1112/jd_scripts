@@ -72,12 +72,12 @@ $.HyperParam = {
 function requireConfig() {
     return new Promise(resolve => {
         console.log('开始获取配置文件\n')
-        $.notify = $.isNode() ? require('./sendNotify') : { sendNotify: async () => { } }
+        $.notify = $.isNode() ? require('../sendNotify') : { sendNotify: async () => { } }
         //获取 Cookies
         $.cookiesArr = []
         if ($.isNode()) {
             //Node.js用户请在jdCookie.js处填写X东ck;
-            const jdCookieNode = require('./jdCookie.js');
+            const jdCookieNode = require('../jdCookie.js');
             Object.keys(jdCookieNode).forEach((item) => {
                 if (jdCookieNode[item]) {
                     $.cookiesArr.push(jdCookieNode[item])
