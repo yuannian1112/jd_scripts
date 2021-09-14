@@ -21,17 +21,17 @@
 ============Quantumultx===============
 [task_local]
 #8.28-9.10 奔跑吧 开学季2
-34 4,16 3-10 9 * https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, tag=9.3-9.13 奔跑吧 开学季, enabled=true
+34 4,16 3-17 9 * https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, tag=9.3-9.13 奔跑吧 开学季, enabled=true
 
 ================Loon==============
 [Script]
-cron "34 4,16 3-10 9 *" script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, tag=9.3-9.13 奔跑吧 开学季
+cron "34 4,16 3-17 9 *" script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, tag=9.3-9.13 奔跑吧 开学季
 
 ===============Surge=================
-8.28-9.10 奔跑吧 开学季2 = type=cron,cronexp="34 4,16 3-10 9 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js
+8.28-9.10 奔跑吧 开学季2 = type=cron,cronexp="34 4,16 3-17 9 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js
 
 ============小火箭=========
-8.28-9.10 奔跑吧 开学季2 = type=cron,script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, cronexpr="34 4,16 3-10 9 *", timeout=3600, enable=true
+8.28-9.10 奔跑吧 开学季2 = type=cron,script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, cronexpr="34 4,16 3-17 9 *", timeout=3600, enable=true
 */
 const $ = new Env('8.28-9.10 奔跑吧 开学季2');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

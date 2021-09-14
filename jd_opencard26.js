@@ -1,5 +1,5 @@
 /*
-cron "12 2,20 8-30 9 *"
+cron "12 2,20 8-30 9 *" jd_opencard26.js
 9.8-9.30 成家有福 长长久久
 https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/45670?activityId=9ef833504aaf436ebd84a3b762c32ead
 */
