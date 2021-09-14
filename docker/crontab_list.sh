@@ -199,6 +199,8 @@
 28 1,19 9-16 9 * node /scripts/jd_opencard28.js >> /scripts/logs/jd_opencard28.log 2>&1
 #开卡29
 4 4,19 13-23 9 * node /scripts/jd_opencard29.js >> /scripts/logs/jd_opencard29.log 2>&1
+#开卡30
+22 1,18 1-22 * * node /scripts/jd_opencard30.js >> /scripts/logs/jd_opencard30.log 2>&1
 #希捷品牌日瓜分百万京豆
 17 2,10 * 9,10 * node /scripts/jd_UnknownTask4.js >> /scripts/logs/jd_UnknownTask4.log 2>&1
 #积分换话费
