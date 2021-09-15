@@ -35,6 +35,9 @@ if ($.isNode()) {
         try{res = await getAuthorShareCode('https://gitee.com/star267/share-code/raw/master/museum.json');}catch (e) {}
         if(!res){res = [];}
     }
+    if(res.length === 0){
+        return ;
+    }
     $.shareUuid = getRandomArrayElements(res,1)[0];
     for (let i = 0; i < cookiesArr.length; i++) {
         getUA();
@@ -427,9 +430,6 @@ function TotalBean() {
     })
 }
 function getRandomArrayElements(arr, count) {
-    if(arr.length === 0){
-        arr = ["2028","12668","12137","12684","12695","12769","12795","12808","12827","12792"];
-    }
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
     while (i-- > min) {
         index = Math.floor((i + 1) * Math.random());
