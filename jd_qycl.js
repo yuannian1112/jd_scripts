@@ -5,14 +5,14 @@ boxjs：https://raw.githubusercontent.com/Ariszy/Private-Script/master/Ariszy.bo
 
 [task_local]
 #企有此礼
-30 0 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, tag= 企有此礼
+30 0,20 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, tag= 企有此礼
 ================Loon==============
 [Script]
-cron "30 0 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js,tag= 企有此礼
+cron "30 0,20 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js,tag= 企有此礼
 ===============Surge=================
-企有此礼 = type=cron,cronexp="30 0 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js
+企有此礼 = type=cron,cronexp="30 0,20 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js
 ============小火箭=========
-企有此礼 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, cronexpr="30 0 * * *", timeout=3600, enable=true
+企有此礼 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, cronexpr="30 0,20 * * *", timeout=3600, enable=true
 */
 const $ = new Env('企有此礼')
 const notify = $.isNode() ?require('./sendNotify') : '';
