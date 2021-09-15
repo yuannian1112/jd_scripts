@@ -35,10 +35,10 @@ cron "30 10,19 * 9 *" https://raw.githubusercontent.com/smiek2221/scripts/master
 
 */
 const $ = new Env('会员“食”力派');
-const Faker=require('./utils/sign_graphics_validate.js')
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const Faker=require('../utils/sign_graphics_validate.js')
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';
