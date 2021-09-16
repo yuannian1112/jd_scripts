@@ -751,9 +751,9 @@ function JDUserSign1(s, key, title, body) {
 async function JDUserSign2(s, key, title, tid) {
   await new Promise(resolve => {
     let lkt = new Date().getTime()
-    let lks = md5('' + 'ztmFUCxcPMNyUq0P' + lkt).toString()
+    let lks = md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
     $nobyda.get({
-      url: `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${tid}&invokeKey=ztmFUCxcPMNyUq0P`,
+      url: `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${tid}&invokeKey=JL1VTNRadM68cIMQ`,
       headers: {
         Cookie: KEY,
         'lkt': lkt,
@@ -783,9 +783,9 @@ async function JDUserSign2(s, key, title, tid) {
   return new Promise(resolve => {
     setTimeout(() => {
       let lkt = new Date().getTime()
-      let lks = md5('' + 'ztmFUCxcPMNyUq0P' + lkt).toString()
+      let lks = md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
       const JDUrl = {
-        url: 'https://jdjoy.jd.com/api/turncard/channel/sign?invokeKey=ztmFUCxcPMNyUq0P',
+        url: 'https://jdjoy.jd.com/api/turncard/channel/sign?invokeKey=JL1VTNRadM68cIMQ',
         headers: {
           Cookie: KEY,
           'lkt': lkt,
