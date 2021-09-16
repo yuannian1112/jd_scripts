@@ -36,9 +36,10 @@ if ($.isNode()) {
         if(!res){res = [];}
     }
     if(res.length === 0){
-        return ;
+        $.shareUuid = '';
+    }else{
+        $.shareUuid = getRandomArrayElements(res,1)[0];
     }
-    $.shareUuid = getRandomArrayElements(res,1)[0];
     for (let i = 0; i < cookiesArr.length; i++) {
         getUA();
         $.index = i + 1;
@@ -91,7 +92,7 @@ async function main() {
     }else{
         console.log(`活动抽奖码：${$.activityInfo.lotteryCount.cuponcode}`);
     }
-    if($.activityInfo.isJoin.status === '0'){
+    if($.activityInfo.isJoin.status === '0' && $.shareUuid){
         await join('1000085868');
         await $.wait(1000);
         for (let i = 0; i < typeList.length; i++) {
