@@ -34,7 +34,7 @@ cron "34 4,16 3-17 9 *" script-path=https://raw.githubusercontent.com/yuannian11
 8.28-9.10 奔跑吧 开学季2 = type=cron,script-path=https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_opencard23.js, cronexpr="34 4,16 3-17 9 *", timeout=3600, enable=true
 */
 const $ = new Env('8.28-9.10 奔跑吧 开学季2');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 // const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
