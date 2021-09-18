@@ -211,8 +211,6 @@
 20 9 * * * node /scripts/jd_yqyl.js >> /scripts/logs/jd_yqyl.log 2>&1
 #
 20 3,6,9 * * * node /scripts/jd_dreamfactory_tuan.js >> /scripts/logs/jd_dreamfactory_tuan.log 2>&1
-#京东工业品抽奖
-10 6 17,18 8 * node /scripts/jd_industryLottery.js >> /scripts/logs/jd_industryLottery.log 2>&1
 #京喜领红包
 23 0,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #超级直播间盲盒抽京豆
