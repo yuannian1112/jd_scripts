@@ -191,8 +191,6 @@
 4 4,19 13-23 9 * node /scripts/jd_opencard29.js >> /scripts/logs/jd_opencard29.log 2>&1
 #开卡30
 22 1,18 1-22 * * node /scripts/jd_opencard30.js >> /scripts/logs/jd_opencard30.log 2>&1
-#开卡31
-33 3,19 14-18 9 * node /scripts/jd_opencard31.js >> /scripts/logs/jd_opencard31.log 2>&1
 #开卡32
 18 5,20 15-23 9 * node /scripts/jd_opencard32.js >> /scripts/logs/jd_opencard32.log 2>&1
 #开卡33
