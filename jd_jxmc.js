@@ -116,12 +116,12 @@ if ($.isNode()) {
     }
   }
 })()
-  .catch((e) => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-  })
-  .finally(() => {
-    $.done();
-  })
+    .catch((e) => {
+      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+    })
+    .finally(() => {
+      $.done();
+    })
 
 async function pasture() {
   try {
@@ -140,11 +140,11 @@ async function pasture() {
       console.log(`互助码：${$.homeInfo.sharekey}`);
       $.helpCkList.push($.cookie);
       $.inviteCodeList.push(
-        {
-          'use':$.UserName,
-          'code':$.homeInfo.sharekey,
-          'max':false
-        }
+          {
+            'use':$.UserName,
+            'code':$.homeInfo.sharekey,
+            'max':false
+          }
       );
       for (let i = 0; i < $.homeInfo.petinfo.length; i++) {
         $.onepetInfo = $.homeInfo.petinfo[i];
@@ -404,12 +404,12 @@ async function takeGetRequest(type) {
       myRequest = getGetRequest(`GetVisitBackCabbage`, url);
       break;
     case 'GetSignInfo':
-      url = `https://m.jingxi.com/jxmc/queryservice/GetSignInfo?channel=7&sceneid=1001&activeid=${$.activeid}&activekey=${$.activekey}&_stk=channel%2Csceneid&_ste=1`;
+      url = `https://m.jingxi.com/jxmc/queryservice/GetSignInfo?channel=7&sceneid=1001&activeid=${$.activeid}&activekey=${$.activekey}&jxmc_jstoken=${token['farm_jstoken']}&timestamp=${token['timestamp']}&phoneid=${token['phoneid']}&_stk=activeid%2Cactivekey%2Cchannel%2Cjxmc_jstoken%2Cphoneid%2Csceneid%2Ctimestamp&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
       myRequest = getGetRequest(`GetSignInfo`, url);
       break;
     case 'GetSignReward':
-      url = `https://m.jingxi.com/jxmc/operservice/GetSignReward?channel=7&sceneid=1001&activeid=${$.activeid}&activekey=${$.activekey}&currdate=${$.GetSignInfo.currdate}&_stk=channel%2Ccurrdate%2Csceneid&_ste=1`;
+      url = `https://m.jingxi.com/jxmc/operservice/GetSignReward?channel=7&sceneid=1001&activeid=${$.activeid}&activekey=${$.activekey}&currdate=${$.GetSignInfo.currdate}&jxmc_jstoken=${token['farm_jstoken']}&timestamp=${token['timestamp']}&phoneid=${token['phoneid']}&_stk=activeid%2Cactivekey%2Cchannel%2Ccurrdate%2Cjxmc_jstoken%2Cphoneid%2Csceneid%2Ctimestamp&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
       myRequest = getGetRequest(`GetSignReward`, url);
       break;
@@ -681,18 +681,18 @@ async function requestAlgo() {
 
 Date.prototype.Format = function (fmt) {
   var e,
-    n = this, d = fmt, l = {
-      "M+": n.getMonth() + 1,
-      "d+": n.getDate(),
-      "D+": n.getDate(),
-      "h+": n.getHours(),
-      "H+": n.getHours(),
-      "m+": n.getMinutes(),
-      "s+": n.getSeconds(),
-      "w+": n.getDay(),
-      "q+": Math.floor((n.getMonth() + 3) / 3),
-      "S+": n.getMilliseconds()
-    };
+      n = this, d = fmt, l = {
+        "M+": n.getMonth() + 1,
+        "d+": n.getDate(),
+        "D+": n.getDate(),
+        "h+": n.getHours(),
+        "H+": n.getHours(),
+        "m+": n.getMinutes(),
+        "s+": n.getSeconds(),
+        "w+": n.getDay(),
+        "q+": Math.floor((n.getMonth() + 3) / 3),
+        "S+": n.getMilliseconds()
+      };
   /(y+)/i.test(d) && (d = d.replace(RegExp.$1, "".concat(n.getFullYear()).substr(4 - RegExp.$1.length)));
   for (var k in l) {
     if (new RegExp("(".concat(k, ")")).test(d)) {
