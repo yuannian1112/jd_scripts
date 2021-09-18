@@ -183,8 +183,6 @@
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #开卡20
 30 8,2 1-21 9 * node /scripts/jd_opencard20.js >> /scripts/logs/jd_opencard20.log 2>&1
-#开卡24
-24 3,18 6-17 9 * node /scripts/jd_opencard24.js >> /scripts/logs/jd_opencard24.log 2>&1
 #开卡26
 17 2,20 8-30 9 * node /scripts/jd_opencard26.js >> /scripts/logs/jd_opencard26.log 2>&1
 #开卡27

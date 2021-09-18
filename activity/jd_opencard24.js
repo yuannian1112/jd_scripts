@@ -37,7 +37,7 @@ cron "24 10,20 6-17 9 *" script-path=https://raw.githubusercontent.com/smiek2221
 9.6-9.17 福满中秋 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard23.js, cronexpr="24 10,20 6-17 9 *", timeout=3600, enable=true
 */
 const $ = new Env('9.6-9.17 福满中秋');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 // const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
