@@ -296,7 +296,13 @@ function try_tabList() {
 		$.get(option, (err, resp, data) => {
 			try {
 				if (err) {
-					console.log(`🚫 ${arguments.callee.name.toString()} API请求失败，请检查网络\n${JSON.stringify(err)}`);
+					if (JSON.stringify(err) === `\"Response code 403 (Forbidden)\"`) {
+						$.isForbidden = true;
+						console.log("账号被京东服务器风控，不再请求该帐号");
+					} else {
+						console.log(JSON.stringify(err));
+						console.log(`${$.name} API请求失败，请检查网路重试`);
+					}
 				} else {
 					data = JSON.parse(data);
 					if (data.success) {
@@ -326,7 +332,13 @@ function try_feedsList(tabId, page) {
 		$.get(option, (err, resp, data) => {
 			try {
 				if (err) {
-					console.log(`🚫 ${arguments.callee.name.toString()} API请求失败，请检查网路\n${JSON.stringify(err)}`);
+					if (JSON.stringify(err) === `\"Response code 403 (Forbidden)\"`) {
+						$.isForbidden = true;
+						console.log("账号被京东服务器风控，不再请求该帐号");
+					} else {
+						console.log(JSON.stringify(err));
+						console.log(`${$.name} API请求失败，请检查网路重试`);
+					}
 				} else {
 					data = JSON.parse(data);
 					let tempKeyword = ``;
@@ -429,7 +441,13 @@ function try_apply(title, activityId) {
 		$.get(option, (err, resp, data) => {
 			try {
 				if (err) {
-					console.log(`🚫 ${arguments.callee.name.toString()} API请求失败，请检查网路\n${JSON.stringify(err)}`);
+					if (JSON.stringify(err) === `\"Response code 403 (Forbidden)\"`) {
+						$.isForbidden = true;
+						console.log("账号被京东服务器风控，不再请求该帐号");
+					} else {
+						console.log(JSON.stringify(err));
+						console.log(`${$.name} API请求失败，请检查网路重试`);
+					}
 				} else {
 					$.totalTry++;
 					data = JSON.parse(data);
