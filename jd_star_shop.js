@@ -26,10 +26,10 @@ $.authorCodeList = [];
 let cookiesArr = [];
 $.linkID = '';
 let uniqueIdList = [
-    {'id':'RU59FC','name':'尹正','linkID':'o4Z4uGy8EYe_-RY7p-Uw_Q','taskId':244},
+    {'id':'RU59FC','name':'尹正','linkID':'Q7qMuOyySR-qdWRz4YYR0w','taskId':259},
 ];
 const rewardList = [
-    'o4Z4uGy8EYe_-RY7p-Uw_Q',
+    'Q7qMuOyySR-qdWRz4YYR0w',
 ]
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
