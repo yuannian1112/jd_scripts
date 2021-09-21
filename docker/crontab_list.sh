@@ -191,8 +191,6 @@
 4 4,19 13-23 9 * node /scripts/jd_opencard29.js >> /scripts/logs/jd_opencard29.log 2>&1
 #开卡30
 22 1,18 1-22 * * node /scripts/jd_opencard30.js >> /scripts/logs/jd_opencard30.log 2>&1
-#开卡32
-18 5,20 15-23 9 * node /scripts/jd_opencard32.js >> /scripts/logs/jd_opencard32.log 2>&1
 #开卡33
 34 4,19 18-28 9 * node /scripts/jd_opencard33.js >> /scripts/logs/jd_opencard33.log 2>&1
 #开卡34
@@ -211,8 +209,6 @@
 23 0,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #超级直播间盲盒抽京豆
 1 18,20 * * * node /scripts/jd_super_mh.js >> /scripts/logs/jd_super_mh.log 2>&1
-#京东汽车兑换
-0 0 * * * node /scripts/jd_car_exchange.js >> /scripts/logs/jd_car_exchange.log 2>&1
 #心相印
 12 9,15 1-30 9,10 * node /scripts/jd_xinxiangyin.js >> /scripts/logs/jd_xinxiangyin.log 2>&1
 # 内容鉴赏官
