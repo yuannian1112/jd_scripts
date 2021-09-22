@@ -10,6 +10,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 const activityList = [
+    {"actid": "5bb3f94bdbca4165ae2af0d85c8e66b2", "endTime": 1632931199000},
     {"actid": "2aac05400cfb47c1b91cf8152f90b8e7", "endTime": 1632931200000},
     {"actid": "f1f1d34436ec4909aa7903f64205e283", "endTime": 1633622400000},
     {"actid": "7377aba024114ddfa25bad00948a8722", "endTime": 1632931200000},
@@ -23,7 +24,7 @@ const activityList = [
     {"actid": "73086c4fed7746e1b911a776d2e8662e", "endTime": 1633017599000},
     {"actid": "179e156d768240db84393751fc9c427b", "endTime": 1633017599000},
     {"actid": "bed695cfc40941c0a641eba935f9601e", "endTime": 1633017599000},
-];
+]
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
@@ -47,8 +48,8 @@ if ($.isNode()) {
         $.oldcookie = cookiesArr[i];
         $.isLogin = true;
         $.nickName = '';
-        await TotalBean();
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+        await TotalBean();
         console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
         if (!$.isLogin) {
             $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
