@@ -2,16 +2,16 @@
 10s阅读
 微信立即参与 -> http://h5.janzho7.cn/j/h?upuid=137424&ch=gzh&type=1
 备用链接 -> http://h5.cw28ciea.cn/j/h?upuid=137424&ch=gzh&type=1
-每小时有0.3 一天5轮 一天1.5
+每小时有0.3 一天6轮 一天1.8
 使用方法:点击开始阅读 成功阅读一次即可抓到包
 脚本没写过盾的
-每次运行都要手动验证一次(也就是一天5次)
+每天手动运行一次
 点立即阅读,等文章出来后关闭页面(注意 千万不要返回)
 拉一人头提现0.3奖励0.5 0.8再奖励0.5
 https://t.me/wenmou_car
 [task_local]
 #10s阅读
-0 8-14/1 * * * https://raw.githubusercontent.com/Wenmoux/scripts/wen/other/jrkuaixun.js, tag=10s阅读, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+cron "10 0-23/2 * * *" https://raw.githubusercontent.com/Wenmoux/scripts/wen/other/jrkuaixun.js, tag=10s阅读, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 [rewrite_local]
 #10s阅读
 .*read_channel\/do_read&pageshow.* url script-request-header https://raw.githubusercontent.com/Wenmoux/scripts/wen/other/jrkuaixun.js
