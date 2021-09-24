@@ -13,8 +13,6 @@
 #10 6,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
 #惊喜签到
 0 3,8 * * * node /scripts/jd_jxsign.js >> /scripts/logs/jd_jxsign.log 2>&1
-#qq星
-20 1-23/2 * * * node /scripts/jd_qqxing.js >> /scripts/logs/jd_qqxing.log 2>&1
 #东东超市兑换奖品
 59 23 * * * node /scripts/jd_blueCoin.js >> /scripts/logs/jd_blueCoin.log 2>&1
 #财富岛
@@ -195,8 +193,6 @@
 30 5 * 9 * node /scripts/jd_opencard35.js >> /scripts/logs/jd_opencard35.log 2>&1
 #开卡36
 18 2,14 22-30 9 * node /scripts/jd_opencard36.js >> /scripts/logs/jd_opencard36.log 2>&1
-#开卡37
-18 2,22 14-24 9 * node /scripts/jd_opencard37.js >> /scripts/logs/jd_opencard37.log 2>&1
 #希捷品牌日瓜分百万京豆
 17 2,10 * 9,10 * node /scripts/jd_UnknownTask4.js >> /scripts/logs/jd_UnknownTask4.log 2>&1
 #积分换话费
