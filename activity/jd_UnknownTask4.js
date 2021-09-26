@@ -7,9 +7,9 @@ https://3.cn/102Qir-AW
 cron "17 2,10 * 9,10 *" https://raw.githubusercontent.com/smiek2221/scripts/master/gua_UnknownTask4.js
 */
 const $ = new Env('希捷品牌日瓜分百万京豆');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';
