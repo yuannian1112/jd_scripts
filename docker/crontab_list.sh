@@ -187,10 +187,10 @@
 34 4,19 18-28 9 * node /scripts/jd_opencard33.js >> /scripts/logs/jd_opencard33.log 2>&1
 #开卡34
 3 3,18 18-28 9 * node /scripts/jd_opencard34.js >> /scripts/logs/jd_opencard34.log 2>&1
-#开卡35
-30 5 * 9 * node /scripts/jd_opencard35.js >> /scripts/logs/jd_opencard35.log 2>&1
 #开卡36
 18 2,14 22-30 9 * node /scripts/jd_opencard36.js >> /scripts/logs/jd_opencard36.log 2>&1
+#开卡38
+47 4 23-28 9 * node /scripts/jd_opencard38.js >> /scripts/logs/jd_opencard38.log 2>&1
 #积分换话费
 43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 领券中心签到
