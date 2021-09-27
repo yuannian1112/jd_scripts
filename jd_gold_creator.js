@@ -164,6 +164,7 @@ function goldCreatorDetail(groupId, subTitleId, taskId, batchId, flag = false) {
               $.remainVotes = data.result.remainVotes || 0;
               $.skuList = data.result.skuList || [];
               $.taskList = data.result.taskList || [];
+              $.signTask = data.result.signTask
               if (flag) {
                 await doTask2(batchId);
               } else {
@@ -211,6 +212,10 @@ async function doTask2(batchId) {
       await goldCreatorDoTask(body);
       await $.wait(2000);
     }
+  }
+  if ($.signTask['taskStatus'] === 1) {
+    const body = {"taskId": $.signTask['taskId'], "itemId": $.signTask['taskItemInfo']['itemId'], "type": $.signTask['taskType'], batchId};
+    await goldCreatorDoTask(body);
   }
 }
 function goldCreatorDoTask(body) {
