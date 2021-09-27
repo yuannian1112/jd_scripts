@@ -222,7 +222,7 @@
 # 京东手机狂欢城
 0 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 东东玩家
-20 0,16 * * * node /scripts/jd_ddwj.js >> /scripts/logs/jd_ddwj.log 2>&1
+17 0-23/4 * * * node /scripts/jd_ddwj.js >> /scripts/logs/jd_ddwj.log 2>&1
 # 热血心跳,狂解压
 5 6,18 * * * node /scripts/jd_decompression.js >> /scripts/logs/jd_decompression.log 2>&1
 # 魔方
