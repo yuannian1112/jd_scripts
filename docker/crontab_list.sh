@@ -211,8 +211,6 @@
 10 9,18 * * * node /scripts/jd_star_shop.js >> /scripts/logs/jd_star_shop.log 2>&1
 # 京喜财富岛月饼
 5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
-# 影像馆
-23 10,21 13-26 9 * node /scripts/jd_film_museum.js >> /scripts/logs/jd_film_museum.log 2>&1
 # 企有此礼
 30 0,20 * * * node /scripts/jd_qycl.js >> /scripts/logs/jd_qycl.log 2>&1
 # 京东价格保护
