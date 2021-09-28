@@ -25,7 +25,7 @@ let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭�
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let uuid
-$.sku = []
+$.shareCodes = []
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
@@ -65,8 +65,32 @@ let allMessage = '';
                 }
                 continue
             }
+            $.sku = []
             uuid = randomString(40)
             await jdMofang()
+        }
+    }
+    for (let i = 0; i < cookiesArr.length; i++) {
+        cookie = cookiesArr[i];
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        $.canHelp = true
+        if ($.shareCodes && $.shareCodes.length) {
+            console.log(`\n开始内部助力`)
+            for (let j = 0; j < $.shareCodes.length && $.canHelp; j++) {
+                console.log(`\n账号${$.UserName} 去助力 ${$.shareCodes[j].use} 的助力码 ${$.shareCodes[j].code}`)
+                if ($.UserName === $.shareCodes[j].use) {
+                    console.log(`助力失败：不能助力自己`)
+                    continue
+                }
+                $.delcode = false
+                await doInteractiveAssignment("assistTaskDetail", $.encryptProjectId, $.sourceCode, $.encryptAssignmentId, $.shareCodes[j].code)
+                await $.wait(2000)
+                if ($.delcode) {
+                    $.shareCodes.splice(j, 1)
+                    j--
+                    continue
+                }
+            }
         }
     }
 })()
@@ -124,9 +148,22 @@ async function queryInteractiveInfo(encryptProjectId, sourceCode) {
                                 if (vo.ext[vo.ext.extraType].status !== 2) {
                                     await doInteractiveAssignment(vo.ext.extraType, encryptProjectId, sourceCode, vo.encryptAssignmentId, vo.ext[vo.ext.extraType].itemId)
                                 } else {
-                                    console.log(`签到失败：今日已签到`)
+                                    console.log(`今日已签到`)
                                 }
-                            } else if (vo.ext.extraType !== "assistTaskDetail" && vo.ext.extraType !== "brandMemberList") {
+                            } else if (vo.ext.extraType === "assistTaskDetail") {
+                                console.log(`【京东账号${$.index}（${$.UserName}）的京东小魔方好友互助码】${vo.ext[vo.ext.extraType].itemId}`)
+                                $.encryptProjectId = encryptProjectId
+                                $.encryptAssignmentId = vo.encryptAssignmentId
+                                $.sourceCode = sourceCode
+                                if (vo.completionCnt < vo.assignmentTimesLimit) {
+                                    $.shareCodes.push({
+                                        "code": vo.ext[vo.ext.extraType].itemId,
+                                        "use": $.UserName
+                                    })
+                                } else {
+                                    console.log(`助力已满`)
+                                }
+                            } else if (vo.ext.extraType !== "brandMemberList") {
                                 console.log(`去做【${vo.assignmentName}】`)
                                 if (vo.completionCnt < vo.assignmentTimesLimit) {
                                     $.type = vo.rewards[0].rewardType
@@ -200,12 +237,22 @@ function doInteractiveAssignment(extraType, encryptProjectId, sourceCode, encryp
                 } else {
                     if (safeGet(data)) {
                         data = JSON.parse(data)
-                        if (actionType === "") {
-                            console.log(`签到成功：获得${data.rewardsInfo.successRewards[$.type][0].quantity}${data.rewardsInfo.successRewards[$.type][0].rewardName}`)
+                        if (extraType === "assistTaskDetail") {
+                            if (data.msg === "已达助力上限" || data.subCode === "108") {
+                                $.canHelp = false
+                                console.log(`助力失败：${data.msg}`)
+                            } else if (data.msg === "任务已完成" || data.subCode === "103") {
+                                $.delcode = true
+                                console.log(`助力失败：您的好友助力已满`)
+                            } else if (data.msg === "任务完成" || data.subCode === "0") {
+                                console.log(`助力成功`)
+                            }
+                        } else if (extraType === "sign1") {
+                            console.log(`签到成功：获得${data.rewardsInfo.successRewards[$.type][0] ? `${data.rewardsInfo.successRewards[$.type][0].quantity}${data.rewardsInfo.successRewards[$.type][0].rewardName}` : `${data.rewardsInfo.successRewards[$.type].quantityDetails[0].quantity}${data.rewardsInfo.successRewards[$.type].quantityDetails[0].rewardName}`}`)
                         } else if (actionType === "0") {
                             if (data.assignmentInfo.completionCnt === data.assignmentInfo.maxTimes) {
                                 $.complete = true
-                                console.log(`完成成功：获得${data.rewardsInfo.successRewards[$.type].quantityDetails[0].quantity}${data.rewardsInfo.successRewards[$.type].quantityDetails[0].rewardName}`)
+                                console.log(`完成成功：获得${data.rewardsInfo.successRewards[$.type][0] ? `${data.rewardsInfo.successRewards[$.type][0].quantity}${data.rewardsInfo.successRewards[$.type][0].rewardName}` : `${data.rewardsInfo.successRewards[$.type].quantityDetails[0].quantity}${data.rewardsInfo.successRewards[$.type].quantityDetails[0].rewardName}`}`)
                             }
                         }
                     }
