@@ -266,7 +266,7 @@ function doInteractiveAssignment(extraType, encryptProjectId, sourceCode, encryp
     })
 }
 
-async function getInteractionInfo() {
+async function getInteractionInfo(type = true) {
     return new Promise(async (resolve) => {
         $.post(taskPostUrl("getInteractionInfo", {"sign":3}), async (err, resp, data) => {
             try {
@@ -276,29 +276,47 @@ async function getInteractionInfo() {
                 } else {
                     if (safeGet(data)) {
                         data = JSON.parse(data)
-                        $.interactionId = data.result.interactionId
-                        $.taskPoolId = data.result.taskPoolInfo.taskPoolId
-                        for (let key of Object.keys(data.result.taskPoolInfo.taskList)) {
-                            let vo = data.result.taskPoolInfo.taskList[key]
-                            if (vo.taskStatus === 0) {
-                                if (vo.taskId === 2002) {
-                                    await queryPanamaPage(vo.groupId)
-                                    for (let id of $.sku) {
-                                        $.complete = false
-                                        await executeNewInteractionTask(vo.taskId, vo.groupId, id)
-                                        await $.wait(2000)
-                                        if ($.complete) break
+                        if (type) {
+                            $.interactionId = data.result.interactionId
+                            $.taskPoolId = data.result.taskPoolInfo.taskPoolId
+                            for (let key of Object.keys(data.result.taskPoolInfo.taskList)) {
+                                let vo = data.result.taskPoolInfo.taskList[key]
+                                if (vo.taskStatus === 0) {
+                                    if (vo.taskId === 2002) {
+                                        await queryPanamaPage(vo.groupId)
+                                        for (let id of $.sku) {
+                                            $.complete = false
+                                            await executeNewInteractionTask(vo.taskId, vo.groupId, id)
+                                            await $.wait(2000)
+                                            if ($.complete) break
+                                        }
+                                    } else {
+                                        for (let id of vo.taskGroupList) {
+                                            $.complete = false
+                                            await executeNewInteractionTask(vo.taskId, id)
+                                            await $.wait(2000)
+                                            if ($.complete) break
+                                        }
                                     }
                                 } else {
-                                    for (let id of vo.taskGroupList) {
-                                        $.complete = false
-                                        await executeNewInteractionTask(vo.taskId, id)
-                                        await $.wait(2000)
-                                        if ($.complete) break
-                                    }
+                                    console.log(`已找到当前魔方`)
+                                }
+                            }
+                            data = await getInteractionInfo(false)
+                            if (data.result.hasFinalLottery === 0) {
+                                let num = 0
+                                for (let key of Object.keys(data.result.taskPoolInfo.taskRecord)) {
+                                    let vo = data.result.taskPoolInfo.taskRecord[key]
+                                    num += vo
+                                }
+                                if (num >= 9) {
+                                    console.log(`共找到${num}个魔方，可开启礼盒`)
+                                    await getNewFinalLotteryInfo()
+                                } else {
+                                    console.log(`共找到${num}个魔方，不可开启礼盒`)
                                 }
                             } else {
-                                console.log(`已找到当前魔方`)
+                                console.log(`已开启礼盒`)
                             }
                         }
                     }
@@ -356,6 +374,31 @@ function executeNewInteractionTask(taskType, advertId, sku = '') {
                         if (data.result.hasDown === 1) {
                             console.log(data.result.isLottery === 1 ? `找到了一个魔方，获得${data.result.lotteryInfoList[0].quantity || ''}${data.result.lotteryInfoList[0].name}` : `找到了一个魔方`)
                             $.complete = true
+                        }
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve(data)
+            }
+        })
+    })
+}
+function getNewFinalLotteryInfo() {
+    return new Promise((resolve) => {
+        $.post(taskPostUrl("getNewFinalLotteryInfo", {"sign":3,"interactionId":$.interactionId}), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} getNewFinalLotteryInfo API请求失败，请检查网路重试`)
+                } else {
+                    if (safeGet(data)) {
+                        data = JSON.parse(data)
+                        if (data.result.lotteryStatus === 1) {
+                            console.log(`开启礼盒成功：获得${data.result.lotteryInfoList[0].quantity}${data.result.lotteryInfoList[0].name}`)
+                        } else {
+                            console.log(`开启礼盒成功：${data.result.toast}`)
                         }
                     }
                 }
