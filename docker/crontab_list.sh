@@ -179,12 +179,8 @@
 20 5,10 * * * node /scripts/jd_fcdyj.js >> /scripts/logs/jd_fcdyj.log 2>&1
 #女装盲盒
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
-#开卡26
-17 2,20 8-30 9 * node /scripts/jd_opencard26.js >> /scripts/logs/jd_opencard26.log 2>&1
 #开卡27
 5 0,15 * * * node /scripts/jd_opencard27.js >> /scripts/logs/jd_opencard27.log 2>&1
-#开卡36
-18 2,14 22-30 9 * node /scripts/jd_opencard36.js >> /scripts/logs/jd_opencard36.log 2>&1
 #开卡39
 45 2,22 * * * node /scripts/jd_opencard39.js >> /scripts/logs/jd_opencard39.log 2>&1
 #积分换话费
