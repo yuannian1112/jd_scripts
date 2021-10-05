@@ -217,6 +217,8 @@
 11 7,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 # 芥么签到
 11 0,9 * * * node /scripts/jd_jmsign.js >> /scripts/logs/jd_jmsign.log 2>&1
+# 芥么赚豪礼
+37 0,11 * * * node /scripts/jd_jmzhl.js >> /scripts/logs/jd_jmzhl.log 2>&1
 # 荣耀新品传送挑战
 5 5,15 * 9,10 * node /scripts/jd_honour.js >> /scripts/logs/jd_honour.log 2>&1
 #早起签到
