@@ -25,7 +25,7 @@
 
 ### 即日起，本仓库仅用于个人学习使用，不提供相关使用教程
 
-#####拉库：
+##### 拉库：
 ql repo https://hub.fastgit.org/yuannian1112/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|utils"
 
 ### 特别感谢(排名不分先后)：
