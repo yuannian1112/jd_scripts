@@ -640,7 +640,7 @@ function JDUserSignPre1(s, key, title, acData, ask) {
   }).then(data => {
     disable(key, title, 2)
     if (typeof(data) == "object") return JDUserSign1(s, key, title, encodeURIComponent(JSON.stringify(data)));
-    if (typeof(data) == "number") return JDUserSign2(s, key, title, data);
+    if (typeof(data) == "number") return JDUserSign2(s, key, title, data, acData);
     if (typeof(data) == "string") return JDUserSignPre1(s, key, title, acData, data);
   }, () => disable(key, title, 2))
 }
@@ -697,7 +697,7 @@ function JDUserSignPre2(s, key, title, acData) {
   }).then(data => {
     disable(key, title, 2)
     if (typeof(data) == "object") return JDUserSign1(s, key, title, encodeURIComponent(`{${data}}`));
-    if (typeof(data) == "number") return JDUserSign2(s, key, title, data)
+    if (typeof(data) == "number") return JDUserSign2(s, key, title, data, acData)
     if (typeof(data) == "string") return JDUserSignPre1(s, key, title, acData, data)
   }, () => disable(key, title, 2))
 }
@@ -751,7 +751,7 @@ function JDUserSign1(s, key, title, body) {
   });
 }
 
-async function JDUserSign2(s, key, title, tid) {
+async function JDUserSign2(s, key, title, tid, acData) {
   await new Promise(resolve => {
     let lkt = new Date().getTime()
     let lks = md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
@@ -769,7 +769,7 @@ async function JDUserSign2(s, key, title, tid) {
           if (data.success && data.data) {
             data = data.data
             if (!data.hasSign) {
-              let ss = await Faker.getBody(`https://prodev.m.jd.com/mall/active/${tid}/index.html`)
+              let ss = await Faker.getBody(`https://prodev.m.jd.com/mall/active/${acData}/index.html`)
               fp = ss.fp
               await getEid(ss, title)
             }
