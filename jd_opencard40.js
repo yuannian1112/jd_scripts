@@ -3,17 +3,17 @@
 ============Quantumultx===============
 [task_local]
 #10.8-10.14 超级会员福利社
-22 1,18 * * * jd_opencard40.js, tag=10.8-10.14 超级会员福利社, enabled=true
+45 2,22 * * * jd_opencard39.js, tag=10.8-10.14 超级会员福利社, enabled=true
 
 ================Loon==============
 [Script]
-cron "22 1,18 * * *" script-path=jd_opencard40.js,tag=10.8-10.14 超级会员福利社
+cron "45 2,22 * * *" script-path=jd_opencard39.js,tag=10.8-10.14 超级会员福利社
 
 ===============Surge=================
-10.8-10.14 超级会员福利社 = type=cron,cronexp="22 1,18 * * *",wake-system=1,timeout=3600,script-path=jd_opencard40.js
+10.8-10.14 超级会员福利社 = type=cron,cronexp="45 2,22 * * *",wake-system=1,timeout=3600,script-path=jd_opencard39.js
 
 ============小火箭=========
-10.8-10.14 超级会员福利社 = type=cron,script-path=jd_opencard40.js, cronexpr="22 1,18 * * *", timeout=3600, enable=true
+10.8-10.14 超级会员福利社 = type=cron,script-path=jd_opencard39.js, cronexpr="45 2,22 * * *", timeout=3600, enable=true
 */
 const $ = new Env('10.8-10.14 超级会员福利社');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
