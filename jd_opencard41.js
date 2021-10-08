@@ -3,17 +3,17 @@
 ============Quantumultx===============
 [task_local]
 #10.8-10.18 金秋好物盛典
-30 9,21 18-25 8 * jd_opencard41.js, tag=10.8-10.18 金秋好物盛典, enabled=true
+30 8,20 8-18 * * jd_opencard41.js, tag=10.8-10.18 金秋好物盛典, enabled=true
 
 ================Loon==============
 [Script]
 cron "30 8,20 8-18 * *" script-path=jd_opencard41.js,tag=10.8-10.18 金秋好物盛典
 
 ===============Surge=================
-10.8-10.18 金秋好物盛典 = type=cron,cronexp="30 9,21 18-25 8 *",wake-system=1,timeout=3600,script-path=jd_opencard41.js
+10.8-10.18 金秋好物盛典 = type=cron,cronexp="30 8,20 8-18 * *",wake-system=1,timeout=3600,script-path=jd_opencard41.js
 
 ============小火箭=========
-10.8-10.18 金秋好物盛典 = type=cron,script-path=jd_opencard41.js, cronexpr="30 9,21 18-25 8 *", timeout=3600, enable=true
+10.8-10.18 金秋好物盛典 = type=cron,script-path=jd_opencard41.js, cronexpr="30 8,20 8-18 * *", timeout=3600, enable=true
 */
 const $ = new Env('10.8-10.18 金秋好物盛典');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
