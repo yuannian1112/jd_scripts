@@ -215,6 +215,8 @@
 37 0,11 * * * node /scripts/jd_jmzhl.js >> /scripts/logs/jd_jmzhl.log 2>&1
 # 荣耀新品传送挑战
 5 5,15 * 9,10 * node /scripts/jd_honour.js >> /scripts/logs/jd_honour.log 2>&1
+# 1+9
+4 4,17 * * * node /scripts/jd_yijiajiu.js >> /scripts/logs/jd_yijiajiu.log 2>&1
 #早起签到
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
 #
