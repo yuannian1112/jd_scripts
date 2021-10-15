@@ -177,8 +177,6 @@
 20 5,10 * * * node /scripts/jd_fcdyj.js >> /scripts/logs/jd_fcdyj.log 2>&1
 #女装盲盒
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
-#开卡40
-22 1,18 8-14 * * node /scripts/jd_opencard40.js >> /scripts/logs/jd_opencard40.log 2>&1
 #开卡41
 30 8,20 8-18 * * node /scripts/jd_opencard41.js >> /scripts/logs/jd_opencard41.log 2>&1
 #开卡43
