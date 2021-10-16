@@ -3,17 +3,17 @@
 ============Quantumultx===============
 [task_local]
 #10.15-10.31 惠聚京东 好物连连
-36 2,19 15-31 10 * jd_opencard42.js, tag=10.15-10.31 惠聚京东 好物连连, enabled=true
+36 2,19  * * * jd_opencard42.js, tag=10.15-10.31 惠聚京东 好物连连, enabled=true
 
 ================Loon==============
 [Script]
-cron "36 2,19 15-31 10 *" script-path=jd_opencard42.js,tag=10.15-10.31 惠聚京东 好物连连
+cron "36 2,19  * * *" script-path=jd_opencard42.js,tag=10.15-10.31 惠聚京东 好物连连
 
 ===============Surge=================
-10.15-10.31 惠聚京东 好物连连 = type=cron,cronexp="36 2,19 15-31 10 *",wake-system=1,timeout=3600,script-path=jd_opencard42.js
+10.15-10.31 惠聚京东 好物连连 = type=cron,cronexp="36 2,19  * * *",wake-system=1,timeout=3600,script-path=jd_opencard42.js
 
 ============小火箭=========
-10.15-10.31 惠聚京东 好物连连 = type=cron,script-path=jd_opencard42.js, cronexpr="36 2,19 15-31 10 *", timeout=3600, enable=true
+10.15-10.31 惠聚京东 好物连连 = type=cron,script-path=jd_opencard42.js, cronexpr="36 2,19  * * *", timeout=3600, enable=true
 */
 const $ = new Env("10.15-10.31 惠聚京东 好物连连");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
