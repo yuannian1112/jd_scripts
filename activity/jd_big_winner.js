@@ -6,9 +6,9 @@ cron "20 * * * *" jd_big_winner.js
 脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
  */
 const $ = new Env('省钱大赢家之翻翻乐');
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '', linkId = 'yMVR-_QKRd2Mq27xguJG-w', fflLinkId = 'YhCkrVusBVa_O2K-7xE6hA';
 const money = $.isNode() ? (process.env.BIGWINNER_MONEY ? process.env.BIGWINNER_MONEY * 1 : 0.3) : ($.getdata("BIGWINNER_MONEY") ? $.getdata("BIGWINNER_MONEY") * 1 : 0.3)
