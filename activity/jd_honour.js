@@ -7,8 +7,8 @@ cron  5 5,15 * 9,10 * https://raw.githubusercontent.com/star261/jd/main/scripts/
 *
 * */
 const $ = new Env('荣耀新品传送挑战');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cookiesArr = [];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
