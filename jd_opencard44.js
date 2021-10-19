@@ -1,20 +1,21 @@
 /*
-10.16-10.22 大牌联合 狂欢抢先go
-脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
-=================================Quantumultx=========================
+5魔方兑换
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
 [task_local]
-#10.16-10.22 大牌联合 狂欢抢先go
-12 2,18 * * * jd_opencard44.js, tag=10.16-10.22 大牌联合 狂欢抢先go, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+#5魔方兑换
+12 2 * * * jd_opencard44.js, tag=5魔方兑换, img-url=, enabled=true
 
-=================================Loon===================================
+================Loon==============
 [Script]
-cron 12 2,18 * * * script-path=jd_opencard44.js,tag=10.16-10.22 大牌联合 狂欢抢先go
+cron "12 2 * * *" script-path=jd_opencard44.js,tag=5魔方兑换
 
-===================================Surge================================
-10.16-10.22 大牌联合 狂欢抢先go = type=cron,cronexp="12 2,18 * * *",wake-system=1,timeout=3600,script-path=jd_opencard44.js
+===============Surge=================
+5魔方兑换 = type=cron,cronexp="12 2 * * *",wake-system=1,timeout=3600,script-path=jd_opencard44.js
 
-====================================小火箭=============================
-10.16-10.22 大牌联合 狂欢抢先go = type=cron,script-path=jd_opencard44.js, cronexpr="12 2,18 * * *", timeout=3600, enable=true
+============小火箭=========
+5魔方兑换 = type=cron,script-path=jd_opencard44.js, cronexpr="12 2 * * *", timeout=3600, enable=true
  */
 const $ = new Env('10.16-10.22 大牌联合 狂欢抢先go');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
