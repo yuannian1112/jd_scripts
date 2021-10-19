@@ -8,7 +8,7 @@
 
 =================================Loon===================================
 [Script]
-cron "12 2,18 * * *" script-path=jd_opencard44.js,tag=10.16-10.22 大牌联合 狂欢抢先go
+cron 12 2,18 * * * script-path=jd_opencard44.js,tag=10.16-10.22 大牌联合 狂欢抢先go
 
 ===================================Surge================================
 10.16-10.22 大牌联合 狂欢抢先go = type=cron,cronexp="12 2,18 * * *",wake-system=1,timeout=3600,script-path=jd_opencard44.js
