@@ -33,7 +33,7 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let inviteCodes = ['RtGKz-2gRQ-jf9HLE4Fm1wUK7Kx0OdwbHQIDgH53RC73-DtgRQ@RtGKzeX2SQigedLMFddn1cwQcppajCK5h_oaMK09uxa1GVIdcQ']
+let inviteCodes = ['RtGKzeX2SQigedLMFddn1cwQcppajCK5h_oaMK09uxa1GVIdcQ@W9GzoJjSI0PrL-PvVLx_mjHeuJbxWx_0uScsLnKcvJ3BSyQ']
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -84,7 +84,7 @@ let inviteCodes = ['RtGKz-2gRQ-jf9HLE4Fm1wUK7Kx0OdwbHQIDgH53RC73-DtgRQ@RtGKzeX2S
       }
       await getInviteInfo();//雇佣
       if (exchangeFlag) {
-        const res = await city_lotteryAward();//抽奖y
+        const res = await city_lotteryAward();//抽奖
         if (res && res > 0) {
           for (let i = 0; i < new Array(res).fill('').length; i++) {
             await $.wait(1000)
