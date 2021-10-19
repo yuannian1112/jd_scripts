@@ -110,6 +110,8 @@ $.appId = 10028;
           continue
         }
       }
+    } else {
+      break
     }
   }
   await showMsg();
