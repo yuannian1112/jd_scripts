@@ -18,14 +18,15 @@ cron "31 2,8 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/
 京东小魔方 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_mf.js, cronexpr="31 2,8 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京东小魔方');
-const notify = $.isNode() ? require('../sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let uuid
 $.shareCodes = []
+let hotInfo = {}
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
@@ -66,14 +67,17 @@ let allMessage = '';
                 continue
             }
             $.sku = []
+            $.hot = false
             uuid = randomString(40)
             await jdMofang()
+            hotInfo[$.UserName] = $.hot
         }
     }
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
         $.canHelp = true
+        if (hotInfo[$.UserName]) continue
         if ($.shareCodes && $.shareCodes.length) {
             console.log(`\n开始内部助力`)
             for (let j = 0; j < $.shareCodes.length && $.canHelp; j++) {
@@ -104,8 +108,8 @@ let allMessage = '';
 async function jdMofang() {
     console.log(`集魔方 赢大奖`)
     await getInteractionHomeInfo()
-    // console.log(`\n集魔方 抽京豆 赢新品`)
-    // await getInteractionInfo()
+    console.log(`\n集魔方 抽京豆 赢新品`)
+    await getInteractionInfo()
 }
 
 async function getInteractionHomeInfo() {
@@ -147,6 +151,7 @@ async function queryInteractiveInfo(encryptProjectId, sourceCode) {
                                     let signDay = (vo.ext[vo.ext.extraType].signList && vo.ext[vo.ext.extraType].signList.length) || 0
                                     $.type = vo.rewards[signDay].rewardType
                                     await doInteractiveAssignment(vo.ext.extraType, encryptProjectId, sourceCode, vo.encryptAssignmentId, vo.ext[vo.ext.extraType].itemId)
+                                    if ($.hot) return
                                 } else {
                                     console.log(`今日已签到`)
                                 }
@@ -164,28 +169,30 @@ async function queryInteractiveInfo(encryptProjectId, sourceCode) {
                                     console.log(`助力已满`)
                                 }
                             } else if (vo.ext.extraType !== "brandMemberList") {
-                                console.log(`去做【${vo.assignmentName}】`)
-                                if (vo.completionCnt < vo.assignmentTimesLimit) {
-                                    $.type = vo.rewards[0].rewardType
-                                    for (let key of Object.keys(vo.ext[vo.ext.extraType])) {
-                                        let task = vo.ext[vo.ext.extraType][key]
-                                        if (task.status !== 2) {
-                                            if (vo.ext.extraType !== "productsInfo" && vo.ext.extraType !== "addCart") {
-                                                await doInteractiveAssignment(vo.ext.extraType, encryptProjectId, sourceCode, vo.encryptAssignmentId, task.itemId, "1")
-                                                await $.wait((vo.ext.waitDuration * 1000) || 2000)
-                                            }
-                                            if (vo.ext.extraType === "browseShop") {
-                                                $.rewardmsg = `完成成功：获得${vo.rewards[0].rewardValue}${vo.rewards[0].rewardName}`
-                                                await qryViewkitCallbackResult(encryptProjectId, vo.encryptAssignmentId, task.itemId)
-                                            } else {
-                                                $.complete = false
-                                                await doInteractiveAssignment(vo.ext.extraType, encryptProjectId, sourceCode, vo.encryptAssignmentId, task.itemId, "0")
-                                                if ($.complete) break
+                                if (Object.keys(vo.ext).length && Object.keys(vo.ext[vo.ext.extraType]).length) {
+                                    console.log(`去做【${vo.assignmentName}】`)
+                                    if (vo.completionCnt < vo.assignmentTimesLimit) {
+                                        $.type = vo.rewards[0].rewardType
+                                        for (let key of Object.keys(vo.ext[vo.ext.extraType])) {
+                                            let task = vo.ext[vo.ext.extraType][key]
+                                            if (task.status !== 2) {
+                                                if (vo.ext.extraType !== "productsInfo" && vo.ext.extraType !== "addCart") {
+                                                    await doInteractiveAssignment(vo.ext.extraType, encryptProjectId, sourceCode, vo.encryptAssignmentId, task.itemId, "1")
+                                                    await $.wait((vo.ext.waitDuration * 1000) || 2000)
+                                                }
+                                                if (vo.ext.extraType === "browseShop") {
+                                                    $.rewardmsg = `完成成功：获得${vo.rewards[0].rewardValue}${vo.rewards[0].rewardName}`
+                                                    await qryViewkitCallbackResult(encryptProjectId, vo.encryptAssignmentId, task.itemId)
+                                                } else {
+                                                    $.complete = false
+                                                    await doInteractiveAssignment(vo.ext.extraType, encryptProjectId, sourceCode, vo.encryptAssignmentId, task.itemId, "0")
+                                                    if ($.complete) break
+                                                }
                                             }
                                         }
+                                    } else {
+                                        console.log(`任务已完成`)
                                     }
-                                } else {
-                                    console.log(`任务已完成`)
                                 }
                             }
                         }
@@ -237,6 +244,11 @@ function doInteractiveAssignment(extraType, encryptProjectId, sourceCode, encryp
                 } else {
                     if (safeGet(data)) {
                         data = JSON.parse(data)
+                        if (data.subCode === "1403") {
+                            $.hot = true
+                            console.log(`活动太火爆了，还是去买买买吧！！！`)
+                            return
+                        }
                         if (extraType === "assistTaskDetail") {
                             if (data.msg === "已达助力上限" || data.subCode === "108") {
                                 $.canHelp = false
@@ -331,7 +343,7 @@ async function getInteractionInfo(type = true) {
 }
 function queryPanamaPage(groupId) {
     return new Promise((resolve) => {
-        $.post(taskPostUrl("queryPanamaPage", {"activityId":"2umkvbpZCUtyN6gcymN88ew8WLeU","dynamicParam":{},"geo":{"lng":"","lat":""},"previewTime":""}), (err, resp, data) => {
+        $.post(taskPostUrl("queryPanamaPage", {"activityId":"3v2Wu9KsgwzW92931wj7sYCRjueP","dynamicParam":{},"geo":{"lng":"","lat":""},"previewTime":""}), (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
@@ -420,7 +432,7 @@ function taskUrl(functionId, body = {}) {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Origin': 'https://h5.m.jd.com',
             'Accept-Language': 'zh-cn',
-            'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+            'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
             'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2bf3XEEyWG11pQzPGkKpKX2GxJz2/index.html',
             'Accept-Encoding': 'gzip, deflate, br',
             'Cookie': cookie
@@ -438,7 +450,7 @@ function taskPostUrl(functionId, body = {}) {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Origin': 'https://h5.m.jd.com',
             'Accept-Language': 'zh-cn',
-            'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+            'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
             'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2umkvbpZCUtyN6gcymN88ew8WLeU/index.html',
             'Accept-Encoding': 'gzip, deflate, br',
             'Cookie': cookie
@@ -549,7 +561,7 @@ function TotalBean() {
                 Accept: "*/*",
                 Connection: "keep-alive",
                 Cookie: cookie,
-                "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+                "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
                 "Accept-Language": "zh-cn",
                 "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
                 "Accept-Encoding": "gzip, deflate, br"
