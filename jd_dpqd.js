@@ -38,7 +38,6 @@ const token = [
   "2CD290865D5844EA6951B5778A2C7379",
   "638D7446A5712C226B334665166ECFD9",
 ]
-]
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
