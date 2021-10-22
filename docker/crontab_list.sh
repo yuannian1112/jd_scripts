@@ -235,6 +235,8 @@
 5 0,2 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # hyj
 0 * * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
+# 选品官
+23 8,19 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
 #早起签到
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
 #
