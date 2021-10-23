@@ -36,7 +36,7 @@
 #京东资产变动通知
 0 12 * * * node /scripts/jd_bean_change.js >> /scripts/logs/jd_bean_change.log 2>&1
 #京东极速版
-0 6 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
+0 1,7 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
 #京东抽奖机&内部互助
 34 3,5 * * * node /scripts/jd_lotteryMachine.js >> /scripts/logs/jd_lotteryMachine.log 2>&1
 #我是大老板
@@ -237,6 +237,10 @@
 0 * * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
 # 选品官
 23 8,19 * * * node /scripts/jd_selectionOffice.js >> /scripts/logs/jd_selectionOffice.log 2>&1
+# 手机狂欢城
+0 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+# 手机狂欢城助力
+10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 #早起签到
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
 #
