@@ -4,7 +4,7 @@ cron 0 * * * * 环游记 自动入会、签到、任务、升级、开宝箱、�
 */
 const $ = new Env('环游记');
 
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 
 
 let cookiesArr = [],
