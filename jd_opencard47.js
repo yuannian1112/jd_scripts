@@ -1,19 +1,6 @@
 /*
 10.23-10.29 大牌联合  狂欢抢先GO
-============Quantumultx===============
-[task_local]
-#10.23-10.29 大牌联合  狂欢抢先GO
-26 2,22 * * * jd_opencard47.js, tag=10.23-10.29 大牌联合  狂欢抢先GO, enabled=true
-
-================Loon==============
-[Script]
-cron "26 2,22 * * *" script-path=jd_opencard47.js,tag=10.23-10.29 大牌联合  狂欢抢先GO
-
-===============Surge=================
-10.23-10.29 大牌联合  狂欢抢先GO = type=cron,cronexp="26 2,22 * * *",wake-system=1,timeout=3600,script-path=jd_opencard47.js
-
-============小火箭=========
-10.23-10.29 大牌联合  狂欢抢先GO = type=cron,script-path=jd_opencard47.js, cronexpr="26 2,22 * * *", timeout=3600, enable=true
+cron 26 2,22 * * * script-path=jd_opencard47.js,tag=10.23-10.29 大牌联合  狂欢抢先GO
 */
 const $ = new Env('10.23-10.29 大牌联合  狂欢抢先GO');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
