@@ -241,6 +241,8 @@
 23 10,11 * * * node /scripts/jd_lol.js >> /scripts/logs/jd_lol.log 2>&1
 # 集魔力卡召唤大奖
 10 7,21 * * * node /scripts/jd_jika.js >> /scripts/logs/jd_jika.log 2>&1
+# 发财大赢家
+1 2,10 * * * node /scripts/jd_fcdyj.js >> /scripts/logs/jd_fcdyj.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
