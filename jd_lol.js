@@ -180,7 +180,6 @@ async function main(cookie) {
             console.log(JSON.stringify(lotteryInfo));
             await $.wait(2000);
         }
-        break;
     }
 }
 async function takeRequest(cookie,body){
