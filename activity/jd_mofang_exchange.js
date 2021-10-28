@@ -20,7 +20,7 @@ cron "0 0 * * *" script-path=https://raw.githubusercontent.com/yuannian1112/jd_s
 const $ = new Env('5魔方兑换');
 const printDetail = false;
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 let cookiesArr = [], cookie = '';
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
