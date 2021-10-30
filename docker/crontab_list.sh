@@ -223,8 +223,6 @@
 20 * * * * node /scripts/jd_daily_egg.js >> /scripts/logs/jd_daily_egg.log 2>&1
 # 攒金币 赢大礼
 22 0,8 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
-# 城城分现金
-0 0-23/1 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
 # 东东超市抢京豆
 11 0,9 * * * node /scripts/jd_superMarket_qjd.js >> /scripts/logs/jd_superMarket_qjd.log 2>&1
 # 预售福利机
@@ -249,6 +247,8 @@
 18 8,12,20 * * * node /scripts/jd_speed_signfree.js >> /scripts/logs/jd_speed_signfree.log 2>&1
 # 抢京豆
 0 0 * * * node /scripts/jd_angryBean.js >> /scripts/logs/jd_angryBean.log 2>&1
+# 极速版-发财挖宝
+20 1,9,16 * * * node /scripts/jd_fcwb.js >> /scripts/logs/jd_fcwb.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
