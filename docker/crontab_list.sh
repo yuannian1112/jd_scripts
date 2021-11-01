@@ -175,6 +175,8 @@
 18 1,20  * * * node /scripts/jd_opencard46.js >> /scripts/logs/jd_opencard46.log 2>&1
 #开卡49
 8 0,22 * * * node /scripts/jd_opencard49.js >> /scripts/logs/jd_opencard49.log 2>&1
+#开卡50
+36 0 1-12 11 * node /scripts/jd_opencard50.js >> /scripts/logs/jd_opencard50.log 2>&1
 #开卡51
 8 1 1-13 11 * node /scripts/jd_opencard51.js >> /scripts/logs/jd_opencard51.log 2>&1
 #开卡52
@@ -251,8 +253,6 @@
 20 1,9,16 * * * node /scripts/jd_fcwb.js >> /scripts/logs/jd_fcwb.log 2>&1
 # 京东超级盒子
 24 2,3 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
-# 沸腾之夜
-6 6,8 * * * node /scripts/jd_hotnight.js >> /scripts/logs/jd_hotnight.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
