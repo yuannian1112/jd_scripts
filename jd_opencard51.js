@@ -1,19 +1,6 @@
 /*
 10.31-11.13 跨界宠粉 豪礼放送
-============Quantumultx===============
-[task_local]
-#10.31-11.13 跨界宠粉 豪礼放送
-8 1 1-13 11 * jd_opencard51.js, tag=10.31-11.13 跨界宠粉 豪礼放送, enabled=true
-
-================Loon==============
-[Script]
-cron "8 1 1-13 11 *" script-path=jd_opencard51.js,tag=10.31-11.13 跨界宠粉 豪礼放送
-
-===============Surge=================
-10.31-11.13 跨界宠粉 豪礼放送 = type=cron,cronexp="8 1 1-13 11 *",wake-system=1,timeout=3600,script-path=jd_opencard51.js
-
-============小火箭=========
-10.31-11.13 跨界宠粉 豪礼放送 = type=cron,script-path=jd_opencard51.js, cronexpr="8 1 1-13 11 *", timeout=3600, enable=true
+cron 8 1 1-13 11 * Jd_opencard51.js
 */
 const $ = new Env("10.31-11.13 跨界宠粉 豪礼放送");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
