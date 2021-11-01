@@ -1,9 +1,22 @@
 /*
-cron 20 * * * * jd_big_winner.js
 省钱大赢家之翻翻乐
 一天可翻多次，但有上限
 运气好每次可得0.3元以上的微信现金(需京东账号绑定到微信)
 脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
+=================================Quantumultx=========================
+[task_local]
+#省钱大赢家之翻翻乐
+20 * * * * jd_big_winner.js, tag=省钱大赢家之翻翻乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+=================================Loon===================================
+[Script]
+cron "20 * * * *" script-path=jd_big_winner.js,tag=省钱大赢家之翻翻乐
+
+===================================Surge================================
+省钱大赢家之翻翻乐 = type=cron,cronexp="20 * * * *",wake-system=1,timeout=3600,script-path=jd_big_winner.js
+
+====================================小火箭=============================
+省钱大赢家之翻翻乐 = type=cron,script-path=jd_big_winner.js, cronexpr="20 * * * *", timeout=3600, enable=true
  */
 const $ = new Env('省钱大赢家之翻翻乐');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -65,10 +78,12 @@ async function main() {
       console.log(`开始进行翻翻乐拿红包\n`)
       await gambleOpenReward();//打开红包
       if ($.canOpenRed) {
-        while (!$.canApCashWithDraw && $.changeReward) {
+        let num = 0;
+        do {
           await openRedReward();
           await $.wait(500);
-        }
+          num++
+        } while (!$.canApCashWithDraw && $.changeReward && num < 20)
         if ($.canApCashWithDraw) {
           //提现
           await openRedReward('gambleObtainReward', $.rewardData.rewardType);
