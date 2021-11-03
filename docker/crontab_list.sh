@@ -195,6 +195,8 @@
 30 10 1-13 11 * node /scripts/jd_opencard59.js >> /scripts/logs/jd_opencard59.log 2>&1
 #开卡60
 47 10 1-11 11 * node /scripts/jd_opencard60.js >> /scripts/logs/jd_opencard60.log 2>&1
+#开卡61
+47 2 1-11 11 * node /scripts/jd_opencard61.js >> /scripts/logs/jd_opencard61.log 2>&1
 #开卡64
 47 14 1-3 11 * node /scripts/jd_opencard64.js >> /scripts/logs/jd_opencard64.log 2>&1
 #积分换话费
