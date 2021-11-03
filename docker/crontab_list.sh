@@ -169,8 +169,6 @@
 55 6 * * * node /scripts/jd_unsubscriLive.js >> /scripts/logs/jd_unsubscriLive.log 2>&1
 #女装盲盒
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
-#开卡46
-18 1,20  * * * node /scripts/jd_opencard46.js >> /scripts/logs/jd_opencard46.log 2>&1
 #开卡49
 8 0,22 * * * node /scripts/jd_opencard49.js >> /scripts/logs/jd_opencard49.log 2>&1
 #开卡50
@@ -197,8 +195,6 @@
 47 10 1-11 11 * node /scripts/jd_opencard60.js >> /scripts/logs/jd_opencard60.log 2>&1
 #开卡61
 47 2 1-11 11 * node /scripts/jd_opencard61.js >> /scripts/logs/jd_opencard61.log 2>&1
-#开卡64
-47 14 1-3 11 * node /scripts/jd_opencard64.js >> /scripts/logs/jd_opencard64.log 2>&1
 #积分换话费
 43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 领券中心签到
