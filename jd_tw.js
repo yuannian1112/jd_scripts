@@ -7,6 +7,7 @@ https://raw.githubusercontent.com/star261/jd/main/scripts/jd_superBrand.js
 */
 const $ = new Env('双11特务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
@@ -204,7 +205,7 @@ async function takeRequest(cookie,functionId,bodyInfo){
                 }
             } catch (e) {
                 console.log(data);
-                $.logErr(e, resp)
+                //$.logErr(e, resp)
             } finally {
                 resolve(data.data || {});
             }
