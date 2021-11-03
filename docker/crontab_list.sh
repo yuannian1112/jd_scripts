@@ -185,6 +185,8 @@
 25 1,19 1-11 11 * node /scripts/jd_opencard54.js >> /scripts/logs/jd_opencard54.log 2>&1
 #开卡55
 47 6 1-11 11 * node /scripts/jd_opencard55.js >> /scripts/logs/jd_opencard55.log 2>&1
+#开卡56
+29 3,21 1-12 11 * node /scripts/jd_opencard56.js >> /scripts/logs/jd_opencard56.log 2>&1
 #开卡57
 47 8 1-12 11 * node /scripts/jd_opencard57.js >> /scripts/logs/jd_opencard57.log 2>&1
 #开卡58
