@@ -49,8 +49,6 @@
 5 3,19 * * * node /scripts/jd_unsubscribe.js >> /scripts/logs/jd_unsubscribe.log 2>&1
 #东东萌宠
 45 6-18/6 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
-#锦鲤红包
-1 2 * * * node /scripts/jd_redPacket.js >> /scripts/logs/jd_redPacket.log 2>&1
 #挑一挑
 1 3,9,18 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 #
@@ -267,6 +265,8 @@
 10 9,13,15,16,19,20 2-8 11 * node /scripts/jd_tewu.js >> /scripts/logs/jd_tewu.log 2>&1
 # 手机竞猜
 0 1,18 * * * node /scripts/jd_sjjc.js >> /scripts/logs/jd_sjjc.log 2>&1
+# 星推官
+22 3,19 * * * node /scripts/jd_xtg.js >> /scripts/logs/jd_xtg.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
