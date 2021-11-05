@@ -1,15 +1,19 @@
 /*
-双十一无门槛红包🧧
+双十一无门槛红包
+cron 0 0,12,20 * * *  https://raw.githubusercontent.com/smiek2121/scripts/master/gua_redEnvelopes.js
+整点跑 红包几率大点
 ck1助力 作者
 其余助力ck1
 https://u.jd.com/yd6BrBO
 跳转到app 可查看助力情况
-cron 0 0,12,20 * * * gua_1111RedEnvelope.js
+
+返利变量：gua_redEnvelope_rebateCode，默认给脚本作者返利，若需要返利给自己，请自己修改返利变量gua_redEnvelope_rebateCode
+例：gua_redEnvelope_rebateCode="你的返利code"
 */
 
 let rebateCodes = ''
 
-const $ = new Env('双十一无门槛红包🧧');
+const $ = new Env('双十一无门槛红包');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Faker = $.isNode() ? require('./utils/sign_graphics_validate.js') : '';
@@ -45,6 +49,7 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
         if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\n咱江湖再见`);
         return
     }
+    console.log('整点跑 红包几率大点')
     $.shareCode = 'sq9bZ'
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
@@ -127,6 +132,7 @@ function getCoupons(shareId = '',type = 1) {
                 "User-Agent": $.UA ,
             }
         }
+        if($.url2) opts["headers"]["Referer"] = $.url2
         $.get(opts, async (err, resp, data) => {
             try {
                 if (err) {
@@ -316,7 +322,7 @@ function getEid(arr) {
 }
 
 function getUA(){
-    $.UA = `jdapp;iPhone;10.2.0;13.1.2;${randomString(40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/2308460611;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
+    $.UA = `jdapp;iPhone;10.2.2;14.3;${randomString(40)};M/5.0;network/wifi;ADID/;model/iPhone12,1;addressid/4199175193;appBuild/167863;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     rebateCode = 'yd6BrBO'
     if($.index != 1){
         let arr = [rebateCodes,'yd6BrBO']
