@@ -41,8 +41,6 @@
 35 0-23/1 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
 #
 4 1,3 * * * node /scripts/jd_market_lottery.js >> /scripts/logs/jd_market_lottery.log 2>&1
-#赚京豆
-10 0,1,23 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 #
 40 * * * * node /scripts/jx_mc_coin.js >> /scripts/logs/jx_mc_coin.log 2>&1
 #
@@ -193,6 +191,8 @@
 47 10 1-11 11 * node /scripts/jd_opencard60.js >> /scripts/logs/jd_opencard60.log 2>&1
 #开卡61
 47 2 1-11 11 * node /scripts/jd_opencard61.js >> /scripts/logs/jd_opencard61.log 2>&1
+#开卡62
+45 2,21 5-12 11 * node /scripts/jd_opencard62.js >> /scripts/logs/jd_opencard62.log 2>&1
 #积分换话费
 43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 领券中心签到
@@ -269,6 +269,8 @@
 22 3,19 * * * node /scripts/jd_xtg.js >> /scripts/logs/jd_xtg.log 2>&1
 # 牛牛福利
 1 9,19 * * * node /scripts/jd_nnfl.js >> /scripts/logs/jd_nnfl.log 2>&1
+# 热血心跳,狂解压
+10 2,9,17 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
