@@ -83,8 +83,6 @@
 0 0 * * * node /scripts/jd_bean_change1.js >> /scripts/logs/jd_bean_change1.log 2>&1
 #
 1 0 * * *  node /scripts/jd_shop.js >> /scripts/logs/jd_shop.log 2>&1
-#京喜牧场
-48 0-23/3 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 #摇钱树
 23 0-23/2 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
 #排行榜
@@ -269,6 +267,8 @@
 1 9,19 * * * node /scripts/jd_nnfl.js >> /scripts/logs/jd_nnfl.log 2>&1
 # 热血心跳,狂解压
 10 2,9,17 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
+# 双11环游记大富翁
+0 2 1-11 11 * node /scripts/jd_travel_shop.js >> /scripts/logs/jd_travel_shop.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
