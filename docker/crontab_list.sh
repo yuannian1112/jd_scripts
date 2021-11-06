@@ -97,6 +97,8 @@
 46 6,13,22 * * * node /scripts/jd_small_home.js >> /scripts/logs/jd_small_home.log 2>&1
 #美丽研究院
 16 9,15,17 * * * node /scripts/jd_beauty.js >> /scripts/logs/jd_beauty.log 2>&1
+#京喜牧场
+48 0-23/3 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 #京东试用
 30 10 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
 #领现金
