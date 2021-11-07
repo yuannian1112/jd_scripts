@@ -7,8 +7,8 @@
  PS:只有押对队伍才能在第二天瓜分豆子。如果觉得哪个队伍胜率大，可以自己修改环境变量，梭哈一个队伍
  */
 const $ = new Env('电竞预言家');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cookiesArr = [];
 // 环境变量：ANSWERCODE, 选择哪一个队伍,默认随机； 例：ANSWERCODE="A" 选择第一个队伍，ANSWERCODE="B" 选择第二个队伍
 let answerCode = $.isNode() ? (process.env.ANSWERCODE ? process.env.ANSWERCODE : `999`):`999`;
@@ -195,7 +195,7 @@ async function takeRequest(cookie,body){
         'Accept' : `application/json, text/plain, */*`,
         'Referer' : `https://dnsm618-100million.m.jd.com/`,
         'Host' : `api.m.jd.com`,
-        'user-agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        'user-agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         'Accept-Language' : `zh-cn`,
         'Accept-Encoding' : `gzip, deflate, br`
     };
