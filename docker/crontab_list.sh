@@ -257,8 +257,6 @@
 20 1,9,16 * * * node /scripts/jd_fcwb.js >> /scripts/logs/jd_fcwb.log 2>&1
 # 京东超级盒子
 24 2,3 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
-# 双11特务
-10 9,13,15,16,19,20 2-8 11 * node /scripts/jd_tewu.js >> /scripts/logs/jd_tewu.log 2>&1
 # 手机竞猜
 0 1,18 * * * node /scripts/jd_sjjc.js >> /scripts/logs/jd_sjjc.log 2>&1
 # 星推官
