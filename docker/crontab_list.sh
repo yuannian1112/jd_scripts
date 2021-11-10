@@ -235,8 +235,6 @@
 13 4,15 * * * node /scripts/jd_industrial_task.js >> /scripts/logs/jd_industrial_task.log 2>&1
 # 天天提鹅
 20 * * * * node /scripts/jd_daily_egg.js >> /scripts/logs/jd_daily_egg.log 2>&1
-# 东东超市抢京豆
-11 0,9 * * * node /scripts/jd_superMarket_qjd.js >> /scripts/logs/jd_superMarket_qjd.log 2>&1
 # 预售福利机
 5 0,2 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # 选品官
