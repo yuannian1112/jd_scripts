@@ -28,6 +28,9 @@
 ##### 拉库：
 ql repo https://ghproxy.com/https://github.com/yuannian1112/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|utils"
 
+## 无法更新到最新版本的，删除图中文件重新拉库
+![image](https://raw.githubusercontent.com/yuannian1112/code/main/2.png)
+
 ### 特别感谢(排名不分先后)：
 
 
