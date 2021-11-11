@@ -16,13 +16,13 @@ sjjc = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-S
 */
 const Ariszy = '手机竞猜'
 const $ = Env(Ariszy)
-const notify = $.isNode() ?require('./sendNotify') : '';
+const notify = $.isNode() ?require('../sendNotify') : '';
 cookiesArr = []
 CodeArr = []
 cookie = ''
 var quizId = "",shareId = "",jump = ""
 var brandlistArr = [],shareidArr = []
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
 const invite=1;//新用户自动邀请，0关闭，1默认开启
