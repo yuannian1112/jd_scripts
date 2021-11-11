@@ -1,5 +1,5 @@
 /*
-超店会员福利社
+超店会员福利社 https://lzdz1-isv.isvjd.com/dingzhi/shop/league/activity/6758593?activityId=dz211026100001616201shop
 cron 8 19,21,23 * 11 * jd_opencard66.js
 */
 const $ = new Env('超店会员福利社');
