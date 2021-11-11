@@ -1,7 +1,6 @@
 /*
 11.04-11.11 大牌联合 赢大额京豆
-入口 https://lzdz1-isv.isvjd.com/dingzhi/shop/league/activity?activityId=dz211104100001616201shop
-cron 19 4,18 4-11 11 * jd_opencard64.js
+cron 8 ,21,22,23 * 11 * jd_opencard67.js
 */
 const $ = new Env('11.04-11.11 大牌联合 赢大额京豆');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
