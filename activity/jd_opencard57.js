@@ -48,8 +48,8 @@ let guaopenwait = "0"
 let guaopencard_draw = "0"
 
 const $ = new Env('11.1~11.12 爆款福利，惠享低价');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cleanCart = ''
 if($.isNode()){
     try{
