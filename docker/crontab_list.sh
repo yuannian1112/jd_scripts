@@ -113,8 +113,6 @@
 20 13 * * 6 node /scripts/jd_get_share_code.js >> /scripts/logs/jd_get_share_code.log 2>&1
 #
 15-55/20 * * * * node /scripts/jd_health_collect.js >> /scripts/logs/jd_health_collect.log 2>&1
-#十秒阅读
-10 0-23/2 * * * node /scripts/jd_read.js >> /scripts/logs/jd_read.log 2>&1
 #京东到家果园
 10 0,8,11,17 * * * node /scripts/jd_jddj_fruit.js >> /scripts/logs/jd_jddj_fruit.log 2>&1
 #京东到家
@@ -234,7 +232,7 @@
 # 牛牛福利
 1 9,19 * * * node /scripts/jd_nnfl.js >> /scripts/logs/jd_nnfl.log 2>&1
 #赚京豆
-10 0,1,23 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
+10,40 0,1 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 #搞基大神-饭粒
 46 1,19 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
 # 热血心跳,狂解压
