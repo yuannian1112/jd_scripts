@@ -14,9 +14,9 @@ https://u.jd.com/yd6BrBO
 let rebateCodes = ''
 
 const $ = new Env('双十一无门槛红包');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
-const Faker = $.isNode() ? require('./utils/sign_graphics_validate.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
+const Faker = $.isNode() ? require('../utils/sign_graphics_validate.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';

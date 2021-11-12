@@ -3,8 +3,8 @@
 cron 25 1,19 1-11 11 * jd_opencard54.js
 */
 const $ = new Env('10.31-11.11 品牌盛典 11.11狂欢购');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 process.env.guaopencard9 = true
 process.env.guaopencard_addSku9 = true

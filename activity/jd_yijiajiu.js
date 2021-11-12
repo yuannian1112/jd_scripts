@@ -4,8 +4,8 @@ cron "4 4,17 * * *"
 https://lzdz1-isv.isvjcloud.com/dingzhi/yijia/collectvalue/activity/5063373?activityId=dz2109100000194701&shareUuid=ee5d41f11f454b8db66c24c2fd09f2f7
 */
 const $ = new Env("一加 9RT新品发布");
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
 let ownCode = null;
 if ($.isNode()) {
