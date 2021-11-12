@@ -110,7 +110,7 @@ var mode = $.isNode() ? (process.env.angryBeanMode ? process.env.angryBeanMode :
     console.log(out)
     msg += out + "\n"
     if (($.isNode() ? (process.env.enableAngryBeanNotify == "false" ? "false" : "true") : "false") == "true") {
-        require('./sendNotify').sendNotify(`真·抢京豆`, msg);
+        require('../sendNotify').sendNotify(`真·抢京豆`, msg);
     }
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -281,7 +281,7 @@ let toChinesNum = (num) => {
 
 function requireConfig() {
     return new Promise(resolve => {
-        const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+        const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
         if ($.isNode()) {
             Object.keys(jdCookieNode).forEach((item) => {
                 if (jdCookieNode[item]) {
