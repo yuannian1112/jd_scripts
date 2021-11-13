@@ -26,7 +26,7 @@
 ### 即日起，本仓库仅用于个人学习使用，不提供相关使用教程
 
 ##### 拉库：
-ql repo https://ghproxy.com/https://github.com/yuannian1112/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|utils"
+ql repo https://ghproxy.com/https://github.com/yuannian1112/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|utils|jdCookie.js|sendNotify.js"
 
 ## 无法更新到最新版本的，删除图中文件重新拉库
 ![image](https://raw.githubusercontent.com/yuannian1112/code/main/2.png)
