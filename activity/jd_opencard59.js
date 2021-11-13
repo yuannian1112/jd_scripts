@@ -42,7 +42,7 @@ let guaopenwait = "0"
 let guaopencard_draw = "0"
 
 const $ = new Env('11.1~11.13 酒水会员盛典');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 let cleanCart = ''
 if($.isNode()){
     try{
@@ -53,7 +53,7 @@ if($.isNode()){
     }catch(e){
     }
 }
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';
