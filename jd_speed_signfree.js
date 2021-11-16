@@ -83,7 +83,7 @@ function get_order_ids(cookie) {
             }, (err, resp, data) => {
                 data = JSON.parse(data)
                 if (data.success == true) {
-                    if (data.data.risk == true) {
+                    if (data.data.risk == false) {
                         console.log("风控用户,跳过");
                         $.message += "风控用户,跳过\n"
                         resolve()
