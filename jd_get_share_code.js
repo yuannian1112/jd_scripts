@@ -653,10 +653,10 @@ async function getShareCode() {
   await getJdFactory()
   await getJxFactory()
   await getJxNc()
-  await getJdZZ()
-  await getJoy()
+  //await getJdZZ()
+  //await getJoy()
   await getSgmh()
-  await getCFD()
+  //await getCFD()
   await getJdCash()
   console.log(`======账号${$.index}结束======\n`)
 }
