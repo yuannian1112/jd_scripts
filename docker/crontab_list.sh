@@ -159,8 +159,6 @@
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #开卡63
 16 0,21 8-30 11 * node /scripts/jd_opencard63.js >> /scripts/logs/jd_opencard63.log 2>&1
-#开卡64
-9 0,18 9-17 11 * node /scripts/jd_opencard64.js >> /scripts/logs/jd_opencard64.log 2>&1
 #积分换话费
 43 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 领券中心签到
@@ -177,8 +175,6 @@
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 京喜财富岛月饼
 5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
-# 京东价格保护
-30 2 * * * node /scripts/jd_priceProtect.js >> /scripts/logs/jd_priceProtect.log 2>&1
 # 东东世界
 15 3,16 * * * node /scripts/jd_ddworld.js >> /scripts/logs/jd_ddworld.log 2>&1
 # 小魔方
@@ -213,8 +209,6 @@
 46 1,19 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
 #锦鲤
 5 0 * * * node /scripts/jd_angryKoi.js >> /scripts/logs/jd_angryKoi.log 2>&1
-# 热血心跳,狂解压
-10 2,9,17 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
 #京喜欢乐砍
 55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
 #早起签到
