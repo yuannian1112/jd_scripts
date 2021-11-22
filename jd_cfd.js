@@ -1124,6 +1124,7 @@ function getUserInfo(showInvite = true) {
           console.log(`${$.name} QueryUserInfo API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+          $.showPp = data?.AreaAddr?.dwIsSHowPp ?? 0
           const {
             buildInfo = {},
             ddwRichBalance,
@@ -1186,11 +1187,11 @@ function getPropTask() {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
           for (let key of Object.keys(data.Data.TaskList)) {
             let vo = data.Data.TaskList[key]
-            if (vo.dwCompleteNum < vo.dwTargetNum) {
+            if ((vo.dwCompleteNum < vo.dwTargetNum) && ![9, 11].includes(vo.dwPointType)) {
               await doTask(vo.ddwTaskId, 3)
               await $.wait(2000)
             } else {
-              if (vo.dwAwardStatus !== 1) {
+              if ((vo.dwCompleteNum >= vo.dwTargetNum) && vo.dwAwardStatus !== 1) {
                 console.log(`【${vo.strTaskName}】已完成，去领取奖励`)
                 await $.wait(2000)
                 await awardTask(2, vo)
@@ -1212,7 +1213,7 @@ function getTaskList(taskType) {
   return new Promise(async (resolve) => {
     switch (taskType){
       case 0: //日常任务
-        $.get(taskListUrl("GetUserTaskStatusList"), async (err, resp, data) => {
+        $.get(taskListUrl("GetUserTaskStatusList", `taskId=0&showAreaTaskFlag=${$.showPp}`), async (err, resp, data) => {
           try {
             if (err) {
               console.log(`${JSON.stringify(err)}`)
@@ -1267,17 +1268,17 @@ function browserTask(taskType) {
     switch (taskType) {
       case 0://日常任务
         for (let i = 0; i < $.allTask.length; i++) {
-          const start = $.allTask[i].completedTimes, end = $.allTask[i].targetTimes
+          const start = $.allTask[i].completedTimes, end = $.allTask[i].targetTimes, bizCode = $.allTask[i]?.bizCode ?? "jxbfd"
           const taskinfo = $.allTask[i];
           console.log(`开始第${i + 1}个【📆日常任务】${taskinfo.taskName}\n`);
           for (let i = start; i < end; i++) {
             //做任务
             console.log(`【📆日常任务】${taskinfo.taskName} 进度：${i + 1}/${end}`)
-            await doTask(taskinfo.taskId);
+            await doTask(taskinfo.taskId, null, bizCode);
             await $.wait(2000);
           }
           //领取奖励
-          await awardTask(0, taskinfo);
+          await awardTask(0, taskinfo, bizCode);
         }
         break;
       case 1://成就任务
@@ -1301,18 +1302,19 @@ function browserTask(taskType) {
 }
 
 //做任务
-function doTask(taskId, type = 1) {
+function doTask(taskId, type = 1, bizCodeXx) {
   return new Promise(async (resolve) => {
     let bizCode = `jxbfd`;
     if (type === 2) bizCode = `jxbfddch`;
     if (type === 3) bizCode = `jxbfdprop`;
+    if (bizCodeXx) bizCode = bizCodeXx
     $.get(taskListUrl(`DoTask`, `taskId=${taskId}`, bizCode), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
         } else {
-          data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+          data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1]);
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -1324,13 +1326,13 @@ function doTask(taskId, type = 1) {
 }
 
 //领取奖励
-function awardTask(taskType, taskinfo) {
+function awardTask(taskType, taskinfo, bizCode = "jxbfd") {
   return new Promise((resolve) => {
     const {taskId, taskName} = taskinfo;
     const {ddwTaskId, strTaskName} = taskinfo;
     switch (taskType) {
       case 0://日常任务
-        $.get(taskListUrl(`Award`, `taskId=${taskId}`), (err, resp, data) => {
+        $.get(taskListUrl(`Award`, `taskId=${taskId}`, bizCode), (err, resp, data) => {
           try {
             if (err) {
               console.log(`${JSON.stringify(err)}`)
@@ -1497,6 +1499,7 @@ function taskListUrl(function_path, body = '', bizCode = 'jxbfd') {
       "Host": "m.jingxi.com",
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate, br",
+      "User-Agent": UA,
       "Accept-Language": "zh-CN,zh-Hans;q=0.9",
       "Referer": "https://st.jingxi.com/",
       "Cookie": cookie
@@ -1556,7 +1559,7 @@ function readShareCode() {
         resolve(data);
       }
     })
-     await $.wait(30 * 1000);
+    await $.wait(30 * 1000);
     resolve()
   })
 }
