@@ -223,7 +223,7 @@
 1 7,12,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
 #锦鲤
 5 0 * * * node /scripts/jd_angryKoi.js >> /scripts/logs/jd_angryKoi.log 2>&1
-#京喜欢乐砍
-55 3,20 * * * python3 /jd/scripts/jd_jxhlk.py >> /jd/log/jd_jxhlk.log 2>&1
+#京豆兑换为喜豆
+33 9 * * * node /scripts/jd_exchangejxbeans.js >> /scripts/logs/jd_exchangejxbeans.log 2>&1
 #早起签到
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
