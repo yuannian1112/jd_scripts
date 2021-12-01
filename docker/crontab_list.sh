@@ -157,8 +157,6 @@
 55 6 * * * node /scripts/jd_unsubscriLive.js >> /scripts/logs/jd_unsubscriLive.log 2>&1
 #女装盲盒
 45 2,20 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
-#开卡63
-16 0,21 8-30 11 * node /scripts/jd_opencard63.js >> /scripts/logs/jd_opencard63.log 2>&1
 #开卡70
 47 1 23-30 11 * node /scripts/jd_opencard70.js >> /scripts/logs/jd_opencard70.log 2>&1
 #开卡71
