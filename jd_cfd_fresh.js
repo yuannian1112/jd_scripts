@@ -1,28 +1,27 @@
 /*
-京喜财富岛合成生鲜兑换
-cron 0 0,12 * * * jd_cfd_fresh_exchange.js   整点好像不放库存  默认0点12点   整点有毛自己改
-更新时间：2021-11-19
+京喜财富岛合成生鲜
+cron 45 * * * * jd_cfd_fresh.js
+更新时间：2021-9-11
 活动入口：微信京喜-我的-京喜财富岛
-变量  可选值  5 10 20 30 50 100 (默认100)
-export JD_CFD_FRESH_DDW_VIRHB="100"
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
-#京喜财富岛合成生鲜兑换
-0 0,12 * * * https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_cfd_fresh_exchange.js, tag=京喜财富岛合成生鲜兑换, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+#京喜财富岛合成生鲜
+45 * * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_fresh.js, tag=京喜财富岛合成生鲜, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "0 0,12 * * *" script-path=https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_cfd_fresh_exchange.js,tag=京喜财富岛合成生鲜兑换
+cron "45 * * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_fresh.js,tag=京喜财富岛合成生鲜
 
 ===============Surge=================
-京喜财富岛合成生鲜兑换 = type=cron,cronexp="0 0,12 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_cfd_fresh_exchange.js
+京喜财富岛合成生鲜 = type=cron,cronexp="45 * * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_fresh.js
 
 ============小火箭=========
-京喜财富岛合成生鲜兑换 = type=cron,script-path=https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_cfd_fresh_exchange.js, cronexpr="0 0,12 * * *", timeout=3600, enable=true
+京喜财富岛合成生鲜 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd_fresh.js, cronexpr="45 * * * *", timeout=3600, enable=true
  */
-const $ = new Env("京喜财富岛合成生鲜兑换");
+const $ = new Env("京喜财富岛合成生鲜");
 const JD_API_HOST = "https://m.jingxi.com/";
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
@@ -32,21 +31,14 @@ $.result = [];
 $.shareCodes = [];
 let cookiesArr = [], cookie = '', token = '';
 let UA, UAInfo = {};
-let ddwVirHb;
-let conditionList = []
-let conditionAllList = []
+let nowTimes;
+const randomCount = $.isNode() ? 20 : 3;
 $.appId = 10032;
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
     })
-    if (process.env.JD_CFD_FRESH_DDW_VIRHB ) {
-        ddwVirHb = process.env.JD_CFD_FRESH_DDW_VIRHB
-    }else {
-        ddwVirHb = "100"
-    }
     if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-
     if (JSON.stringify(process.env).indexOf('GITHUB') > -1) process.exit(0);
 } else {
     cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
@@ -58,8 +50,7 @@ if ($.isNode()) {
     }
     $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
     await requestAlgo();
-    await $.wait(500)
-    console.log(`\n\n\n变量JD_CFD_FRESH_DDW_VIRHB  可选值  5 10 20 30 50 100 (默认100)\n`)
+    await $.wait(1000)
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i];
@@ -83,64 +74,150 @@ if ($.isNode()) {
             $.allTask = []
             $.info = {}
             token = await getJxToken()
-            conditionList = []
-            $.exchange = true;
-            console.log(`尝试获取兑换参数\n`)
-            await exchangePinPinPearlState()
-            if (!$.exchange){
-                console.log(`无活动权限 下个\n`)
-                continue
-            }
-            console.log(`获取变量对应参数 : `,ddwVirHb,"\n")
-            let condition = conditionAllList.filter(e => e.ddwVirHb === Number(ddwVirHb))[0];
-            if (condition){
-                await exchangePinPinPearl(condition.ddwVirHb,condition.strPool);
-            }else {
-                console.log(`未获取到指定变量对应参数  默认提现最大兑换额度\n`)
-                await exchangePinPinPearlStateByMax();
-            }
-            // await $.wait(500);
+            await cfd();
+            await $.wait(2000);
         }
     }
+
 })()
     .catch((e) => $.logErr(e))
     .finally(() => $.done());
 
-async function exchangePinPinPearlStateByMax(){
-    console.log(`尝试提现最大兑换额度\n`)
-    if (conditionList.length===0){
-        console.log(`未获取到兑换参数 下个\n`)
-        return;
-    }
-    let number = Math.max.apply(Math,conditionList.map(item => {
-        return item.ddwVirHb;
-    }));
+async function cfd() {
+    try {
+        nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
+        let beginInfo = await getUserInfo();
+        if (beginInfo.LeadInfo.dwLeadType === 2) {
+            console.log(`还未开通活动，尝试初始化`)
+            await noviceTask()
+            await $.wait(2000)
+            beginInfo = await getUserInfo(false);
+            if (beginInfo.LeadInfo.dwLeadType !== 2) {
+                console.log(`初始化成功\n`)
+            } else {
+                console.log(`初始化失败\n`)
+                return
+            }
+        }
 
-    let condition = conditionList.filter(e => e.ddwVirHb == number)[0];
-    await exchangePinPinPearl(condition.ddwVirHb,condition.strPool);
+        //抽奖
+        await $.wait(2000)
+        await composePearlState(4)
+
+
+        //合成生鲜
+        let count = $.isNode() ? (process.env.JD_CFD_RUNNUM ? process.env.JD_CFD_RUNNUM * 1 : Math.floor((Math.random() * 2)) + 3) : ($.getdata('JD_CFD_RUNNUM') ? $.getdata('JD_CFD_RUNNUM') * 1 : Math.floor((Math.random() * 2)) + 3);
+        console.log(`\n合成生鲜`)
+        console.log(`合成生鲜运行次数为：${count}\n`)
+        let num = 0
+        do {
+            await $.wait(2000)
+            await composePearlState(3)
+            num++
+        } while (!$.stop && num < count)
+
+    } catch (e) {
+        $.logErr(e)
+    }
 }
 
-// 兑换喜豆
-async function exchangePinPinPearl(ddwVirHb,strPoolName) {
+// 合成生鲜
+async function composePearlState(type) {
     return new Promise(async (resolve) => {
-        $.get(taskUrl(`user/ExchangePinPinPearl`, `__t=${Date.now()}&dwIsPP=1&strZone=jxbfd&dwLvl=1&dwIsRandHb=0&ddwVirHb=${ddwVirHb}&strPoolName=${strPoolName}`), async (err, resp, data) => {
+        $.get(taskUrl(`user/ComposePinPinPearlState`, `__t=${Date.now()}&dwGetType=0`), async (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
                     console.log(`${$.name} ComposePearlState API请求失败，请检查网路重试`)
                 } else {
-                    if (data) {
-                        data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
-                        if (data.iRet === 0) {
-                            console.log(`京东账号${$.index} ${$.UserName} 兑换喜豆成功  金额:【`+ddwVirHb+'】\n');
-                        }else if (data.iRet === 2046){
-                            console.log("余额不足哦 \n")
-                            await exchangePinPinPearlStateByMax();
-                        }else {
-                            console.log("兑换失败 ",data,"\n")
-                        }
-                    } else {
-                        $.log('京东服务器返回空数据');
+                    switch (type) {
+                        case 1:
+                            data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                            break
+                        case 2:
+                            data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                            console.log(`领助力奖励`)
+                            if (data.iRet === 0) {
+                                let helpNum = []
+                                for (let key of Object.keys(data.helpInfo.HelpList)) {
+                                    let vo = data.helpInfo.HelpList[key]
+                                    if (vo.dwStatus !== 1 && vo.dwIsHasAward === 1 && vo.dwIsHelp === 1) {
+                                        helpNum.push(vo.dwId)
+                                    }
+                                }
+                                if (helpNum.length !== 0) {
+                                    for (let j = 0; j < helpNum.length; j++) {
+                                        await pearlHelpDraw(data.ddwSeasonStartTm, helpNum[j])
+                                        await $.wait(2000)
+                                        data = await composePearlState(1)
+                                    }
+                                } else {
+                                    console.log(`暂无可领助力奖励`)
+                                }
+                            }
+                            break
+                        case 3:
+                            data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                            if (data.iRet === 0) {
+                                console.log(`当前已合成${data.dwCurProgress}颗生鲜，总计获得${data.ddwVirHb  }个金豆子`)
+                                if (data.strDT) {
+                                    // let num = Math.ceil(Math.random() * 12 + 12)
+                                    let num = data.PearlList.length
+                                    let div = Math.ceil(Math.random() * 4 + 2)
+                                    console.log(`合成生鲜：模拟操作${num}次`)
+                                    for (let v = 0; v < num; v++) {
+                                        console.log(`模拟操作进度：${v + 1}/${num}`)
+                                        let beacon = data.PearlList[0]
+                                        data.PearlList.shift()
+                                        let beaconType = beacon.type
+                                        if (v % div === 0){
+                                            await realTmReport(data.strMyShareId)
+                                            await $.wait(5000)
+                                        }
+                                        if (beacon.rbf) {
+                                            let size = 1
+                                            // for (let key of Object.keys(data.PearlList)) {
+                                            //   let vo = data.PearlList[key]
+                                            //   if (vo.rbf && vo.type === beaconType) {
+                                            //     data.PearlList.splice(key, 1)
+                                            //     size = 2
+                                            //     vo.rbf = 0
+                                            //     break
+                                            //   }
+                                            // }
+                                            await composePearlAward(data.strDT, beaconType, size)
+                                        }
+                                    }
+                                    let strLT = data.oPT[data.ddwCurTime % data.oPT.length]
+                                    let res = await composePearlAddProcess(data.strDT, strLT)
+                                    if (res.iRet === 0) {
+                                        console.log(`\n合成生鲜成功：获得${res.ddwAwardHb }个金豆子\n`)
+                                        if (res.ddwAwardHb === 0) {
+                                            $.stop = true
+                                            console.log(`合成生鲜没有奖励，停止运行\n`)
+                                        }
+                                    } else {
+                                        console.log(`\n合成生鲜失败：${res.sErrMsg}\n`)
+                                    }
+                                } else {
+                                    console.log(`今日已完成\n`)
+                                }
+                            }
+                            break
+                        case 4:
+                            data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                            console.log(`每日抽奖`)
+                            if (data.iRet === 0) {
+                                if (data.dayDrawInfo.dwIsDraw === 0) {
+                                    let strToken = (await getPearlDailyReward()).strToken
+                                    await $.wait(2000)
+                                    await pearlDailyDraw(data.ddwSeasonStartTm, strToken)
+                                } else {
+                                    console.log(`无抽奖次数\n`)
+                                }
+                            }
+                        default:
+                            break;
                     }
                 }
             } catch (e) {
@@ -151,42 +228,324 @@ async function exchangePinPinPearl(ddwVirHb,strPoolName) {
         })
     })
 }
-// 获取兑换
-async function exchangePinPinPearlState() {
-    return new Promise(async (resolve) => {
-        $.get(taskUrl(`user/ExchangePinPinPearlState`, `__t=${Date.now()}&dwIsPP=1&strZone=jxbfd&dwLvl=1&dwIsRandHb=0`), async (err, resp, data) => {
+function realTmReport(strMyShareId) {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/RealTmReport`, `__t=${Date.now()}&dwIdentityType=0&strBussKey=composegame&strMyShareId=${strMyShareId}&ddwCount=10`), (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
-                    console.log(`${$.name} ComposePearlState API请求失败，请检查网路重试`)
+                    console.log(`${$.name} RealTmReport API请求失败，请检查网路重试`)
                 } else {
-                    if (data) {
-                        data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
-                        if (data.iRet === 0) {
-                            console.log(`获取兑换参数成功`);
-                            if (conditionAllList.length ===0){
-                                conditionAllList = data.exchangeInfo.prizeInfo
-                            }
-                            let filterData = data.exchangeInfo.prizeInfo.filter(e => e.dwState === 0);
-                            for (var o in filterData) {
-                                let prizeInfoElement = filterData[o];
-                                conditionList.push({
-                                    "strPool": prizeInfoElement.strPool,
-                                    "ddwVirHb":prizeInfoElement.ddwVirHb
-                                })
-                            }
-                        }else {
-                            $.exchange= false
-                            console.log("获取兑换参数失败 ",data)
-                        }
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        })
+    })
+}
+function composePearlAddProcess(strDT, strLT) {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/ComposePearlAddProcess`, `strBT=${strDT}&strLT=${strLT}&dwIsPP=1`), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} ComposePearlAddProcess API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+}
+function getPearlDailyReward() {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/GetPpPearlDailyReward`, `__t=${Date.now()}`), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} PpPearlDailyDraw API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+}
+function pearlDailyDraw(ddwSeasonStartTm, strToken) {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/PpPearlDailyDraw`, `__t=${Date.now()}&ddwSeaonStart=${ddwSeasonStartTm}&strToken=${strToken}`), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} PearlDailyDraw API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    if (data.iRet === 0) {
+                        console.log(`抽奖成功：获得${data.strPrizeName || JSON.stringify(data)}\n`)
                     } else {
-                        $.log('京东服务器返回空数据');
+                        console.log(`抽奖失败：${data.sErrMsg}\n`)
                     }
                 }
             } catch (e) {
                 $.logErr(e, resp);
             } finally {
                 resolve(data);
+            }
+        })
+    })
+}
+function composePearlAward(strDT, type, size) {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/ComposePearlAward`, `__t=${Date.now()}&type=${type}&size=${size}&strBT=${strDT}`), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} ComposePearlAward API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    if (data.iRet === 0) {
+                        console.log(`模拟操作中奖：获得${data.ddwAwardHb }个金豆子，总计获得${data.ddwVirHb }个金豆子`)
+                    } else {
+                        console.log(`模拟操作未中奖：${data.sErrMsg}`)
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+}
+
+// 助力奖励
+function pearlHelpDraw(ddwSeasonStartTm, dwUserId) {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/PearlHelpDraw`, `__t=${Date.now()}&ddwSeaonStart=${ddwSeasonStartTm}&dwUserId=${dwUserId}`), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} PearlHelpDraw API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    if (data.iRet === 0) {
+                        console.log(`领取助力奖励成功：获得${data.StagePrizeInfo.ddwAwardHb  }个金豆子，总计获得${data.StagePrizeInfo.ddwVirHb  }个金豆子`)
+                    } else {
+                        console.log(`领取助力奖励失败：${data.sErrMsg}`)
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        })
+    })
+}
+
+// 助力
+function helpByStage(shareCodes) {
+    return new Promise((resolve) => {
+        $.get(taskUrl(`user/PpPearlHelpByStage`, `__t=${Date.now()}&strShareId=${shareCodes}`), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} helpbystage API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    if (data.iRet === 0 || data.sErrMsg === 'success') {
+                        console.log(`助力成功`)
+                    } else if (data.iRet === 2235 || data.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~') {
+                        console.log(`助力失败：${data.sErrMsg}`)
+                        $.canHelp = false
+                    } else if (data.iRet === 2232 || data.sErrMsg === '分享链接已过期') {
+                        console.log(`助力失败：${data.sErrMsg}`)
+                        $.delcode = true
+                    } else if (data.iRet === 9999 || data.sErrMsg === '您还没有登录，请先登录哦~') {
+                        console.log(`助力失败：${data.sErrMsg}`)
+                        $.canHelp = false
+                    } else if (data.iRet === 2229 || data.sErrMsg === '助力失败啦~') {
+                        console.log(`助力失败：您的账号已黑`)
+                        $.canHelp = false
+                    } else if (data.iRet === 2190 || data.sErrMsg === '达到助力上限') {
+                        console.log(`助力失败：${data.sErrMsg}`)
+                        $.canHelp = false
+                        $.delcode = true
+                    } else {
+                        $.canHelp = false
+                        console.log(`助力失败：${data.sErrMsg}`)
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+}
+
+function getAuthorShareCode(url) {
+    return new Promise(async resolve => {
+        const options = {
+            url: `${url}?${new Date()}`, "timeout": 10000, headers: {
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+            }
+        };
+        if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
+            const tunnel = require("tunnel");
+            const agent = {
+                https: tunnel.httpsOverHttp({
+                    proxy: {
+                        host: process.env.TG_PROXY_HOST,
+                        port: process.env.TG_PROXY_PORT * 1
+                    }
+                })
+            }
+            Object.assign(options, { agent })
+        }
+        $.get(options, async (err, resp, data) => {
+            try {
+                resolve(JSON.parse(data))
+            } catch (e) {
+                // $.logErr(e, resp)
+            } finally {
+                resolve();
+            }
+        })
+        await $.wait(10000)
+        resolve();
+    })
+}
+
+// 获取用户信息
+function getUserInfo(showInvite = true) {
+    return new Promise(async (resolve) => {
+        $.get(taskUrl(`user/QueryUserInfo`, `ddwTaskId=&strShareId=&strMarkList=${encodeURIComponent('guider_step,collect_coin_auth,guider_medal,guider_over_flag,build_food_full,build_sea_full,build_shop_full,build_fun_full,medal_guider_show,guide_guider_show,guide_receive_vistor,daily_task,guider_daily_task')}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} QueryUserInfo API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    const {
+                        ddwRichBalance,
+                        ddwCoinBalance,
+                        sErrMsg,
+                        strMyShareId,
+                        dwLandLvl,
+                        LeadInfo = {},
+                        Business = {},
+                    } = data;
+                    if (showInvite) {
+                        console.log(`获取用户信息：${sErrMsg}\n${$.showLog ? data : ""}`);
+                        console.log(`\n当前等级:${dwLandLvl},金币:${ddwCoinBalance},财富值:${ddwRichBalance},连续营业天数:${Business.dwBussDayNum},离线收益:${Business.ddwCoin}\n`)
+                    }
+                    if (showInvite && strMyShareId) {
+                        console.log(`财富岛好友互助码每次运行都变化,旧的当天有效`);
+                        console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${strMyShareId}\n`);
+                        $.shareCodes.push(strMyShareId)
+                    }
+                    $.info = {
+                        ...$.info,
+                        ddwRichBalance,
+                        ddwCoinBalance,
+                        strMyShareId,
+                        dwLandLvl,
+                        LeadInfo,
+                    };
+                    resolve({
+                        ddwRichBalance,
+                        ddwCoinBalance,
+                        strMyShareId,
+                        LeadInfo,
+                    });
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        })
+    })
+}
+
+// 新手任务
+async function noviceTask(){
+    let body = ``
+    await init(`user/guideuser`, body)
+    body = `strMark=guider_step&strValue=welcom&dwType=2`
+    await init(`user/SetMark`, body)
+    body = `strMark=guider_over_flag&strValue=999&dwType=2`
+    await init(`user/SetMark`, body)
+    body = `strMark=guider_step&strValue=999&dwType=2`
+    await init(`user/SetMark`, body)
+    body = `strMark=guider_step&strValue=999&dwType=2`
+    await init(`user/SetMark`, body)
+    body = `strMark=guider_over_flag&strValue=999&dwType=2`
+    await init(`user/SetMark`, body)
+    body = `strMark=guider_step&strValue=gift_redpack&dwType=2`
+    await init(`user/SetMark`, body)
+    body = `strMark=guider_step&strValue=none&dwType=2`
+    await init(`user/SetMark`, body)
+}
+async function init(function_path, body) {
+    return new Promise(async (resolve) => {
+        $.get(taskUrl(function_path, body), async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} init API请求失败，请检查网路重试`)
+                } else {
+                    if (function_path == "user/SetMark") opId = 23
+                    if (function_path == "user/guideuser") opId = 27
+                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    contents = `1771|${opId}|${data.iRet}|0|${data.sErrMsg || 0}`
+                    await biz(contents)
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        })
+    })
+}
+function biz(contents){
+    return new Promise(async (resolve) => {
+        let option = {
+            url:`https://m.jingxi.com/webmonitor/collect/biz.json?contents=${contents}&t=${Math.random()}&sceneval=2`,
+            headers: {
+                Cookie: cookie,
+                Accept: "*/*",
+                Connection: "keep-alive",
+                Referer: "https://st.jingxi.com/fortune_island/index.html?ptag=138631.26.55",
+                "Accept-Encoding": "gzip, deflate, br",
+                Host: 'm.jingxi.com',
+                "User-Agent": UA,
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+            }
+        }
+        $.get(option, async (err, resp, _data) => {
+            try {
+                // console.log(_data)
+            }
+            catch (e) {
+                $.logErr(e, resp);
+            }
+            finally {
+                resolve();
             }
         })
     })
@@ -195,7 +554,7 @@ async function exchangePinPinPearlState() {
 function taskUrl(function_path, body = '', dwEnv = 7) {
     let url = `${JD_API_HOST}jxbfd/${function_path}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=${dwEnv}&_cfd_t=${Date.now()}&ptag=7155.9.47${body ? `&${body}` : ''}`;
     url += `&_stk=${getStk(url)}`;
-    url += `&_ste=1&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=0&dwIsPP=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
+    url += `&_ste=1&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&dwIsPP=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
     return {
         url,
         headers: {
@@ -221,6 +580,64 @@ function randomString(e) {
     return n
 }
 
+function showMsg() {
+    return new Promise(async (resolve) => {
+        if ($.result.length) {
+            if ($.notifyTime) {
+                const notifyTimes = $.notifyTime.split(",").map((x) => x.split(":"));
+                const now = $.time("HH:mm").split(":");
+                console.log(`\n${JSON.stringify(notifyTimes)}`);
+                console.log(`\n${JSON.stringify(now)}`);
+                if ( notifyTimes.some((x) => x[0] === now[0] && (!x[1] || x[1] === now[1])) ) {
+                    $.msg($.name, "", `${$.result.join("\n")}`);
+                }
+            } else {
+                $.msg($.name, "", `${$.result.join("\n")}`);
+            }
+
+            if ($.isNode() && process.env.CFD_NOTIFY_CONTROL)
+                await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `${$.result.join("\n")}`);
+        }
+        resolve();
+    });
+}
+
+//格式化助力码
+function shareCodesFormat() {
+    return new Promise(async resolve => {
+        $.newShareCodes = []
+        const readShareCodeRes = await readShareCode();
+        if (readShareCodeRes && readShareCodeRes.code === 200) {
+            $.newShareCodes = [...new Set([...$.shareCodes, ...(readShareCodeRes.data || [])])];
+        } else {
+            $.newShareCodes = [...new Set([...$.shareCodes])];
+        }
+        console.log(`您将要助力的好友${JSON.stringify($.newShareCodes)}`)
+        resolve();
+    })
+}
+function readShareCode() {
+    return new Promise(async resolve => {
+        $.get({url: `https://ghproxy.com/https://raw.githubusercontent.com/jiulan/helpRepository/main/json/cfd_hb.json`, 'timeout': 10000}, (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} API请求失败，请检查网路重试`)
+                } else {
+                    if (data) {
+                        data = JSON.parse(data);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve(data);
+            }
+        })
+        await $.wait(10000);
+        resolve()
+    })
+}
 function TotalBean() {
     return new Promise(resolve => {
         const options = {
