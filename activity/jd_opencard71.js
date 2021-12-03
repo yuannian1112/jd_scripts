@@ -45,8 +45,8 @@ let guaopenwait = "0"
 let guaopencard_draw = "0"
 
 const $ = new Env('11.25~11.30 联合开卡-71');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cleanCart = ''
 if($.isNode()){
     try{

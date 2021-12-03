@@ -41,8 +41,8 @@ let guaopencard = "false"
 let guaopenwait = "0"
 
 const $ = new Env('11.23~11.30 奢宠会员 瓜分万元大奖');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cleanCart = ''
 if($.isNode()){
     try{
