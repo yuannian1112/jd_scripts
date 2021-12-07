@@ -227,6 +227,12 @@
 41 23 * * * node /scripts/jd_price.js >> /scripts/logs/jd_price.log 2>&1
 #金榜年终奖
 10 0,2 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
+#京东金融每周领取权益活动
+10 17 * 12 * node /scripts/jd_jr_draw.js >> /scripts/logs/jd_jr_draw.log 2>&1
+#京东生鲜每日抽奖
+10 7 * * * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
+#骁龙
+10 9,17 * * * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
 #京豆兑换为喜豆
 33 9 * * * node /scripts/jd_exchangejxbeans.js >> /scripts/logs/jd_exchangejxbeans.log 2>&1
 #早起签到
