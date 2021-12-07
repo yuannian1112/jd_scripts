@@ -225,6 +225,8 @@
 10 0 * * * node /scripts/jd_lottery_drew.js >> /scripts/logs/jd_lottery_drew.log 2>&1
 #京东保价
 41 23 * * * node /scripts/jd_price.js >> /scripts/logs/jd_price.log 2>&1
+#金榜年终奖
+10 0,2 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
 #京豆兑换为喜豆
 33 9 * * * node /scripts/jd_exchangejxbeans.js >> /scripts/logs/jd_exchangejxbeans.log 2>&1
 #早起签到
