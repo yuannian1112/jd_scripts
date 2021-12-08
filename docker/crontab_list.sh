@@ -38,8 +38,6 @@
 #我是大老板
 35 0-23/1 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
 #
-4 1,3 * * * node /scripts/jd_market_lottery.js >> /scripts/logs/jd_market_lottery.log 2>&1
-#
 5 3,19 * * * node /scripts/jd_unsubscribe.js >> /scripts/logs/jd_unsubscribe.log 2>&1
 #东东萌宠
 45 6-18/6 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
@@ -63,8 +61,6 @@
 10 1 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
 #健康社区
 13 2,5,20 * * * node /scripts/jd_health.js >> /scripts/logs/jd_health.log 2>&1
-#赚30
-20 0,1 * * * node /scripts/jd_SplitRedPacket.js >> /scripts/logs/jd_SplitRedPacket.log 2>&1
 #秒秒币
 10 2 * * * node /scripts/jd_ms.js >> /scripts/logs/jd_ms.log 2>&1
 #
@@ -117,8 +113,6 @@
 5-40/5 * * * * node /scripts/jd_jddj_getPoints.js >> /scripts/logs/jd_jddj_getPoints.log 2>&1
 #京东到家
 20 */4 * * * node /scripts/jd_jddj_plantBeans.js >> /scripts/logs/jd_jddj_plantBeans.log 2>&1
-#零食街
-46 0,1 * * * node /scripts/jd_lsj.js >> /scripts/logs/jd_lsj.log 2>&1
 #
 13 3 * * * node /scripts/jd_drawEntrance.js >> /scripts/logs/jd_drawEntrance.log 2>&1
 #特务
@@ -127,8 +121,6 @@
 5 0,12 * * * node /scripts/jd_SendBean.js >> /scripts/logs/jd_SendBean.log 2>&1
 #
 20 0,2 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
-#粉丝互动
-4 0 * * * node /scripts/jd_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
 #财富岛气球
 5 * * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1
 #宠汪汪偷狗粮
@@ -195,8 +187,6 @@
 0 0 * * * node /scripts/jd_ddworld_exchange.js >> /scripts/logs/jd_ddworld_exchange.log 2>&1
 # 天天提鹅
 20 * * * * node /scripts/jd_daily_egg.js >> /scripts/logs/jd_daily_egg.log 2>&1
-# 选品官
-23 8,19 * * * node /scripts/jd_selectionOffice.js >> /scripts/logs/jd_selectionOffice.log 2>&1
 # 发财大赢家
 1 2,10 * * * node /scripts/jd_fcdyj.js >> /scripts/logs/jd_fcdyj.log 2>&1
 # 翻翻乐
@@ -227,8 +217,6 @@
 41 23 * * * node /scripts/jd_price.js >> /scripts/logs/jd_price.log 2>&1
 #金榜年终奖
 10 0,2 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
-#京东金融每周领取权益活动
-10 17 * 12 * node /scripts/jd_jr_draw.js >> /scripts/logs/jd_jr_draw.log 2>&1
 #京东生鲜每日抽奖
 10 7 * * * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 #骁龙
