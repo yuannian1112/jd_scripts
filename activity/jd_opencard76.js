@@ -45,8 +45,8 @@ let guaopenwait = "0"
 let guaopencard_draw = "0"
 
 const $ = new Env('12.3~12.12 12.12 好物狂欢盛典');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cleanCart = ''
 if($.isNode()){
     try{

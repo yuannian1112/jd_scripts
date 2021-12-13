@@ -20,8 +20,8 @@ cron "4 2,1 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/j
 京喜领88元红包 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_jxlhb.js, cronexpr="4 2,1 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京喜领88元红包');
-const notify = $.isNode() ? require('./sendNotify') : {};
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : {};
+const notify = $.isNode() ? require('../sendNotify') : {};
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : {};
 let cookiesArr = [], cookie = '';
 let UA, UAInfo = {}, codeInfo = {}, token;
 if ($.isNode()) {
@@ -352,7 +352,7 @@ function TotalBean() {
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: cookie,
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Accept-Language": "zh-cn",
         "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
         "Accept-Encoding": "gzip, deflate, br"

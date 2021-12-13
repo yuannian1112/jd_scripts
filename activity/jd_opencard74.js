@@ -40,8 +40,8 @@ let guaopencard = "false"
 let guaopenwait = "0"
 
 const $ = new Env('12.1~12.12 大牌联合 赢大额京豆');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cleanCart = ''
 if($.isNode()){
     try{
