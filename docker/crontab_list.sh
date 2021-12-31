@@ -165,8 +165,6 @@
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 京喜财富岛月饼
 5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
-# 东东世界
-15 3,16 * * * node /scripts/jd_ddworld.js >> /scripts/logs/jd_ddworld.log 2>&1
 # 小魔方
 31 2,8 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
 # 魔方
@@ -195,8 +193,6 @@
 46 1,19 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
 #农场集勋章
 16 7,16 * * * node /scripts/jd_medal.js >> /scripts/logs/jd_medal.log 2>&1
-#工业品
-10 7,19 * 12 * node /scripts/jd_gyp.js >> /scripts/logs/jd_gyp.log 2>&1
 #京喜财富岛合成生鲜
 45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
 #财富岛珍珠兑换
@@ -219,22 +215,16 @@
 15 3,20 * * * node /scripts/jd_jfcz.js >> /scripts/logs/jd_jfcz.log 2>&1
 #玩一玩成就
 0 8,22 * * * node /scripts/jd_wyw.js >> /scripts/logs/jd_wyw.log 2>&1
-#天天拼图
-20 0,16 * * * node /scripts/jd_ttpt.js >> /scripts/logs/jd_ttpt.log 2>&1
 # 京喜签到-喜豆
 10 2,19 * * * node /scripts/jx_sign_xd.js >> /scripts/logs/jx_sign_xd.log 2>&1
 # 京东答题领金豆
 22 6,18 * * * node /scripts/jx_jddt.js >> /scripts/logs/jx_jddt.log 2>&1
-# 发财挖宝
-40 6,17 * * * node /scripts/jd_fcwb_help.js >> /scripts/logs/jd_fcwb_help.log 2>&1
 # 写情书抽京豆
 1 1,14 12-25 12 * node /scripts/jd_xqscjd.js >> /scripts/logs/jd_xqscjd.log 2>&1
 # 京东评价
 37 15 * * * node /scripts/jd_evaluation.js >> /scripts/logs/jd_evaluation.log 2>&1
 # 京车会签到
 19 3 * * * node /scripts/jd_jchsign.js >> /scripts/logs/jd_jchsign.log 2>&1
-# 戏剧大赛
-5 5 10-31 12 * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
 # 京东通天塔--签到
 31 8,21 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
 #京东签到图形验证
