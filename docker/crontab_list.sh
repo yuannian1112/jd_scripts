@@ -225,6 +225,8 @@
 37 15 * * * node /scripts/jd_evaluation.js >> /scripts/logs/jd_evaluation.log 2>&1
 # 京东通天塔--签到
 31 8,21 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
+# 年货节签到
+23 2,22 * * * node /scripts/jd_nh_sign.js >> /scripts/logs/jd_nh_sign.log 2>&1
 #京东签到图形验证
 14 2,10 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
 #京豆兑换为喜豆
