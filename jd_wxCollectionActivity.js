@@ -80,9 +80,9 @@ $.keywordsNum = 0;
                 $.getPrize = null;
                 await addCart();
                 if($.drawInfoName === false || $.getPrize === null){
-                    break
+                    //break
                 } else if($.getPrize != null && !$.getPrize.includes("京豆")){
-                    break
+                    //break
                 }
                 await $.wait(2000)
                 // await requireConfig();
