@@ -16,9 +16,9 @@ cron "0 0-23/1 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/maste
 城城领现金 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_city.js, cronexpr="0 0-23/1 * * *", timeout=3600, enable=true
  */
 const $ = new Env('城城领现金');
-const notify = $.isNode() ? require('../sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //自动抽奖 ，环境变量  JD_CITY_EXCHANGE
 let exchangeFlag = $.getdata('JD_CITY_EXCHANGE') || "false";//是否开启自动抽奖，建议活动快结束开启，默认关闭
 exchangeFlag = $.isNode() ? (process.env.JD_CITY_EXCHANGE ? process.env.JD_CITY_EXCHANGE : `${exchangeFlag}`) : ($.getdata('JD_CITY_EXCHANGE') ? $.getdata('JD_CITY_EXCHANGE') : `${exchangeFlag}`);
@@ -36,7 +36,7 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
-  'RtGKz-2gRQ-jf9HLE4Fm1wUK7Kx0OdwbHQIDgH53RC73-DtgRQ','RtGKzeX2SQigedLMFddn1cwQcppajCK5h_oaMK09uxa1GVIdcQ','RtGKqLjhEmLDKsrCdZJUmr-a9IsteDNggNOO6LIMdjEI4ryx'
+  '-ryUXq0IYmFDYkCVTo6Q9t6QSR4iExCD','-ryUXKVebmZAZEOSSNiR9LL96ZhpHYW1','-ryUBtNKAQE5G3W-PZukuzWUMThOcsY'
 ]
 $.shareCodesArr = [];
 
@@ -116,7 +116,7 @@ $.shareCodesArr = [];
         }
       } else {
         //默认10.29开启抽奖
-        if ((new Date().getMonth()  + 1) === 10 && new Date().getDate() >= 29) {
+        if ((new Date().getMonth()  + 1) === 1 && new Date().getDate() >= 21) {
           const res = await city_lotteryAward();//抽奖
           if (res && res > 0) {
             for (let i = 0; i < new Array(res).fill('').length; i++) {
@@ -153,9 +153,9 @@ function taskPostUrl(functionId,body) {
   }
 }
 function getInviteId() {
-  let body = {"lbsCity":"16","realLbsCity":"1315","inviteId":'',"headImg":"","userName":"","taskChannel":"1"}
+  let body = {"lbsCity":"1","realLbsCity":"2953","inviteId":"","headImg":"","userName":"","taskChannel":"1","location":"","safeStr":""}
   return new Promise((resolve) => {
-    $.post(taskPostUrl("city_getHomeData",body), async (err, resp, data) => {
+    $.post(taskPostUrl("city_getHomeDatav1",body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -190,42 +190,68 @@ function getInviteId() {
   })
 }
 function getInfo(inviteId, flag = false) {
-  let body = {"lbsCity":"16","realLbsCity":"1315","inviteId":inviteId,"headImg":"","userName":"","taskChannel":"1"}
+  let body = {"lbsCity":"1","realLbsCity":"2953","inviteId":inviteId,"headImg":"","userName":"","taskChannel":"1","location":"","safeStr":""}
   return new Promise((resolve) => {
-    $.post(taskPostUrl("city_getHomeData",body), async (err, resp, data) => {
+    $.post(taskPostUrl("city_getHomeDatav1",body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
-            // if (inviteId) $.log(`\n助力结果:\n${data}\n`)
             data = JSON.parse(data);
             if (data.code === 0) {
               if (data.data && data['data']['bizCode'] === 0) {
-                console.log(`待提现:￥${data.data.result.userActBaseInfo.poolMoney}`)
-                for(let vo of data.data.result && data.data.result.popWindows || []){
-                  if (vo && vo.type === "dailycash_second") {
-                    await receiveCash()
-                    await $.wait(2*1000)
+                if (flag) {
+                  console.log(`【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.data && data.data.result.userActBaseInfo.inviteId}`);
+                  if (data.data && data.data.result.userActBaseInfo.inviteId) {
+                    $.shareCodes.push(data.data.result.userActBaseInfo.inviteId)
                   }
+                  console.log(`剩余金额：${data.data.result.userActBaseInfo.poolMoney}`)
+                  for (let pop of data.data.result.popWindows || []) {
+                    if (pop.data.cash && (pop.data.cash !== data.data.result.userActBaseInfo.poolMoney)) {
+                      await receiveCash("", "2");
+                    }
+                  }
+                  const { taskDetailResultVo } = data.data.result.taskInfo;
+                  const { lotteryTaskVos, taskVos } = taskDetailResultVo;
+                  for (let lotteryTask of lotteryTaskVos) {
+                    if (lotteryTask.times >= lotteryTask.maxTimes && lotteryTask.times !== undefined) {
+                      for (let lo of lotteryTask?.badgeAwardVos || []) {
+                        if (lo.status === 3) {
+                          await receiveCash("", "6");
+                        }
+                      }
+                    }
+                  }
+                  // for (let task of taskVos || []) {
+                  //   const t = Date.now();
+                  //   if (task.status === 1 && t >= task.taskBeginTime && t < task.taskEndTime) {
+                  //     const id = task.taskId, max = task.maxTimes;
+                  //     const waitDuration = task.waitDuration || 0;
+                  //     let time = task?.times || 0;
+                  //     for (let ltask of task.shoppingActivityVos) {
+                  //       if (ltask.status === 1) {
+                  //         console.log(`去做任务：${ltask.title}`);
+                  //         if (waitDuration) {
+                  //           await $.wait(1500);
+                  //           await city_doTaskByTk(id, ltask.taskToken, 1);
+                  //           await $.wait(waitDuration * 1000);
+                  //         }
+                  //         await city_doTaskByTk(id, ltask.taskToken);
+                  //         time++;
+                  //         if (time >= max) break;
+                  //       }
+                  //     }
+                  //     await $.wait(2500);
+                  //   }
+                  // }
                 }
-                for(let vo of data.data.result && data.data.result.mainInfos || []){
+                for (let vo of data.data.result && data.data.result.mainInfos || []) {
                   if (vo && vo.remaingAssistNum === 0 && vo.status === "1") {
                     console.log(vo.roundNum)
                     await receiveCash(vo.roundNum)
-                    await $.wait(2*1000)
-                  }
-                }
-                if(flag){
-                  // console.log(data.data.result.taskInfo.taskDetailResultVo.taskVos)
-                  for(let vo of data.data.result && data.data.result.taskInfo.taskDetailResultVo.taskVos && false || []){
-                    if (vo && vo.status == 1) {
-                      console.log(vo.taskName)
-                      // console.log(vo.roundNum)
-                      // await receiveCash(vo.roundNum)
-                      // await $.wait(2*1000)
-                    }
+                    await $.wait(2 * 1000)
                   }
                 }
               } else {
