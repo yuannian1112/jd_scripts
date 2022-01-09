@@ -87,6 +87,7 @@ async function mpdzCar() {
         })
         // console.log($.buyerNick)
         if ($.buyerNick) {
+            await $.wait(5000);
             console.log("游戏")
             await task('/ql/front/carPlayUpdate', {
                 buyerNick: $.buyerNick,
