@@ -4,7 +4,7 @@ ck1助力 作者
 其余助力ck1
 https://u.jd.com/SKCvfBS
 跳转到app 可查看助力情况
-cron 0 20-23/1 * * * gua_1111RedEnvelope.js
+0 20-23/1 * * * gua_1111RedEnvelope.js, tag=2022年年货节京享红包活动🧧, enabled=true
 */
 
 let rebateCodes = ''
