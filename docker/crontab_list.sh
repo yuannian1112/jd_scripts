@@ -221,8 +221,6 @@
 0 0 * * * node /scripts/jd_sevenDay.js >> /scripts/logs/jd_sevenDay.log 2>&1
 # 城城分现金
 0 0-23/1 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
-# 炸年兽
-0 0-23/5 * * *  node /scripts/jd_zns.js >> /scripts/logs/jd_zns.log 2>&1
 # 加购物车抽奖
 45 4 * * * node /scripts/jd_wxCollectionActivity.js >> /scripts/logs/jd_wxCollectionActivity.log 2>&1
 # 关注店铺抽奖
