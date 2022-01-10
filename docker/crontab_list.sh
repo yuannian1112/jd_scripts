@@ -230,7 +230,7 @@
 # tw
 23 11,20 * * * node /scripts/jd_tw.js >> /scripts/logs/jd_tw.log 2>&1
 # 2022年年货节京享红包活动
-0 20-23/1 * * * node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
+0 0,20,22 * * * node /scripts/jd_nh_red.js >> /scripts/logs/jd_nh_red.log 2>&1
 # 头文子J
 10 8,18 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
 # 头文字J 游戏

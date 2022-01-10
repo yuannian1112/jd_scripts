@@ -4,18 +4,20 @@ ck1助力 作者
 其余助力ck1
 https://u.jd.com/SKCvfBS
 跳转到app 可查看助力情况
+返利变量：gua_redEnvelope_rebateCode，默认给脚本作者返利，若需要返利给自己，请自己修改返利变量gua_redEnvelope_rebateCode
+例：gua_redEnvelope_rebateCode="你的返利code"
 脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
 =================================Quantumultx=========================
 [task_local]
 #2022年年货节京享红包活动🧧
-0 20-23/1 * * * gua_1111RedEnvelope.js, tag=2022年年货节京享红包活动🧧, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 0,20,22 * * * gua_1111RedEnvelope.js, tag=2022年年货节京享红包活动🧧, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 =================================Loon===================================
 [Script]
-cron "0 20-23/1 * * *" script-path=gua_1111RedEnvelope.js,tag=2022年年货节京享红包活动🧧
+cron "0 0,20,22 * * *" script-path=gua_1111RedEnvelope.js,tag=2022年年货节京享红包活动🧧
 ===================================Surge================================
-2022年年货节京享红包活动🧧 = type=cron,cronexp="0 20-23/1 * * *",wake-system=1,timeout=3600,script-path=gua_1111RedEnvelope.js
+2022年年货节京享红包活动🧧 = type=cron,cronexp="0 0,20,22 * * *",wake-system=1,timeout=3600,script-path=gua_1111RedEnvelope.js
 ====================================小火箭=============================
-2022年年货节京享红包活动🧧 = type=cron,script-path=gua_1111RedEnvelope.js, cronexpr="0 20-23/1 * * *", timeout=3600, enable=true
+2022年年货节京享红包活动🧧 = type=cron,script-path=gua_1111RedEnvelope.js, cronexpr="0 0,20,22 * * *", timeout=3600, enable=true
 */
 
 let rebateCodes = ''
