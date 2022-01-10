@@ -35,10 +35,10 @@ let cookiesArr = [];
 let UA, token, UAInfo = {}
 $.appId = 10028;
 let cardinfo = {
-  "16": "小黄鸡",
-  "17": "辣子鸡",
+  "19": "椰子鸡",
   "18": "猪肚鸡",
-  "19": "椰子鸡"
+  "17": "辣子鸡",
+  "16": "小黄鸡"
 }
 const petInfo = {
   "4": {
