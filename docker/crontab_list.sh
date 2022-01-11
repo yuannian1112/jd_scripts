@@ -229,6 +229,8 @@
 5 10,20 3-5 1 * node /scripts/jd_UnknownTask5.js >> /scripts/logs/jd_UnknownTask5.log 2>&1
 # tw
 23 11,20 * * * node /scripts/jd_tw.js >> /scripts/logs/jd_tw.log 2>&1
+# 京东超级盒子
+4 2,3,22 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 2022年年货节京享红包活动
 0 0,20,22 * * * node /scripts/jd_nh_red.js >> /scripts/logs/jd_nh_red.log 2>&1
 # 头文子J
