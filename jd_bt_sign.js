@@ -15,7 +15,7 @@ const $ = new Env('白条抽奖');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const Faker = require('./JDSignValidator.js')
+const Faker = require('./utils/JDSignValidator.js')
 let cookiesArr = [], cookie = '';
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
