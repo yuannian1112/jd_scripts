@@ -227,6 +227,10 @@
 5 10,20 3-5 1 * node /scripts/jd_UnknownTask5.js >> /scripts/logs/jd_UnknownTask5.log 2>&1
 # tw
 23 11,20 * * * node /scripts/jd_tw.js >> /scripts/logs/jd_tw.log 2>&1
+# 天天压岁钱
+33 0,13 * * * node /scripts/jd_ttysq.js >> /scripts/logs/jd_ttysq.log 2>&1
+# 白条抽奖
+10 9 * * * node /scripts/jd_bt_sign.js >> /scripts/logs/jd_bt_sign.log 2>&1
 # 京东超级盒子
 4 2,3,22 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 2022年年货节京享红包活动
