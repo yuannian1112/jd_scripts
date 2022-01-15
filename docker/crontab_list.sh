@@ -215,8 +215,6 @@
 31 8,21 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
 # 年货节签到
 23 2,22 * * * node /scripts/jd_nh_sign.js >> /scripts/logs/jd_nh_sign.log 2>&1
-# 把智能生活带给TA
-10 4,19 * * * node /scripts/jd_bzlshdgt.js >> /scripts/logs/jd_bzlshdgt.log 2>&1
 # 超级无线店铺签到
 0 0 * * * node /scripts/jd_sevenDay.js >> /scripts/logs/jd_sevenDay.log 2>&1
 # 加购物车抽奖
@@ -231,6 +229,8 @@
 33 0,13 * * * node /scripts/jd_ttysq.js >> /scripts/logs/jd_ttysq.log 2>&1
 # 白条抽奖
 10 9 * * * node /scripts/jd_bt_sign.js >> /scripts/logs/jd_bt_sign.log 2>&1
+# 通天塔签到共建
+0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
 # 京东超级盒子
 4 2,3,22 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 2022年年货节京享红包活动
