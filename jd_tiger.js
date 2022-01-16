@@ -5,7 +5,7 @@ https://yearfestival.jd.com
 cron 0 0,12,18 * * * jd_tiger.js
 转义自HW大佬
 */
-const $ = new Env('萌虎摇摇乐);
+const $ = new Env('萌虎摇摇乐');
 let UA = process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)
 const got = require('got')
 const notify = require('./sendNotify')
