@@ -87,30 +87,9 @@ Object.keys(jdCookieNode).forEach((item) => {
         // index === 0 ?
         //     shareCodes = Array.from(new Set([...shareCodesHW, ...shareCodesSelf, ...temp])) :
         //     shareCodes = Array.from(new Set([...shareCodesSelf, ...shareCodesHW, ...temp]))
-        shareCodes = Array.from(new Set([...shareCodesSelf, ...authorCode, ...pool]))
+        //shareCodes = Array.from(new Set([...shareCodesSelf, ...authorCode, ...pool]))
         // console.log(shareCodes)
-        for (let code of shareCodes) {
-            console.log(`账号${i + 1} 去助力 ${code} ${shareCodesSelf.includes(code) ? '(内部)' : ''}`)
-            try {
-                //const res = await api({ "shareId": code, "apiMapping": "/api/task/support/doSupport" })
-                if (res.data.status === 1) {
-                    !res.data.supporterPrize ?
-                        console.log('不助力自己') :
-                        console.log('助力成功，京豆：', res.data.supporterPrize.beans, '，积分：', res.data.supporterPrize.score)
-                } else if (res.data.status === 7) {
-                    console.log('上限')
-                    break
-                } else if (res.data.status === 3) {
-                    console.log('已助力过')
-                } else {
-                    console.log('其他情况', res.data.status)
-                }
-                await wait(1000)
-            } catch (e) {
-                console.log('黑号？', e)
-            }
 
-        }
     }
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i]
