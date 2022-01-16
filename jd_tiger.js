@@ -92,7 +92,7 @@ Object.keys(jdCookieNode).forEach((item) => {
         for (let code of shareCodes) {
             console.log(`账号${i + 1} 去助力 ${code} ${shareCodesSelf.includes(code) ? '(内部)' : ''}`)
             try {
-                const res = await api({ "shareId": code, "apiMapping": "/api/task/support/doSupport" })
+                //const res = await api({ "shareId": code, "apiMapping": "/api/task/support/doSupport" })
                 if (res.data.status === 1) {
                     !res.data.supporterPrize ?
                         console.log('不助力自己') :
@@ -203,7 +203,7 @@ async function getShareCodePool(key, num) {
             }
         } catch (e) {
             // console.warn(e.stack)
-           // console.log("getShareCodePool Error, Retry...")
+            // console.log("getShareCodePool Error, Retry...")
             //await wait(2000 + Math.floor((Math.random() * 4000)))
         }
     }
