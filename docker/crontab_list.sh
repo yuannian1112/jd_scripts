@@ -230,7 +230,9 @@
 # 白条抽奖
 10 9 * * * node /scripts/jd_bt_sign.js >> /scripts/logs/jd_bt_sign.log 2>&1
 # 萌虎摇摇乐
-0 0,12,18 node /scripts/jd_tiger.js >> /scripts/logs/jd_tiger.log 2>&1
+0 0,18 node /scripts/jd_tiger.js >> /scripts/logs/jd_tiger.log 2>&1
+# 萌虎摇摇乐助力
+0 0,18 node /scripts/jd_tiger_help.js >> /scripts/logs/jd_tiger_help.log 2>&1
 # 通天塔签到共建
 0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
 # 京东超级盒子

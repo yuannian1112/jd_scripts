@@ -4,9 +4,9 @@ https://yearfestival.jd.com
 优先内部互助,剩余次数助力作者和助力池
 cron 0 0,18 * * * jd_tiger.js
 转义自HW大佬
-const $ = new Env('萌虎摇摇乐');
+const $ = new Env('萌虎摇摇乐助力');
 */
-const name = '萌虎摇摇乐'
+const name = '萌虎摇摇乐助力'
 let UA = process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)
 const got = require('got')
 const notify = require('./sendNotify')
@@ -32,15 +32,15 @@ Object.keys(jdCookieNode).forEach((item) => {
             console.log('助力码：', res.data)
             await wait(1000)
             shareCodesSelf.push(res.data)
-            res = await api({ "apiMapping": "/api/task/support/list" })
-            console.log('收到助力：', res.data.supportedNum)
-            await wait(1000)
+            //res = await api({ "apiMapping": "/api/task/support/list" })
+            //console.log('收到助力：', res.data.supportedNum)
+            // await wait(1000)
 
-            res = await api({ "apiMapping": "/api/task/brand/tabs" })
-            await wait(1000)
+            //res = await api({ "apiMapping": "/api/task/brand/tabs" })
+            //await wait(1000)
             for (let tab of res.data) {
                 let taskGroupId = tab.taskGroupId
-                res = await api({ "taskGroupId": taskGroupId, "apiMapping": "/api/task/brand/getTaskList" })
+                // res = await api({ "taskGroupId": taskGroupId, "apiMapping": "/api/task/brand/getTaskList" })
                 for (let t of res.data) {
                     for (let i = t.finishNum; i < t.totalNum; i++) {
                         res = await getTaskDetail(taskGroupId)
@@ -52,7 +52,7 @@ Object.keys(jdCookieNode).forEach((item) => {
                             if (res.data.taskType === 'BROWSE_TASK') {
                                 res = await api({ "taskGroupId": taskGroupId, "taskId": res.data.taskId, "taskItemId": res.data.taskItemId, "timestamp": res.data.timeStamp, "apiMapping": "/api/task/brand/getReward" })
                                 console.log('任务完成，积分：', res.data.integral, '，京豆：', res.data.jbean)
-                                await wait(1000)
+                                //await wait(1000)
                             } else if (res.data.taskType === 'FOLLOW_SHOP_TASK') {
                                 // console.log('任务完成，获得：', res.data.rewardInfoVo?.integral, res.data.rewardInfoVo?.jbean)
                                 console.log(res.data.rewardInfoVo)
@@ -66,9 +66,9 @@ Object.keys(jdCookieNode).forEach((item) => {
         }
     }
     let authorCode = []
-    let res = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/tiger.json')
+    let res = await getAuthorShareCode('')
     if (!res) {
-        res = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/tiger.json')
+        res = await getAuthorShareCode('')
     }
     if (res) {
         authorCode = res.sort(() => 0.5 - Math.random())
@@ -197,14 +197,14 @@ async function getShareCodePool(key, num) {
             const { body } = await got(``)
             //console.debug('getShareCodePool:', body)
             shareCode = JSON.parse(body).data || []
-            //console.log(`随机获取${num}个${key}成功：${JSON.stringify(shareCode)}`)
+            console.log(`随机获取${num}个${key}成功：${JSON.stringify(shareCode)}`)
             if (shareCode.length !== 0) {
                 break
             }
         } catch (e) {
             // console.warn(e.stack)
-           // console.log("getShareCodePool Error, Retry...")
-            //await wait(2000 + Math.floor((Math.random() * 4000)))
+            //console.log("getShareCodePool Error, Retry...")
+            // await wait(2000 + Math.floor((Math.random() * 4000)))
         }
     }
     return shareCode
