@@ -211,6 +211,8 @@
 31 8,21 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
 # 年货节签到
 23 2,22 * * * node /scripts/jd_nh_sign.js >> /scripts/logs/jd_nh_sign.log 2>&1
+# 炸年兽
+33 0,6-23/6 * * * node /scripts/jd_zns.js >> /scripts/logs/jd_zns.log 2>&1
 # 超级无线店铺签到
 0 0 * * * node /scripts/jd_sevenDay.js >> /scripts/logs/jd_sevenDay.log 2>&1
 # 加购物车抽奖
