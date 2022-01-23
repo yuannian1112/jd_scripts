@@ -217,6 +217,8 @@
 27 7,18 * * * node /scripts/jd_festival.js >> /scripts/logs/jd_festival.log 2>&1
 # 超级无线店铺签到
 0 0 * * * node /scripts/jd_sevenDay.js >> /scripts/logs/jd_sevenDay.log 2>&1
+# 魔方
+20 4,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 # 加购物车抽奖
 45 4 * * * node /scripts/jd_wxCollectionActivity.js >> /scripts/logs/jd_wxCollectionActivity.log 2>&1
 # 关注店铺抽奖
