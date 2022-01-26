@@ -237,6 +237,8 @@
 0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
 # 京东超级盒子
 4 2,3,22 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
+# 京喜领88元红包
+4 0,1 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 # 头文子J
 10 8,18 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
 # 头文字J 游戏
