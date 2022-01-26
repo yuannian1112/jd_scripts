@@ -1,7 +1,7 @@
 /*
 年货节签到
 只有大吉才会推送
-cron 23 2,22 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_nh_sign.js
+cron 23 7 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_nh_sign.js
 * * */
 const $ = new Env('年货节签到');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -65,18 +65,20 @@ async function main() {
                 ext = {"exchangeNum":1};
             }
             if(oneInfo.assignmentName === '17日大奖'){
-                ext = {"exchangeNum":2};
+                ext = {"exchangeNum":1};
             }
             if(oneInfo.assignmentName === '24日大奖'){
-                ext = {"exchangeNum":3};
+                ext = {"exchangeNum":1};
             }
             let info = {
                 "encryptProjectId":"MD6S5z8gGgtP2VLJkLqmWPuDtHe",
                 "encryptAssignmentId":oneInfo.encryptAssignmentId,
                 "sourceCode":"aceaceglqd20211215",
                 "completionFlag":true,
-                "ext":ext
             };
+            if(ext){
+                info['ext'] = ext
+            }
             let signInfo = await takeRequest('doInteractiveAssignment',JSON.stringify(info));
             if(signInfo && signInfo.rewardsInfo && signInfo.rewardsInfo.successRewards){
                 let allSignInfo = signInfo.rewardsInfo.successRewards;
