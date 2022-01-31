@@ -239,6 +239,8 @@
 4 2,3,22 * * * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 京喜领88元红包
 4 0,1 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+# 京喜领88元红包
+15 10,22 31,1 1,2 * node /scripts/jd_HappyNewYear_Share.js >> /scripts/logs/jd_HappyNewYear_Share.log 2>&1
 # 头文子J
 10 8,18 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
 # 头文字J 游戏
