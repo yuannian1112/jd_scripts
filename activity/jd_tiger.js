@@ -7,10 +7,10 @@ cron 0 0,18 * * * jd_tiger.js
 const $ = new Env('萌虎摇摇乐');
 */
 const name = '萌虎摇摇乐'
-let UA = process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)
+let UA = process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)
 const got = require('got')
-const notify = require('./sendNotify')
-const jdCookieNode = require('./jdCookie.js')
+const notify = require('../sendNotify')
+const jdCookieNode = require('../jdCookie.js')
 let shareCodesSelf = []
 let cookiesArr = [],
     cookie

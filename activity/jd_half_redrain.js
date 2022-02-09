@@ -15,9 +15,9 @@ cron "30 16-23/1 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/J
 */
 const $ = new Env("半点京豆雨");
 let allMessage = "";
-const notify = $.isNode() ? require("./sendNotify") : "";
+const notify = $.isNode() ? require("../sendNotify") : "";
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
+const jdCookieNode = $.isNode() ? require("../jdCookie.js") : "";
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = "", message;
 if ($.isNode()) {
