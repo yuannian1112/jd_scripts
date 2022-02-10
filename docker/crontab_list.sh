@@ -203,8 +203,6 @@
 10 6,10,12 * * * node /scripts/jd_mpdzcar_game.js >> /scripts/logs/jd_mpdzcar_game.log 2>&1
 # 头文字J 助力
 10 3,19 * * * node /scripts/jd_mpdzcar_help.js >> /scripts/logs/jd_mpdzcar_help.log 2>&1
-# 京东-幸福小店
-18 1,21 * * * node /scripts/jd_xfxd.js >> /scripts/logs/jd_xfxd.log 2>&1
 #京东签到图形验证
 14 2,10 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
 #京豆兑换为喜豆
