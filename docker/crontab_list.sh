@@ -199,6 +199,8 @@
 0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
 # 头文子J
 10 8,18 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
+# 赚京豆
+10 0,17 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 头文字J 游戏
 10 6,10,12 * * * node /scripts/jd_mpdzcar_game.js >> /scripts/logs/jd_mpdzcar_game.log 2>&1
 # 头文字J 助力
