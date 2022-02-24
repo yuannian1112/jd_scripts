@@ -5,8 +5,8 @@ TG https://t.me/ducktalk
 https://lzkj-isv.isvjcloud.com//activity/xxx?activityId=xxx
 */
 const $ = new Env('关注店铺抽奖');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
 let activityIdList = [
     "433d21343fd84405b86fb91eef2b2c25",

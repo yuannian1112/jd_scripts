@@ -113,8 +113,6 @@
 5 0,12 * * * node /scripts/jd_SendBean.js >> /scripts/logs/jd_SendBean.log 2>&1
 #
 20 0,2 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
-#财富岛气球
-5 * * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1
 #
 20 6,7 * * * node /scripts/jd_morningSc.js >> /scripts/logs/jd_morningSc.log 2>&1
 #领现金兑换
@@ -143,8 +141,6 @@
 20 3,6,9 * * * node /scripts/jd_dreamfactory_tuan.js >> /scripts/logs/jd_dreamfactory_tuan.log 2>&1
 # 内容鉴赏官
 5 2,5,16 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
-# 京喜财富岛月饼
-5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
 # 芥么签到
 11 0,9 * * * node /scripts/jd_jmsign.js >> /scripts/logs/jd_jmsign.log 2>&1
 # 芥么赚豪礼
@@ -163,10 +159,6 @@
 46 1,19 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
 #农场集勋章
 16 7,16 * * * node /scripts/jd_medal.js >> /scripts/logs/jd_medal.log 2>&1
-#京喜财富岛合成生鲜
-45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
-#财富岛珍珠兑换
-59 0-23/1 * * * node /scripts/jd_cfd_pearl_ex.js >> /scripts/logs/jd_cfd_pearl_ex.log 2>&1
 #美丽研究院--兑换
 1 7,12,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
 #锦鲤
@@ -187,10 +179,6 @@
 31 8,21 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
 # 魔方
 20 4,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
-# 加购物车抽奖
-45 4 * * * node /scripts/jd_wxCollectionActivity.js >> /scripts/logs/jd_wxCollectionActivity.log 2>&1
-# 关注店铺抽奖
-13 5 * * * node /scripts/jd_wxShopFollowActivity.js >> /scripts/logs/jd_wxShopFollowActivity.log 2>&1
 # 天天压岁钱
 33 0,13 * * * node /scripts/jd_ttysq.js >> /scripts/logs/jd_ttysq.log 2>&1
 # 白条抽奖
