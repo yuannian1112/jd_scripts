@@ -26,7 +26,7 @@
 ### 即日起，本仓库仅用于个人学习使用，不提供相关使用教程
 
 ##### 拉库：
-ql repo https://github.xiaohuang.workers.dev/https://github.com/yuannian1112/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|utils|jdCookie.js|sendNotify.js"
+ql repo https://hub.fastgit.xyz/yuannian1112/jd_scripts.git "jd_|jx_|getJDCookie" "activity|backUp" "^jd[^_]|USER|utilsjdCookie.js|sendNotify.js"
 
 ## 无法更新到最新一次提交的任务，删除图中文件重新拉库
 ![image](https://raw.githubusercontent.com/yuannian1112/code/main/2.png)
