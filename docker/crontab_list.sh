@@ -191,6 +191,8 @@
 10 0,17 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 颜究种植园
 30 6-20/3 * * * node /scripts/jd_xinruimz.js >> /scripts/logs/jd_xinruimz.log 2>&1
+# 京喜领88元红包
+30 0,1 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 # 头文字J 游戏
 10 6,10,12 * * * node /scripts/jd_mpdzcar_game.js >> /scripts/logs/jd_mpdzcar_game.log 2>&1
 # 头文字J 助力
