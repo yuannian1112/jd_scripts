@@ -9,8 +9,6 @@
 #10 6,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
 #惊喜签到
 0 3,8 * * * node /scripts/jd_jxsign.js >> /scripts/logs/jd_jxsign.log 2>&1
-#东东超市兑换奖品
-59 23 * * * node /scripts/jd_blueCoin.js >> /scripts/logs/jd_blueCoin.log 2>&1
 #财富岛
 35 * * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
 #京东汽车
@@ -19,8 +17,6 @@
 13 5,19 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 #京东多合一签到
 0 4,14 * * * node /scripts/jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
-#东东超市
-39 * * * * node /scripts/jd_superMarket.js >> /scripts/logs/jd_superMarket.log 2>&1
 #京东极速版红包
 20 2,12 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
 #领京豆额外奖励
@@ -147,8 +143,6 @@
 37 0,11 * * * node /scripts/jd_jmzhl.js >> /scripts/logs/jd_jmzhl.log 2>&1
 # 东东世界兑换
 0 0 * * * node /scripts/jd_ddworld_exchange.js >> /scripts/logs/jd_ddworld_exchange.log 2>&1
-# 天天提鹅
-20 * * * * node /scripts/jd_daily_egg.js >> /scripts/logs/jd_daily_egg.log 2>&1
 # 发财大赢家
 1 2,10 * * * node /scripts/jd_fcdyj.js >> /scripts/logs/jd_fcdyj.log 2>&1
 # 京东极速版签到免单
@@ -179,10 +173,6 @@
 20 4,19 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 # 天天压岁钱
 33 0,13 * * * node /scripts/jd_ttysq.js >> /scripts/logs/jd_ttysq.log 2>&1
-# 白条抽奖
-10 9 * * * node /scripts/jd_bt_sign.js >> /scripts/logs/jd_bt_sign.log 2>&1
-# 通天塔签到共建
-0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
 # 头文子J
 10 8,18 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
 # 赚京豆
@@ -191,8 +181,6 @@
 30 6-20/3 * * * node /scripts/jd_xinruimz.js >> /scripts/logs/jd_xinruimz.log 2>&1
 # 京喜领88元红包
 30 0,1 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
-# 逛PLUS抽京豆
-18 1,21 * * * node /scripts/jd_plusLottery.js >> /scripts/logs/jd_plusLottery.log 2>&1
 # 头文字J 游戏
 10 6,10,12 * * * node /scripts/jd_mpdzcar_game.js >> /scripts/logs/jd_mpdzcar_game.log 2>&1
 # 头文字J 助力
