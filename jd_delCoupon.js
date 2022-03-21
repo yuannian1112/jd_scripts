@@ -151,6 +151,10 @@ function getCoupon() {
 function isJDCoupon(title) {
   if (title.indexOf('京东') > -1)
     return true
+  if (title.indexOf('每月权益') > -1)
+    return true
+  if (title.indexOf('商品运费') > -1)
+    return true
   else if (title.indexOf('超市') > -1)
     return true
   else if (title.indexOf('京贴') > -1)
