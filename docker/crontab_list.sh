@@ -175,8 +175,6 @@
 33 0,13 * * * node /scripts/jd_ttysq.js >> /scripts/logs/jd_ttysq.log 2>&1
 # 头文子J
 10 8,18 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
-# 赚京豆
-10 0,17 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 颜究种植园
 30 6-20/3 * * * node /scripts/jd_xinruimz.js >> /scripts/logs/jd_xinruimz.log 2>&1
 # 京喜领88元红包
