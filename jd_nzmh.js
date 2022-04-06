@@ -1,7 +1,7 @@
 /*
 女装盲盒
-活动时间：2021-1-29至2021-2-28
-活动地址：https://anmp.jd.com/babelDiy/Zeus/3z12ngsd27UR1KfRqdMrMSSg3uxg/index.html
+活动时间：2022-4-1至2022-4-30
+活动地址：https://anmp.jd.com/babelDiy/Zeus/3qshXVjiSE2M9rfaCpntAXfkg166/index.html
 活动入口：京东app-女装馆-赢京豆
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -40,8 +40,8 @@ if ($.isNode()) {
     return;
   }
   console.log('女装盲盒\n' +
-      '活动时间：2021-1-29至2021-2-28\n' +
-      '活动地址：https://anmp.jd.com/babelDiy/Zeus/3z12ngsd27UR1KfRqdMrMSSg3uxg/index.html');
+      '活动时间：2022-4-1至2022-4-30\n' +
+      '活动地址：https://anmp.jd.com/babelDiy/Zeus/3qshXVjiSE2M9rfaCpntAXfkg166/index.html');
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -61,7 +61,7 @@ if ($.isNode()) {
         continue
       }
       try {
-        await jdMh('https://anmp.jd.com/babelDiy/Zeus/3z12ngsd27UR1KfRqdMrMSSg3uxg/index.html')
+        await jdMh('https://anmp.jd.com/babelDiy/Zeus/3qshXVjiSE2M9rfaCpntAXfkg166/index.html')
       } catch (e) {
         $.logErr(e)
       }
@@ -159,9 +159,13 @@ function doTask(taskId) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data.match(/query\((.*)\n/)[1])
-          if (data.data.complete_task_list.includes(taskId)) {
-            console.log(`任务完成成功，当前幸运值${data.data.curbless}`)
-            $.userInfo.bless = data.data.curbless
+          if (data.errcode === 8004) {
+            console.log(`任务完成失败，无效任务ID`)
+          } else {
+            if (data.data.complete_task_list.includes(taskId)) {
+              console.log(`任务完成成功，当前幸运值${data.data.curbless}`)
+              $.userInfo.bless = data.data.curbless
+            }
           }
         }
       } catch (e) {
