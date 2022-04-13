@@ -189,5 +189,11 @@
 0 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 手机狂欢城助力
 10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
+# 京享周周乐
+2 6,23 * * * node /scripts/jd_xs_zzl.js >> /scripts/logs/jd_xs_zzl.log 2>&1
+# 4月蒙牛春日音乐节抽奖机
+31 14 9-21/3 4 * node /scripts/jd_mncryyj.js >> /scripts/logs/jd_mncryyj.log 2>&1
+# 4月京东国际联合活动
+31 1 10-18/3 4 * node /scripts/jd_gjlh.js >> /scripts/logs/jd_gjlh.log 2>&1
 #早起签到
 1 6,7 * * * python3 /jd/scripts/jd_zqfl.py >> /jd/log/jd_zqfl.log 2>&1
